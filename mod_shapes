@@ -1,0 +1,17 @@
+Option Explicit
+
+Sub ShapeNames()
+    Dim sh_shape As shape
+    
+    For Each sh_shape In ActiveSheet.Shapes
+        Debug.Print sh_shape.Name
+    Next sh_shape
+    
+End Sub
+
+Public Sub GetSomething(str_something As String)
+    
+    ActiveSheet.Shapes(str_something).Select
+
+End Sub
+
