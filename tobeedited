@@ -1,0 +1,16 @@
+Option Explicit
+
+Dim xlApp, xlBook
+
+Set xlApp = CreateObject("Excel.Application")
+
+Set xlBook = xlApp.Workbooks.Open("C:\Users\v.doynov\Desktop\TEST_Eraser\Rest 8_15\_Eraser15.xlsm", 0, True)
+xlApp.Run "Main"
+xlBook.Close
+xlApp.Quit
+
+Set xlBook = Nothing
+Set xlApp = Nothing
+
+WScript.Echo "Finished."
+WScript.Quit
