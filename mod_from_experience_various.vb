@@ -437,3 +437,10 @@ Public Sub SelectMeA1RangeEverywhere()
 
 End Sub
 
+sub WithoutSelectFreezePanes
+
+    Application.Goto tbl_output.Cells(3, 6)
+    ActiveWindow.FreezePanes = False
+    ActiveWindow.FreezePanes = True
+
+end sub
