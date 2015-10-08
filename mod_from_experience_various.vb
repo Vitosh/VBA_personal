@@ -444,3 +444,29 @@ sub WithoutSelectFreezePanes
     ActiveWindow.FreezePanes = True
 
 end sub
+
+Function bubble_sort(ByRef TempArray As Variant) As Variant
+    Dim Temp            As Variant
+    Dim i               As Integer
+    Dim NoExchanges     As Integer
+    
+    ' Loop until no more "exchanges" are made.
+    Do
+        NoExchanges = True
+        
+        ' Loop through each element in the array.
+        For i = LBound(TempArray) To UBound(TempArray) - 1
+        
+            ' If the element is greater than the element
+            ' following it, exchange the two elements.
+            If CLng(TempArray(i)) > CLng(TempArray(i + 1)) Then
+                NoExchanges = False
+                Temp = TempArray(i)
+                TempArray(i) = TempArray(i + 1)
+                TempArray(i + 1) = Temp
+            End If
+        Next i
+    
+    Loop While Not (NoExchanges)
+    bubble_sort = TempArray
+End Function
