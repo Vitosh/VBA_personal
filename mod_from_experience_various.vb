@@ -470,3 +470,15 @@ Function bubble_sort(ByRef TempArray As Variant) As Variant
     Loop While Not (NoExchanges)
     bubble_sort = TempArray
 End Function
+
+Public Function sum_array(my_array As Variant) As Double
+    'For unknown reasons, WorksheetFunction.sum(my_array) does not work always,
+    'when we sum currency, integer and double...
+    
+    Dim l_counter           As Long
+    
+    For l_counter = LBound(my_array) To UBound(my_array)
+        sum_array = sum_array + my_array(l_counter)
+    Next l_counter
+    
+End Function
