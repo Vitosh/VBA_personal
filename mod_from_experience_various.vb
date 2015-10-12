@@ -482,3 +482,15 @@ Public Function sum_array(my_array As Variant) As Double
     Next l_counter
     
 End Function
+
+Public Function b_value_in_array(my_value As Variant, my_array As Variant) As Boolean
+
+    Dim l_counter
+    
+    For l_counter = LBound(my_array) To UBound(my_array)
+        my_array(l_counter) = CStr(my_array(l_counter))
+    Next l_counter
+
+    b_value_in_array = Not IsError(Application.Match(CStr(my_value), my_array, 0))
+    
+End Function
