@@ -24,7 +24,8 @@ Public Sub GetInformationPrinted()
     Set ti = t.InterfaceInfoFromObject(k)
 
     For Each mi In ti.Members
-            '0 is for LET Properties, 1 is for LET Properties
+            '0 is for GET Properties,
+            '1 is for LET Properties
             'Change accordingly
             If mi.ReturnType.PointerLevel = 0 Then
                 Debug.Print mi.name & vbCrLf; CallByName(k, mi.name, VbGet) & vbCrLf
