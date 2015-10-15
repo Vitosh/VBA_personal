@@ -1,0 +1,39 @@
+Option Explicit
+
+Enum enum_investors
+    inv_Public
+    inv_Private
+End Enum
+
+Enum enum_standort
+    standort_Berlin
+    standort_Hamburg
+    standort_Nurnberg
+    standort_Munchen
+    standort_Frankfurt
+    standort_Vienna
+End Enum
+
+Enum enum_project
+    project_wohnung
+    project_gewerbe
+    project_beides
+End Enum
+
+Enum enum_BA
+    
+    BA_0
+    BA_1
+    BA_2
+    BA_3
+    BA_4
+    BA_5
+    BA_6
+    BA_7
+    BA_8
+    BA_9
+    BA_10
+
+End Enum
+
+Public my_choice As cls_arrChoice
