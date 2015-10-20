@@ -521,5 +521,8 @@ Function last_column(Optional str_sheet As String, Optional row_to_check As Long
     End If
     
     last_column = shSheet.Cells(row_to_check, shSheet.Columns.Count).End(xlToLeft).Column
-    
 End Function
+
+Sub SaveFile
+    A = Application.GetSaveAsFilename(InitialFileName:=environ("username") & "_"&ThisWorkbook.Name , fileFilter:="Excel Files (*.xlsm), *.xlsm")
+end Sub
