@@ -526,3 +526,17 @@ End Function
 Sub SaveFile
     A = Application.GetSaveAsFilename(InitialFileName:=environ("username") & "_"&ThisWorkbook.Name , fileFilter:="Excel Files (*.xlsm), *.xlsm")
 end Sub
+
+Public Function b_val_in_array(var_to_search As Variant, my_array As Variant) As Boolean
+
+    Dim object      As Variant
+    
+    For Each object In my_array
+        If CStr(var_to_search) = CStr(object) Then
+            b_val_in_array = True
+            Exit Function
+        End If
+    Next object
+    b_val_in_array = False
+    
+End Function
