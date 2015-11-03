@@ -16,3 +16,6 @@ Public Function add_months_and_get_first_date(ByVal my_date As Date, ByVal i_mon
     add_months_and_get_first_date = get_first_day_of_month(DateAdd("m", i_month, my_date))
 End Function
 
+Public Function date_diff_in_months(a As Date, b As Date) As Long
+    date_diff_in_months = DateDiff("m", a, b)
+End Function
