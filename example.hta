@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<HTA:APPLICATION ID="VitoshAcademyExample" BORDER="thin" BORDERSTYLE="complex" maximizeButton="no" minimizeButton="no" />
+		<title>Simple Strange Calculator for VitoshAcademy.Com</title>
+	</head>
+	<style>
+		body {
+			background-color: #b0c4de;
+		}
+		input{
+			background-color: #aabbcc;
+		}
+		.btn {
+		  background: #3498db;
+		}
+
+		.btn:hover {
+		  background: #3cb0fd;
+		}
+	</style>
+	<script language ="VBScript">
+	Option Explicit
+	dim multiply
+	
+	Public Sub Main()
+		On Error Resume Next
+			result.Value = cdbl(cdbl(number1.value)+cdbl(number2.value)+50)*multiply+1
+			multiply = multiply*2+1
+		if Err Then Msgbox ("Do not try to bug it!")
+		On Error GoTo 0
+	End Sub
+	</script>
+	<body>
+		<table>
+			<tr>
+				<td>
+					<input type="text" name="number1" size="20" value="5">
+				</td>
+				<td>
+					<input type="text" name="number2" size="20" value="6">
+				</td>
+			</tr>
+			<tr>
+				<td >
+				<input name="Button" class="btn" id="ButtonCalculate"  type="button" value="Calculate" onclick="Main()">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" name="result" value="Push The Button" size="20">
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
