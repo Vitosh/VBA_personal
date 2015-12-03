@@ -1,16 +1,14 @@
-Public Function RGB2HTMLColor(R As Byte, G As Byte, _
-                            B As Byte) As String
-
+Option Explicit
 
 'INPUT: Numeric (Base 10) Values for R, G, and B)
+'OUTPUT:
+'String to be used for color of element in VBA.
+'E.G -> if the color is like this:-> &H80000005&
+'we should change just the last 6 positions to get our color! H80 must stay.
 
-'RETURNS:
-'A string that can be used as an HTML Color
-'(i.e., "#" + the Hexadecimal equivalent)
+Public Function RGB2HTMLColor(B As Byte, G As Byte, R As Byte) As String
 
-'For VBA the RGB is reversed. R and B are revered...
-
-    Dim HexR, HexB, HexG As Variant
+    Dim HexR As Variant, HexB As Variant, HexG As Variant
     Dim sTemp As String
 
     On Error GoTo ErrorHandler
@@ -26,8 +24,9 @@ Public Function RGB2HTMLColor(R As Byte, G As Byte, _
     HexB = Hex(B)
     If Len(HexB) < 2 Then HexB = "0" & HexB
 
+    RGB2HTMLColor = HexR & HexG & HexB
+    Debug.Print "Red and Blue are reversed ... pay attention to the input in the input"
 
-
-    RGB2HTMLColor = "#" & HexR & HexG & HexB
 ErrorHandler:
+    Debug.Print "RGB2HTMLColor was not successful"
 End Function
