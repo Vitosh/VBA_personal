@@ -26,7 +26,8 @@ Public Function RGB2HTMLColor(B As Byte, G As Byte, R As Byte) As String
 
     RGB2HTMLColor = HexR & HexG & HexB
     Debug.Print "Red and Blue are reversed ... pay attention to the input in the input"
-
+    Exit Function
+    
 ErrorHandler:
     Debug.Print "RGB2HTMLColor was not successful"
 End Function
