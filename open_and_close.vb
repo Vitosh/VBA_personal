@@ -63,3 +63,17 @@ Public Sub HideNeeded()
     Call OnEnd
     
 End Sub
+
+
+Public Sub UnhideAll()
+        
+    Dim Sheet As Worksheet
+    
+    For Each Sheet In ThisWorkbook.Worksheets
+       ' If Sheet.Visible = Not xlSheetVisible Then Sheet.Visible = xlSheetVisible
+       Sheet.Visible = xlSheetVisible
+    Next Sheet
+    
+    Call UnprotectAll
+    
+End Sub
