@@ -39,3 +39,27 @@ Private Sub Workbook_Open()
     Application.Caption = ""
     
 End Sub
+
+Public Sub HideNeeded()
+    
+    Dim var_Sheet                   As Variant
+    
+    Dim arr_visible_sheets          As Variant
+    Dim arr_hidden_sheets           As Variant
+    
+    Call OnStart
+     
+    arr_visible_sheets = Array(tbl_Input)
+    arr_hidden_sheets = Array(tbl_1, tbl_2, tbl_3)
+    
+    For Each var_Sheet In arr_visible_sheets
+        var_Sheet.Visible = xlSheetVisible
+    Next var_Sheet
+    
+    For Each var_Sheet In arr_hidden_sheets
+        var_Sheet.Visible = xlSheetVeryHidden
+    Next var_Sheet
+   
+    Call OnEnd
+    
+End Sub
