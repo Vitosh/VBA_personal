@@ -4,7 +4,7 @@ Public Sub MainGen()
 
     Dim str_file_name           As String
 
-    On Error GoTo MainGen_Error
+    'On Error GoTo MainGen_Error
    
     Call OnStart
 
@@ -13,6 +13,12 @@ Public Sub MainGen()
     DestWb.SaveAs str_file_name, FileFormat:=52
 
     Set DestWb = Workbooks.Open(str_file_name)
+    
+    If WorkbookHasVBACode(DestWb) Then
+        MsgBox STR_CODE_IN_DESTINATION_ERROR, vbInformation, "Generator"
+        Exit Sub
+    End If
+    
 
     Call CopyModule(ThisWorkbook, "mod_public", DestWb)
     Call CopyModule(ThisWorkbook, "mod_main", DestWb)
@@ -20,7 +26,7 @@ Public Sub MainGen()
     
     Application.Run "'" & DestWb.Name & "'!AddAButton"
 
-    MsgBox "File named " & str_file_name & " is generated", vbInformation, "Generator"
+    MsgBox "Datei " & str_file_name & " generiert.", vbInformation, "Generator"
     
     DestWb.Save
     DestWb.Close
@@ -36,7 +42,7 @@ MainGen_Error:
     Select Case Err.Number
     
     Case 1004:
-        MsgBox "Please, close the other excel files or select a file through browse"
+        MsgBox STR_UNCLOSED_FILE_ERROR
     Case Else:
         MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure MainGen of Module mod_gen_main"
     End Select
@@ -44,6 +50,28 @@ MainGen_Error:
     Call OnEnd
     
 End Sub
+
+Private Function WorkbookHasVBACode(wb As Workbook)
+    
+    Dim ModuleLineCount As Long
+    
+   On Error GoTo WorkbookHasVBACode_Error
+    
+    WorkbookHasVBACode = False
+    ModuleLineCount = wb.VBProject.VBComponents(wb.CodeName).CodeModule.CountOfLines
+    
+    If ModuleLineCount > 25 Then
+        WorkbookHasVBACode = True
+    End If
+
+   On Error GoTo 0
+   Exit Function
+
+WorkbookHasVBACode_Error:
+    
+    Debug.Print "error in WorkbookHasVBACode"
+    
+End Function
 
 Public Function define_new_file_name() As String
     
@@ -136,4 +164,49 @@ Public Function RGB2HTMLColor(B As Byte, G As Byte, R As Byte) As String
 ErrorHandler:
     Debug.Print "N O T successful"
 End Function
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
