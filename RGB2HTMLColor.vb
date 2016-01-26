@@ -25,7 +25,9 @@ Public Function RGB2HTMLColor(B As Byte, G As Byte, R As Byte) As String
     If Len(HexB) < 2 Then HexB = "0" & HexB
 
     RGB2HTMLColor = HexR & HexG & HexB
-    Debug.Print "Red and Blue are reversed ... pay attention to the input in the input"
+    Debug.Print "Enter RGB, without caring for the real colors, the function knows what it is doing."
+    Debug.Print "IF 50D092 then &H0050D092&"
+
     Exit Function
     
 ErrorHandler:
