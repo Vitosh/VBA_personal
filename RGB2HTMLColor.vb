@@ -1,5 +1,5 @@
 Option Explicit
-
+'RGB2HTMLColor html htmlcolor
 'INPUT: Numeric (Base 10) Values for R, G, and B)
 'OUTPUT:
 'String to be used for color of element in VBA.
