@@ -14,7 +14,7 @@ Public Const COLUMNS_NOT_TOUCHED = 0
 Public current_cell                 As Range
 '
 
-Public Sub main()
+Public Sub Main()
     
     Dim my_cell         As Range
     Dim l_col_len       As Long: l_col_len = last_column(row_to_check:=4)
@@ -33,7 +33,7 @@ Public Sub main()
     tbl_output.Rows(3).Clear
     tbl_output.Rows(5).Clear
     tbl_output.Rows(6).Clear
-    
+        
     'Copy
     Range(Cells(1, 1), Cells(1, l_col_len)).Value = Range(Cells(4, 1), Cells(4, l_col_len)).Value
     
@@ -73,20 +73,26 @@ Public Sub main()
     'Action
     Call RedAndBlackRecalculation_main2(l_col_len, 2)
     
-    tbl_output.Protect "toughpassword100"
-    
     'Checks
     d_result = sum_range(tbl_output.Range(tbl_output.Cells(4, 1), tbl_output.Cells(4, l_col_len)))
     d_result_ini = sum_range(tbl_output.Range(tbl_output.Cells(1, 1), tbl_output.Cells(1, l_col_len)))
     
     If d_result > 0 Then
-        MsgBox "Sie haben keinen Gewinn. Ihre finanziellen Verlust beträgt " & d_result & " Euro.", vbInformation, "RedAndBlack"
+        [my_result] = d_result
+        'MsgBox "Sie haben keinen Gewinn. Ihre finanziellen Verlust beträgt " & d_result & " Euro.", vbInformation, "RedAndBlack"
+    Else
+        [my_result] = ""
     End If
+    
+    'tbl_output.Protect "toughpassword100"
     
     If d_result <> d_result_ini Then
         MsgBox "Überprüfen Sie die Eingabe.", vbInformation, "RedAndBlack"
     End If
-    
+        
+    tbl_output.Rows(2).EntireRow.Hidden = 1
+    tbl_output.Rows(5).EntireRow.Hidden = 1
+        
     Call OnEnd
     Set my_cell = Nothing
 
@@ -101,8 +107,12 @@ main_Error:
 End Sub
 
 Public Sub MakeRedAndBlack(ByRef my_range As Range)
+
     my_range.NumberFormat = "$#,##0.00_);[Red]($#,##0.00)"
+    my_range.Font.Name = "Calibri"
+    my_range.Font.Size = 11
     
+        
     'if we try to do it with parenthesis, then the zero values are not showing...
     'my_range.NumberFormat = "$#,##0.00_);[Red]($#,##0.00);"
     
