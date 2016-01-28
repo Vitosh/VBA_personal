@@ -1,0 +1,1 @@
+Call RedAndBlackRecalculation_main2(IIf(my_calendar_settings.LastColumnAustria > 0, arr_calendar_settings(6) + [set_months_enlarge_calendar], my_calendar_settings.SizeTotal), arr_calendar_settings(10))
