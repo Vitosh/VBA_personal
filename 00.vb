@@ -617,3 +617,15 @@ Function NamedRangeExists(strRangeName As String) As Boolean
     On Error GoTo 0
     
 End Function
+
+Function getRGB2(l_long) As String
+    Dim R As Long
+    Dim G As Long
+    Dim B As Long
+
+    R = l_long Mod 256
+    G = l_long \ 256 Mod 256
+    B = l_long \ 65536 Mod 256
+    getRGB2 = "R=" & R & ", G=" & G & ", B=" & B
+End Function
+
