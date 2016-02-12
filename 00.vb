@@ -629,3 +629,22 @@ Function getRGB2(l_long) As String
     getRGB2 = "R=" & R & ", G=" & G & ", B=" & B
 End Function
 
+Public Function b_value_in_array(my_value As Variant, _
+                                 my_array As Variant, _
+                    Optional b_is_string As Boolean = False, _
+                    Optional str_separator As String = ":") As Boolean
+
+    Dim l_counter
+
+    If b_is_string Then
+        my_array = Split(my_array, str_separator)
+    End If
+
+    For l_counter = LBound(my_array) To UBound(my_array)
+        my_array(l_counter) = CStr(my_array(l_counter))
+    Next l_counter
+
+    b_value_in_array = Not IsError(Application.Match(CStr(my_value), my_array, 0))
+    
+End Function
+
