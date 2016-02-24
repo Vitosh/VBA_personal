@@ -648,3 +648,15 @@ Public Function b_value_in_array(my_value As Variant, _
     
 End Function
 
+'call lockscroll(Array(tbl_main.Name,"A1:W100"))
+Public Sub LockScroll(ByRef my_array As Variant)
+    
+    Dim l_counter           As Long
+    
+    If Not Len(Join(my_array)) > 0 Then Exit Sub
+    
+    For l_counter = 0 To UBound(my_array) Step 2
+        ThisWorkbook.Sheets(my_array(l_counter)).ScrollArea = my_array(l_counter + 1)
+    Next l_counter
+    
+End Sub
