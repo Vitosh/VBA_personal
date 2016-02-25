@@ -5,4 +5,4 @@ Thus, about one hour of VBA development would be saved each time an app is devel
 
 License
 ----
-MIT
+**MIT**
