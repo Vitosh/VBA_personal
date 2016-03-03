@@ -660,3 +660,16 @@ Public Sub LockScroll(ByRef my_array As Variant)
     Next l_counter
     
 End Sub
+
+Public Function row_value_find_value(s_wanted As String, tbl As Object) As Long
+    
+    row_value_find_value = tbl.Cells(1, 1).EntireColumn.Find(What:=s_wanted).Row
+
+End Function
+
+Public Function col_value_find_value(s_wanted As String, tbl As Object) As Long
+    
+    col_value_find_value = tbl.Cells(1, 1).entirerow.Find(What:=s_wanted).column
+
+End Function
+
