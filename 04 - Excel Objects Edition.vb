@@ -15,12 +15,12 @@ Sub RemoveFormulasFromAnotherSheet()
     Dim rng_cell            As Range
     Dim str_inside          As String: str_inside = ":\"
     
-    For Each rng_cell In ActiveSheet.UsedRange
+    For Each rng_cell In ActiveSheet.UsedRange 'Selection
         If InStr(rng_cell.Formula, str_inside) > 0 Then
             Debug.Print rng_cell.Formula
             Debug.Print rng_cell.Address
             Debug.Print "---------------------------"
+            'rng_cell.Value = rng_cell.Value
         End If
     Next rng_cell
-    
- End Sub
+End Sub
