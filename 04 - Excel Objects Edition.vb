@@ -1,5 +1,6 @@
 Option Explicit
 
+
 Sub ExtendContentFromRight()
     
     Dim rng_first           As Range
@@ -52,4 +53,16 @@ Public Sub ColorSS()
 
 ColorSS_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure ColorSS of Sub mod_play_with_me"
+End Sub
+
+Public Sub Insert186Rows()
+
+    Dim l_counter   As Long
+    
+    Stop 'Make sure it is saved and the 2.2. is selected...
+
+    For l_counter = 1 To 186
+        ActiveCell.Offset(1).EntireRow.Insert
+    Next l_counter
+    
 End Sub
