@@ -66,3 +66,7 @@ Public Sub Insert186Rows()
     Next l_counter
     
 End Sub
+
+Public Sub ImmediateMe()
+    ActiveSheet.Rows.Ungroup
+End Sub
