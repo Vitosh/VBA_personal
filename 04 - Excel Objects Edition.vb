@@ -70,3 +70,8 @@ End Sub
 Public Sub ImmediateMe()
     ActiveSheet.Rows.Ungroup
 End Sub
+
+!!! - On a sheet!
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+   Target.EntireRow.Select
+End Sub
