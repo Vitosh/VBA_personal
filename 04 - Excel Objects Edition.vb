@@ -81,7 +81,6 @@ Public Sub ImmediateMe()
 
 End Sub
 
-
 !!! - On a sheet!
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
    Target.EntireRow.Select
