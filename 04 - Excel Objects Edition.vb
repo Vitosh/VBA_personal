@@ -85,3 +85,18 @@ End Sub
 Private Sub Worksheet_SelectionChange(ByVal Target As Range)
    Target.EntireRow.Select
 End Sub
+
+'---------------------------------------------------------------------------------------
+' Method : AddStringToFormula
+' Author : v.doynov
+' Date   : 29.03.2016
+' Purpose: Call like this =>> call AddStringToFormula(")*set_teilung_ba1")
+'---------------------------------------------------------------------------------------
+Public Sub AddStringToFormula(s_added_str As String)
+
+  Dim r_range As Range
+    For Each r_range In Selection.SpecialCells(xlCellTypeFormulas)
+        r_range.Formula = "=(" & Right(r_range.Formula, Len(r_range.Formula) - 1) & s_added_str
+    Next r_range
+
+End Sub
