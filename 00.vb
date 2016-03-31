@@ -673,3 +673,31 @@ Public Function col_value_find_value(s_wanted As String, tbl As Object) As Long
 
 End Function
 
+Public Sub CreateChart()
+    
+    Dim myChtObj            As ChartObject
+    Dim rngChtData          As Range
+    Dim rngChtXVal          As Range
+    Dim iColumn             As Long
+    Dim l_border            As Long: l_border = Application.Width * 0.02
+
+    Set rngChtData = tbl_input.Range(tbl_input.Cells(1, CALENDAR_START_COL), tbl_input.Cells(2, CALENDAR_START_COL).End(xlToRight))
+    
+    Debug.Print Application.Width
+    Debug.Print Application.Width - l_border
+    
+    Set myChtObj = tbl_input.ChartObjects.Add(Left:=l_border, Width:=(Application.Width - 3 * l_border), Top:=tbl_input.Cells(7, 4).Top, Height:=Application.Width / 5)
+    myChtObj.Chart.SetSourceData Source:=rngChtData
+
+    myChtObj.Chart.Legend.Delete
+    myChtObj.Chart.ChartStyle = 40
+    myChtObj.Chart.ClearToMatchStyle
+    Cells(1, 1).Select
+    
+    Set rngChtData = Nothing
+    Set myChtObj = Nothing
+
+   On Error GoTo 0
+   Exit Sub
+    
+End Sub
