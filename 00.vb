@@ -686,12 +686,17 @@ Public Sub CreateChart()
     Debug.Print Application.Width
     Debug.Print Application.Width - l_border
     
-    Set myChtObj = tbl_input.ChartObjects.Add(Left:=l_border, Width:=(Application.Width - 3 * l_border), Top:=tbl_input.Cells(7, 4).Top, Height:=Application.Width / 5)
+    Set myChtObj = tbl_input.ChartObjects.Add( _
+                                              Left:=Application.Width / 4, _
+                                              Width:=2 * (Application.Width / 3), _
+                                              Top:=tbl_input.Cells(7, 4).Top, _
+                                              Height:=Application.Width / 5)
+                                              
     myChtObj.Chart.SetSourceData Source:=rngChtData
-
     myChtObj.Chart.Legend.Delete
     myChtObj.Chart.ChartStyle = 40
     myChtObj.Chart.ClearToMatchStyle
+    
     Cells(1, 1).Select
     
     Set rngChtData = Nothing
