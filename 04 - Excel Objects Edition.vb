@@ -120,6 +120,7 @@ Sub DisplayCommentsInWS()
                 ws_target.Range("D" & i) = rng_rng.Value
                 ws_target.Range("E" & i) = rng_rng.Comment.Author
                 i = i + 1
+                Debug.Print "Working " & i
                 
             Next rng_rng
         End If
@@ -130,7 +131,11 @@ Sub DisplayCommentsInWS()
         Application.DisplayAlerts = False
         ws_target.Delete
         Application.DisplayAlerts = True
+    Else
+        Debug.Print "End"
     End If
+    
+    ws_target.Columns.AutoFit
     
     Call OnEnd
     
