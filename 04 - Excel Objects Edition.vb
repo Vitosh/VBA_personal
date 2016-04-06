@@ -84,3 +84,91 @@ AddStringToFormula_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure AddStringToFormula of Module mod_play"
     
 End Sub
+
+Sub DisplayCommentsInWS()
+
+    Dim ws_target           As Worksheet
+    Dim ws_source           As Worksheet
+    Dim rng_rng             As Range
+    Dim rng_cell            As Variant
+    Dim i                   As Long: i = 2
+    Dim b_comment_found     As Boolean
+    
+    Call OnStart
+    
+    Set ws_target = Sheets("Comments") 'I would love to have an error if it does not exist
+    ws_target.Cells.Delete
+    ws_target.Range("A1") = "Sheet"
+    ws_target.Range("B1") = "Address"
+    ws_target.Range("C1") = "Comment"
+    ws_target.Range("D1") = "Cell value"
+    ws_target.Range("E1") = "Author"
+    
+    On Error Resume Next
+    
+    For Each ws_source In ThisWorkbook.Worksheets
+        Set rng_cell = ws_source.Cells.SpecialCells(xlCellTypeComments)
+        
+        If Not IsEmpty(rng_cell) Then
+            For Each rng_rng In rng_cell
+                b_comment_found = True
+                
+                ws_target.Range("A" & i) = ws_source.Name
+                ws_target.Range("B" & i) = rng_rng.Address
+                ws_target.Range("C" & i) = rng_rng.Comment.Text
+                ws_target.Range("C" & i).WrapText = False
+                ws_target.Range("D" & i) = rng_rng.Value
+                ws_target.Range("E" & i) = rng_rng.Comment.Author
+                i = i + 1
+                
+            Next rng_rng
+        End If
+    Next ws_source
+    
+    If Not b_comment_found Then
+        Debug.Print "No Comments were found. Tab ""Comments"" is deleted"
+        Application.DisplayAlerts = False
+        ws_target.Delete
+        Application.DisplayAlerts = True
+    End If
+    
+    Call OnEnd
+    
+    On Error GoTo 0
+    
+    Set rng_rng = Nothing
+    Set ws_source = Nothing
+    Set ws_target = Nothing
+    Set rng_cell = Nothing
+    
+End Sub
+
+Public Sub DeleteAllComments()
+
+    Dim ws      As Worksheet
+    Dim cmt     As Comment
+
+    For Each ws In ThisWorkbook.Worksheets
+        For Each cmt In ws.Comments
+            Debug.Print "Comment deleted"
+            cmt.Delete
+        Next cmt
+    Next ws
+
+End Sub
+
+Public Sub OnStart()
+
+    Application.ScreenUpdating = False
+    Application.Calculation = xlAutomatic
+    Application.EnableEvents = False
+
+End Sub
+
+Public Sub OnEnd()
+
+    Application.ScreenUpdating = True
+    Application.EnableEvents = True
+    Application.StatusBar = False
+    
+End Sub
