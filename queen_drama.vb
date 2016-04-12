@@ -5,17 +5,28 @@ Public Const SIZE = 8
 Public b_chessboard(7, 7)               As Variant
 Public l_solutions_found                As Long
 
-Public attackedRows                     As New Dictionary
-Public attackedColumns                  As New Dictionary
-Public attackedLeftDiagonals            As New Dictionary
-Public attackedRightDiagonals           As New Dictionary
+Public attackedRows                     As Object ' as New Scripting.Dictionary => for early binding with Microsoft Scripting Runtime
+Public attackedColumns                  As Object
+Public attackedLeftDiagonals            As Object
+Public attackedRightDiagonals           As Object
 
 Sub Main()
+    
+    Set attackedRows = CreateObject("Scripting.Dictionary")
+    Set attackedColumns = CreateObject("Scripting.Dictionary")
+    Set attackedLeftDiagonals = CreateObject("Scripting.Dictionary")
+    Set attackedRightDiagonals = CreateObject("Scripting.Dictionary")
     
     tbl_show.Cells.Delete
     l_solutions_found = 0
     Call PutQueens(0)
     tbl_show.Columns.ColumnWidth = 3
+    
+    Set attackedRows = Nothing
+    Set attackedColumns = Nothing
+    Set attackedLeftDiagonals = Nothing
+    Set attackedRightDiagonals = Nothing
+  
     
 End Sub
 
