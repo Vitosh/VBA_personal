@@ -26,12 +26,17 @@ Public Sub NumbersAndDictionary()
         Next l_counter_1
     Next l_counter_0
     
-    'Print Dictionary
-    
-    For l_counter_0 = 0 To my_dict.Count - 1
-        Debug.Print l_counter_0; " "; my_dict.Item(l_counter_0)
-    Next l_counter_0
+    Call PrintDictionary(my_dict)
     
     Set my_dict = Nothing
     
+End Sub
+
+Public Sub PrintDictionary(my_dict As Object)
+    
+    Dim l_counter_0     As Long
+
+    For l_counter_0 = 0 To my_dict.Count - 1
+        Debug.Print l_counter_0; " "; my_dict.Item(l_counter_0)
+    Next l_counter_0
 End Sub
