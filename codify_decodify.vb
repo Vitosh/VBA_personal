@@ -31,7 +31,7 @@ Public Function codify(str_name) As String
     
     Next l_counter
     
-    codify = Hex(l_number) & str_char_result
+    codify = Hex(l_number) & StrReverse(str_char_result)
     
 End Function
 
@@ -61,8 +61,36 @@ Public Function decodify(str_name) As String
         
     Next l_counter
     
-    decodify = l_left & str_right
+    decodify = l_left & StrReverse(str_right)
 
+End Function
+
+Public Function format_decodify(str_input As String, Optional b_for_file_name As Boolean = False) As String
+    
+    Dim str_exchange1   As String: str_exchange1 = ":"
+    Dim str_exchange2   As String: str_exchange2 = " "
+    
+    If b_for_file_name Then
+        If Len(str_input) = 9 Then
+            format_decodify = insert_in_position(str_input, str_exchange2, 6)
+        Else
+            format_decodify = insert_in_position(str_input, str_exchange2, 5)
+        End If
+        
+        Exit Function
+        
+    End If
+    
+    If Len(str_input) = 9 Then
+        format_decodify = insert_in_position(str_input, str_exchange1, 2)
+        format_decodify = insert_in_position(format_decodify, str_exchange1, 5)
+        format_decodify = insert_in_position(format_decodify, str_exchange2, 8)
+    Else
+        format_decodify = insert_in_position(str_input, str_exchange1, 1)
+        format_decodify = insert_in_position(format_decodify, str_exchange1, 4)
+        format_decodify = insert_in_position(format_decodify, str_exchange2, 7)
+    End If
+    
 End Function
 
 Public Function mod_where(str As String, l_left As Long) As Long
@@ -78,14 +106,22 @@ Public Function mod_where(str As String, l_left As Long) As Long
 
 End Function
 
-Public Sub PrintMyName()
-
-    Debug.Print Chr(194) & Chr(200) & Chr(210) & Chr(206) & Chr(216)
-
-End Sub
-
 Public Function get_extension() As String
 
     get_extension = Replace(Time, ":", "") & Replace(Left(Environ("Username"), 4), ".", "")
 
+End Function
+
+Function insert_in_position(source As String, str As String, l As Long) As String
+    'insert in position
+    
+    insert_in_position = Mid(source, 1, l) & str & Mid(source, l + 1, Len(source) - l)
+    
+End Function
+
+Function delete_in_position(source As String, l As Long) As String
+    'delete in position
+    
+    delete_in_position = Mid(source, 1, l - 1) & Mid(source, l + 1, Len(source) - l)
+    
 End Function
