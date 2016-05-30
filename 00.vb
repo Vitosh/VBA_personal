@@ -706,3 +706,9 @@ Public Sub CreateChart()
    Exit Sub
     
 End Sub
+
+Public Sub PrintMyName()
+
+    Debug.Print Chr(194) & Chr(200) & Chr(210) & Chr(206) & Chr(216)
+
+End Sub
