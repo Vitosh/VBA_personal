@@ -2,18 +2,16 @@ Option Explicit
 
 Public Function codify(str_name) As String
     
-    
     Dim l_counter           As Long
     Dim l_number            As Long
     
-    Dim str_substring       As String
     Dim str_number          As String
-    
-    Dim str_ext             As String
-    Dim str_new_ext         As String
     
     Dim str_char            As String
     Dim str_char_result     As String
+    
+    Dim str_first           As String
+    Dim str_last            As String
     
     'making the time
     For l_counter = 1 To Len(str_name) - 3
@@ -33,6 +31,18 @@ Public Function codify(str_name) As String
     
     codify = Hex(l_number) & StrReverse(str_char_result)
     
+    'now reverse first and last positions
+    str_first = get_in_position(codify, 1)
+    str_last = get_in_position(codify, 1, True)
+    
+    codify = delete_in_position(codify, 1)
+    codify = delete_in_position(codify, Len(codify))
+    
+    codify = insert_in_position(codify, str_first, Len(codify))
+    codify = insert_in_position(codify, str_last, 0)
+    
+    codify = LCase(codify)
+    
 End Function
 
 Public Function decodify(str_name) As String
@@ -43,6 +53,19 @@ Public Function decodify(str_name) As String
     
     Dim l_left          As Long
     Dim str_right       As String
+    
+    Dim str_first       As String
+    Dim str_last        As String
+    
+    'now reverse first and last positions
+    str_first = get_in_position(str_name, 1)
+    str_last = get_in_position(str_name, 1, True)
+    
+    str_name = delete_in_position(str_name, 1)
+    str_name = delete_in_position(str_name, Len(str_name))
+    
+    str_name = insert_in_position(str_name, str_first, Len(str_name))
+    str_name = insert_in_position(str_name, str_last, 0)
     
     'making the time
     
@@ -112,16 +135,27 @@ Public Function get_extension() As String
 
 End Function
 
-Function insert_in_position(source As String, str As String, l As Long) As String
+Function insert_in_position(ByVal source As String, str As String, l As Long) As String
     'insert in position
     
     insert_in_position = Mid(source, 1, l) & str & Mid(source, l + 1, Len(source) - l)
     
 End Function
 
-Function delete_in_position(source As String, l As Long) As String
+Function delete_in_position(ByVal source As String, l As Long) As String
     'delete in position
     
     delete_in_position = Mid(source, 1, l - 1) & Mid(source, l + 1, Len(source) - l)
     
 End Function
+
+Function get_in_position(ByVal str As String, l_position As Long, Optional b_is_last As Boolean = False) As String
+    
+    get_in_position = Mid(str, l_position, 1)
+    
+    If b_is_last Then get_in_position = Mid(str, Len(str), 1)
+    
+End Function
+
+
+
