@@ -12,3 +12,13 @@ Public Sub ShowErrors()
     If Len(str_result) > 1 Then MsgBox str_result
     
 End Sub
+
+
+Public Function change_commas(ByVal myValue As Variant) As String
+
+    Dim str_temp As String
+
+    str_temp = CStr(myValue)
+    change_commas = Replace(str_temp, ",", ".")
+
+End Function
