@@ -4,12 +4,14 @@ Sub myPathForFolder()
     Debug.Print GetFolder(Environ("USERPROFILE"))
 End Sub
 
-Function GetFolder(InitialLocation As String) As String
+Function GetFolder(Optional InitialLocation As String) As String
 
     On Error GoTo GetFolder_Error
 
     Dim FolderDialog        As FileDialog
     Dim SelectedFolder      As String
+    
+    If Len(InitialLocation) = 0 Then InitialLocation = ThisWorkbook.Path
     
     Set FolderDialog = Excel.Application.FileDialog(msoFileDialogFolderPicker)
     
