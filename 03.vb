@@ -22,3 +22,22 @@ Public Function change_commas(ByVal myValue As Variant) As String
     change_commas = Replace(str_temp, ",", ".")
 
 End Function
+
+Public Sub EnableMySaves()
+
+    Application.OnKey "%{F11}"
+    Application.OnKey "^c"
+    Application.OnKey "^v"
+    Application.OnKey "^x"
+    If Not b_value_in_array(Environ("username"), ADMINS, True) Then Application.EnableCancelKey = xlDisabled
+
+End Sub
+
+Public Sub DisableMySaves()
+
+    Application.OnKey "^c", "DisabledCombination"
+    Application.OnKey "^v", "DisabledCombination"
+    Application.OnKey "^x", "DisabledCombination"
+    Application.EnableCancelKey = xlInterrupt
+
+End Sub
