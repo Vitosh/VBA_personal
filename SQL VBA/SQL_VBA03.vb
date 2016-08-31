@@ -29,9 +29,8 @@ Sub ServerUpload()
         Next l_counter2
         
         str_right = Left(str_right, Len(str_right) - 1) & ")"
-        str_left = "(Datum,Zeit,Benutzer,Objekt,Grundstueckskaufpreis,Objektankaufskosten,Baukosten,"
-        str_left = str_left & "Planerkosten,Sicherheit,Herstellkosten,Vertriebskosten,SonstigeKosten,"
-        str_left = str_left & "Gesamtkosten,VerkaufspreisEinheiten,VerkaufspreisTG,Gesamterloes,IRR,ObjektReturn,EKmax)"
+        str_left = "(~,~,~,~,~,~,~,"
+        str_left = str_left & ~,~,~,~,~,~,~)"
         
         conn.Execute "insert into dbo.tempt_report" & str_left & "VALUES" & str_right
         conn.Close
