@@ -1,6 +1,6 @@
 Option Explicit
 
-Sub ServerUpload()
+Sub ServerUpload(str_table As String)
 
     Dim conn            As Object
     Dim l_last_row      As Long
@@ -29,15 +29,15 @@ Sub ServerUpload()
         Next l_counter2
         
         str_right = Left(str_right, Len(str_right) - 1) & ")"
-        str_left = "(~,~,~,~,~,~,~,"
-        str_left = str_left & ~,~,~,~,~,~,~)"
+        str_left = "(Datum,Zeit,Benutzer,Objekt,Grundstueckskaufpreis,Objektankaufskosten,Baukosten,"
+        str_left = str_left & "Planerkosten,Sicherheit,Herstellkosten,Vertriebskosten,SonstigeKosten,"
+        str_left = str_left & "Gesamtkosten,VerkaufspreisEinheiten,VerkaufspreisTG,Gesamterloes,IRR,ObjektReturn,EKmax)"
         
-        conn.Execute "insert into dbo.tempt_report" & str_left & "VALUES" & str_right
+        conn.Execute "insert into dbo." & str_table & str_left & "VALUES" & str_right
         conn.Close
     Next l_counter
          
     Set conn = Nothing
-    Debug.Print "UPLOAD SUCCESSFUL!"
     
 End Sub
 
@@ -46,6 +46,12 @@ Sub ResetInfoInTable()
     Dim cnLogs              As Object
 
     If Not b_value_in_array(str_get_username, ADMINS, True) Then Exit Sub
+    
+        Select Case MsgBox("Wirklick? Aber wirklich?", vbYesNo, "Wirklich?")
+            Case vbNo
+                Debug.Print "Nichts Gemacht"
+                Exit Sub
+        End Select
     
     Set cnLogs = CreateObject("ADODB.Connection")
 
@@ -58,13 +64,7 @@ Sub ResetInfoInTable()
 
 End Sub
 
-Public Function str_get_username() As String
-    
-    str_get_username = Environ("Username")
-    
-End Function
-
-Sub ServerDownload()
+Sub ServerDownload(str_table As String)
     
     Dim cnLogs              As Object
     Dim rsHeaders           As Object
@@ -73,8 +73,6 @@ Sub ServerDownload()
     Dim l_counter           As Long
 
     Call OnStart
-    
-    If Not b_value_in_array(str_get_username, ADMINS, True) Then Exit Sub
     
     Set cnLogs = CreateObject("ADODB.Connection")
     Set rsHeaders = CreateObject("ADODB.Recordset")
@@ -85,10 +83,10 @@ Sub ServerDownload()
     
     With rsHeaders
         .ActiveConnection = cnLogs
-        .Open "SELECT * FROM syscolumns WHERE id=OBJECT_ID('tempt_report')"
+        .Open "SELECT * FROM syscolumns WHERE id=OBJECT_ID('" & str_table & "')"
         
         Do While Not rsHeaders.EOF
-            Cells(1, l_counter + 1) = rsHeaders(0)
+            tbl_all.Cells(1, l_counter + 1) = rsHeaders(0)
             l_counter = l_counter + 1
             rsHeaders.MoveNext
         Loop
@@ -97,16 +95,16 @@ Sub ServerDownload()
     
     With rsData
         .ActiveConnection = cnLogs
-        .Open "SELECT * FROM tempt_report;"
+        .Open "SELECT * FROM " & str_table & ";"
         tbl_all.Cells(2, 1).CopyFromRecordset rsData
         .Close
     End With
     
     Call FormatCells
+    
     Call OnEnd
-    
     Debug.Print "DOWNLOAD SUCCESSFUL!"
-    
+
 End Sub
 
 Sub FormatCells()
@@ -147,7 +145,10 @@ Sub FormatCells()
             End Select
         Next l_counter2
     Next l_counter
-        
+    
+    If Not tbl_all.AutoFilterMode Then tbl_all.Rows(1).AutoFilter
+    tbl_all.Columns.AutoFit
+    
     Set my_cell = Nothing
     Call OnEnd
 
