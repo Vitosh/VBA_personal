@@ -1,4 +1,4 @@
-Use Gladiator
+USE Gladiator
 GO
 
 WITH PartitionedCounted AS 
