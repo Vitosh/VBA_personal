@@ -16,3 +16,8 @@ INNER JOIN tempt_report AS tbl ON tbl.Objekt=pc.Objekt AND
 EOMONTH(TBL.Datum)=pc.EOM
 WHERE pc.Nr > 1
 ORDER BY Objekt
+--
+IF 2=2
+SELECT 101
+ELSE 
+SELECT 222
