@@ -5,6 +5,7 @@ Public Sub OnEnd()
     Application.AskToUpdateLinks = True
     Application.DisplayAlerts = True
     Application.Calculation = xlAutomatic
+    ThisWorkbook.Date1904 = False
     
     Application.StatusBar = False
     
@@ -17,6 +18,7 @@ Public Sub OnStart()
     Application.AskToUpdateLinks = False
     Application.DisplayAlerts = False
     Application.Calculation = xlAutomatic
+    ThisWorkbook.Date1904 = False
     
     ActiveWindow.View = xlNormalView
 
