@@ -116,3 +116,13 @@ SELECT
   DAY(GETDATE()) AS theday,
   MONTH(GETDATE()) AS themonth,
   YEAR(GETDATE()) AS theyear;
+--
+declare @number int;
+declare @mylen int;
+
+set @number = 234;
+set @mylen = 8;
+
+select @number [number], right(replicate('0', @mylen) + CAST(@number AS VARCHAR(8)), @mylen) AS str_productid
+--
+
