@@ -111,3 +111,8 @@ SELECT
 SELECT
   CAST(SYSDATETIME() AS DATE) AS [current_date],
   CAST(SYSDATETIME() AS TIME) AS [current_time];
+--
+SELECT
+  DAY(GETDATE()) AS theday,
+  MONTH(GETDATE()) AS themonth,
+  YEAR(GETDATE()) AS theyear;
