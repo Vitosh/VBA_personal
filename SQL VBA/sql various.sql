@@ -138,3 +138,22 @@ GO
 SET STATISTICS TIME OFF
 GO
 --
+use tsql2012
+SET STATISTICS TIME ON
+GO
+
+if OBJECT_ID('LiveQueryStats','U') is not null 
+	begin
+		drop table livequerystats 
+		print 'drop';
+	end
+ELSE 
+	print 'not';
+
+CREATE TABLE LiveQueryStats
+    (ID INT IDENTITY(1,1),
+     VALUE VARCHAR(10))
+GO
+ 
+SET STATISTICS TIME OFF
+GO
