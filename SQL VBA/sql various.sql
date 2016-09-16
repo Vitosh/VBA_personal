@@ -125,4 +125,16 @@ set @mylen = 8;
 
 select @number [number], right(replicate('0', @mylen) + CAST(@number AS VARCHAR(8)), @mylen) AS str_productid
 --
-
+use tsql2012
+SET STATISTICS TIME ON
+GO
+ 
+if OBJECT_ID('livequerystats','U') is not null drop table livequerystats
+CREATE TABLE LiveQueryStats
+    (ID INT IDENTITY(1,1),
+     VALUE VARCHAR(10))
+GO
+ 
+SET STATISTICS TIME OFF
+GO
+--
