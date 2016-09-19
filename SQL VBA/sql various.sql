@@ -157,3 +157,8 @@ GO
  
 SET STATISTICS TIME OFF
 GO
+-- How to get query history
+select qs.execution_count, qt.text from sys.dm_exec_query_stats [qs]
+cross apply  sys.dm_exec_sql_text(qs.sql_handle) [qt]
+ORDER BY execution_count
+--
