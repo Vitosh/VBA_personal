@@ -661,17 +661,38 @@ Public Sub LockScroll(ByRef my_array As Variant)
     
 End Sub
 
-Public Function row_value_find_value(s_wanted As String, tbl As Object) As Long
-    
-    row_value_find_value = tbl.Cells(1, 1).EntireColumn.Find(What:=s_wanted).Row
-
-End Function
-
 Public Function col_value_find_value(s_wanted As String, tbl As Object) As Long
     
-    col_value_find_value = tbl.Cells(1, 1).entirerow.Find(What:=s_wanted).column
+    On Error GoTo col_value_find_value_Error
+
+    col_value_find_value = tbl.Cells(1, 1).EntireRow.Find(What:=s_wanted).Column
+
+    On Error GoTo 0
+    Exit Function
+
+col_value_find_value_Error:
+
+    Debug.Print "Error " & Err.Number & " (" & Err.Description & ") in procedure col_value_find_value of Function mod_various"
+    col_value_find_value = -1
+    
+End Function
+
+Public Function row_value_find_value(s_wanted As String, tbl As Object) As Long
+
+    On Error GoTo row_value_find_value_Error
+
+    row_value_find_value = tbl.Cells(1, 1).EntireColumn.Find(What:=s_wanted).Row
+
+    On Error GoTo 0
+    Exit Function
+
+row_value_find_value_Error:
+
+    Debug.Print "Error " & Err.Number & " (" & Err.Description & ") in procedure row_value_find_value of Function mod_various"
+    row_value_find_value = -1
 
 End Function
+
 
 Public Sub CreateChart()
     
