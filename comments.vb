@@ -21,3 +21,47 @@ Public Sub delete_comment_in_selection()
         current_cell.ClearComments
     Next current_cell
 End Sub
+
+'Make Comments even better:
+
+Public Sub AddComments(r_cell As Range)
+    
+    r_cell.ClearComments
+    r_cell.AddComment.Visible = False
+    r_cell.Comment.Text (generate_info_for_comment(r_cell))
+    
+    With r_cell.Comment.Shape
+        
+        .AutoShapeType = msoShapeRoundedRectangle
+        
+        .ScaleHeight 3.5, msoFalse, msoScaleFromTopLeft
+        .ScaleWidth 4, msoFalse, msoScaleFromTopLeft
+        
+        .TextFrame.Characters.Font.Name = "Tahoma"
+        .TextFrame.Characters.Font.Size = 14
+        .TextFrame.Characters.Font.ColorIndex = 1
+
+        .Line.ForeColor.RGB = RGB(0, 0, 0)
+        .Line.BackColor.RGB = RGB(255, 255, 255)
+        
+        .Fill.Visible = msoTrue
+        .Fill.ForeColor.RGB = RGB(255, 204, 153)
+        .Fill.OneColorGradient msoGradientDiagonalUp, 1, 0.25
+        
+        .Placement = xlMoveAndSize
+        
+    End With
+    
+End Sub
+
+Public Function generate_info_for_comment(my_cell As Range) As String
+    
+    Dim str_text As String
+    
+    str_text = "Auto " & Left(Date, 5) & " " & Left(Environ("username"), 4) & vbCrLf & vbCrLf
+    str_text = str_text & "Werte:" & " " & my_cell.value & vbCrLf & vbCrLf
+    str_text = str_text & "war:" & " " & my_cell.Formula
+        
+    generate_info_for_comment = str_text
+    
+End Function
