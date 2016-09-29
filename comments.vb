@@ -50,6 +50,8 @@ Public Sub AddComments(r_cell As Range)
         '.Fill.OneColorGradient msoGradientDiagonalUp, 2, 0.9
         '.Fill.TwoColorGradient msoGradientHorizontal, 2
 
+        .Line.DashStyle = msoLineLongDash        
+        .Shadow.Visible = msoFalse
         
         .Placement = xlMoveAndSize
         
