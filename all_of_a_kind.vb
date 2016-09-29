@@ -276,3 +276,30 @@ End Function
 Public Sub HideSelectedSheets()
     ActiveWindow.SelectedSheets.Visible = False
 End Sub
+                
+'---------------------------------------------------------------------------------------
+' Method : MinimizeRibbon
+' Author : v.doynov
+' Date   : 29.09.2016
+' Purpose: Minimizes the ribbon, if b_minimize is TRUE, maximizes if FALSE.
+'---------------------------------------------------------------------------------------
+Public Sub MinimizeRibbon(Optional b_minimize = True)
+
+    On Error GoTo MinimizeRibbon_Error
+
+    If (Not CommandBars.GetPressedMso("MinimizeRibbon")) And b_minimize Then
+        CommandBars.ExecuteMso "MinimizeRibbon"
+    End If
+    
+    If (CommandBars.GetPressedMso("MinimizeRibbon")) And (Not b_minimize) Then
+        CommandBars.ExecuteMso "MinimizeRibbon"
+    End If
+
+    On Error GoTo 0
+    Exit Sub
+
+MinimizeRibbon_Error:
+
+    Debug.Print "Error " & Err.Number & " (" & Err.Description & ") in procedure MinimizeRibbon of Sub mod_sheets"
+
+End Sub
