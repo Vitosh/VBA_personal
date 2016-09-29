@@ -47,6 +47,9 @@ Public Sub AddComments(r_cell As Range)
         .Fill.Visible = msoTrue
         .Fill.ForeColor.RGB = RGB(255, 204, 153)
         .Fill.OneColorGradient msoGradientDiagonalUp, 1, 0.25
+        '.Fill.OneColorGradient msoGradientDiagonalUp, 2, 0.9
+        '.Fill.TwoColorGradient msoGradientHorizontal, 2
+
         
         .Placement = xlMoveAndSize
         
