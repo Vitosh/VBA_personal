@@ -26,3 +26,13 @@ Function last_row(Optional str_sheet As String, Optional column_to_check As Long
     last_row = shSheet.Cells(shSheet.Rows.Count, column_to_check).End(xlUp).Row
 
 End Function
+
+Public Function locate_value_col(str_value As String, ByRef target_sheet As Worksheet) As Long
+    
+    Dim cell_to_find As Range
+    
+    Set cell_to_find = Range(target_sheet.Cells(1, 1), target_sheet.Cells(1, last_col(tbl_totals))).Find(str_value, LookIn:=xlValues)
+    locate_value_col = cell_to_find.Column
+    Set cell_to_find = Nothing
+    
+End Function
