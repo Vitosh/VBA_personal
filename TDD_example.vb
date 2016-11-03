@@ -774,3 +774,24 @@ Public Sub TDD_1A()
     On Error GoTo 0
     
 End Sub
+
+Public Sub CreateNumbers(Optional l_size_cols As Long = 10, _
+                         Optional l_size_total As Long = 1000)
+
+    Dim l_counter                   As Long
+    Dim l_row                       As Long
+    Dim l_col                       As Long
+    
+    ActiveSheet.Cells.Clear
+
+    For l_counter = 0 To l_size_total - 1
+    
+        l_row = l_counter \ l_size_cols
+        l_col = l_counter Mod l_size_cols
+        
+        ActiveSheet.[a1].Offset(l_row, l_col) = l_counter + 1
+        
+    Next l_counter
+End Sub
+
+
