@@ -20,7 +20,7 @@ Public Function codify_time() As String
     dbl_01 = Split(CStr(dbl_now), ",")(0)
     dbl_02 = Split(CStr(dbl_now), ",")(1)
     
-    codify = Hex(dbl_01) & "_" & Hex(dbl_02)
+    codify_time = Hex(dbl_01) & "_" & Hex(dbl_02)
 
    On Error GoTo 0
    Exit Function
