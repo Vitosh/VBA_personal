@@ -7,6 +7,31 @@ Option Explicit
 Public Const FIRST_ASCII = 97
 Public Const LETTERS_NUMBER = 26
 
+Public Function codify_time() As String
+
+    If [set_in_production] Then On Error GoTo codify_Error
+    
+    Dim dbl_01                  As Variant
+    Dim dbl_02                  As Variant
+    Dim dbl_now                 As Double
+    
+    dbl_now = Round(Now(), 8)
+    
+    dbl_01 = Split(CStr(dbl_now), ",")(0)
+    dbl_02 = Split(CStr(dbl_now), ",")(1)
+    
+    codify = Hex(dbl_01) & "_" & Hex(dbl_02)
+
+   On Error GoTo 0
+   Exit Function
+
+codify_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure codify of Function TDD_Export"
+
+End Function
+
+
 Public Function codify(str_name) As String
     
     Dim l_counter           As Long
