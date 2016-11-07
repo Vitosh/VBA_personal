@@ -1,3 +1,7 @@
+'Encrypt, encript,
+'Decrypt, decript,
+'password, check hours
+
 Option Explicit
 
 Public Function codify(str_name) As String
