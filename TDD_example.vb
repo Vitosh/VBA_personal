@@ -64,7 +64,7 @@ End Sub
 '---------------------------------------------------------------------------------------
 ' Method : MakeAllValues
 ' Author : v.doynov
-' Date   : 03.11.2016
+' Date   : 07.11.2016
 ' Purpose: Select the range, for which you want the TDD code.
 '---------------------------------------------------------------------------------------
 
@@ -89,7 +89,11 @@ Public Sub MakeAllValues()
                 End If
             End If
         Else
-            str = str & 0
+            If my_cell.HasFormula Then
+                str = str & """"""
+            Else
+                str = str & 0
+            End If
         End If
         
         Debug.Print str
