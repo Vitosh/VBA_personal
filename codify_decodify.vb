@@ -4,6 +4,9 @@
 
 Option Explicit
 
+Public Const FIRST_ASCII = 97
+Public Const LETTERS_NUMBER = 26
+
 Public Function codify(str_name) As String
     
     Dim l_counter           As Long
