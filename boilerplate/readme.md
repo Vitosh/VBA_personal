@@ -6,7 +6,7 @@ Thus, about one hour of VBA development would be saved each time an app is devel
 License
 ----
 **MIT**
-
+<hr>
 *Functions look like:*
 - f_bln_zero_or_empty
 - f_bln_is_array_allocated
