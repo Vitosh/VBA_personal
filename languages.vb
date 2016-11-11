@@ -1,3 +1,5 @@
+'change language
+'change fonts
 Option Explicit
 
 Public Enum LandName
