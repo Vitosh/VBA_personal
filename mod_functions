@@ -128,12 +128,6 @@ Public Function add_months(my_date As Date, i_month As Integer) As Date
 
 End Function
 
-Public Function make_random(down As Integer, up As Integer)
-
-    make_random = Int((up - down + 1) * Rnd + down)
-
-End Function
-
 Public Sub ShowMeTheNames()
     Dim i As Integer
     
