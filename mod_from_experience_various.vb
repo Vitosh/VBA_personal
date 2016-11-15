@@ -224,13 +224,6 @@ Public Function sum_range(my_range As Range) As Double
 
 End Function
 
-
-Public Function make_random(down As Integer, up As Integer)
-
-    make_random = Int((up - down + 1) * Rnd + down)
-
-End Function
-
 Public Function last_row_with_data(ByVal lng_column_number As Long, shCurrent As Variant) As Long
     
     last_row_with_data = shCurrent.Cells(Rows.Count, lng_column_number).End(xlUp).Row
