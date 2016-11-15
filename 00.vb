@@ -234,9 +234,12 @@ Public Function sum_range(my_range As Range) As Double
 
 End Function
 
-Public Function make_random(down As Long, up As Long)
-
-    make_random = Int((up - down + 1) * Rnd + down)
+Public Function make_random(down As Long, up As Long) As Long
+    
+    make_random = CLng((up - down + 1) * Rnd + down)
+    
+    If make_random > up Then make_random = up
+    If make_random < down Then make_random = down
 
 End Function
 
