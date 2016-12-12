@@ -1,7 +1,7 @@
 
 Sub change_all_names()
     
-    Dim i               As Integer
+    Dim i               As Long
     Dim s               As String
     Dim s_old           As String
     Dim s_new           As String
