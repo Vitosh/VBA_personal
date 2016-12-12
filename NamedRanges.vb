@@ -25,8 +25,6 @@ Sub change_all_names()
 
 End Sub
 
-Option Explicit
-
 Public Sub MakeNegativesOne(l_col As Long)
 
     Dim l_counter           As Long
