@@ -736,3 +736,13 @@ Public Sub PrintMyName()
     Debug.Print Chr(194) & Chr(200) & Chr(210) & Chr(206) & Chr(216)
 
 End Sub
+
+Public Function Now() As Date
+    
+    If [set_in_production] Then
+        Now = DateSerial(2017, 2, 2) + TimeSerial(15, 1, 2)
+    Else
+        Now = VBA.Now()
+    End If
+    
+End Function
