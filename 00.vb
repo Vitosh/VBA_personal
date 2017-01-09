@@ -740,9 +740,9 @@ End Sub
 Public Function Now() As Date
     
     If [set_in_production] Then
-        Now = DateSerial(2017, 2, 2) + TimeSerial(15, 1, 2)
-    Else
         Now = VBA.Now()
+    Else
+        Now = DateSerial(2017, 2, 2) + TimeSerial(15, 1, 2)
     End If
     
 End Function
