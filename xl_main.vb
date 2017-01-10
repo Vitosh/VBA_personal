@@ -45,31 +45,40 @@ Private Sub Workbook_NewSheet(ByVal Sh As Object)
 End Sub
 
 Private Sub Workbook_Open()
-
-   On Error GoTo Workbook_Open_Error
-
+    
+    On Error GoTo Workbook_Open_Error
+    
+    Call LockMe
     Call HideNeeded
-    tbl_input.Activate
-    [set_in_production] = True
+    Call LockScroll(Array(tbl_main.Name, "A1:X107"))
+    Call MinimizeRibbon
     
-    If Not b_value_in_array(Environ("username"), ADMINS, True) Then
-        Application.OnKey "%{F11}", "DisabledCombination"
-    End If
-    
+    ActiveWindow.WindowState = xlMaximized
     Application.WindowState = xlMaximized
-    CheckHowManyWbAreOpened
-    tbl_input.ScrollArea = tbl_input.UsedRange.Address
-    tbl_input.Protect s_CONST
+    
+    'Application.ExecuteExcel4Macro "show.toolbar(""Ribbon"", false)"
+    'ActiveWindow.DisplayHeadings = False
+    Application.OnKey "^{W}", "DisabledCombination"
+    Application.OnKey "^{w}", "DisabledCombination"
+    Application.OnKey "^{E}", "InitializeFormTotals"
+    Application.OnKey "^{e}", "InitializeFormTotals"
+
+    Call CheckHowManyWbAreOpened
+    
+    tbl_main.Select
+    'tbl_main.tb_Show = False
+    tbl_main.chb_delete = False
+    
+    tbl_main.Cells(1, 1).Select
+    ActiveWindow.Zoom = 74
     
     On Error GoTo 0
-   Exit Sub
+    Exit Sub
 
 Workbook_Open_Error:
 
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Workbook_Open of Sub xl_paku"
-    Me.Save
-    ThisWorkbook.Close
-    
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Workbook_Open of Sub DieseArbeitsmappe", vbInformation, [set_planerkostenberechnung]
+
 End Sub
 
 Public Sub CheckHowManyWbAreOpened()
