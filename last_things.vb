@@ -88,3 +88,37 @@ Public Function l_locate_value_col(target As String, _
     l_locate_value_col = -1
 
 End Function
+
+            
+            
+Public Function LastUsedColumn() As Long
+    
+    Dim rLastCell As Range
+    
+    Set rLastCell = ActiveSheet.Cells.Find(What:="*", _
+                                    After:=ActiveSheet.Cells(1, 1), _
+                                    LookIn:=xlFormulas, _
+                                    LookAt:=xlPart, _
+                                    SearchOrder:=xlByColumns, _
+                                    SearchDirection:=xlPrevious, _
+                                    MatchCase:=False)
+    
+    LastUsedColumn = rLastCell.Column
+
+End Function
+
+Public Function LastUsedRow() As Long
+
+    Dim rLastCell As Range
+
+    Set rLastCell = ActiveSheet.Cells.Find(What:="*", _
+                                    After:=ActiveSheet.Cells(1, 1), _
+                                    LookIn:=xlFormulas, _
+                                    LookAt:=xlPart, _
+                                    SearchOrder:=xlByRows, _
+                                    SearchDirection:=xlPrevious, _
+                                    MatchCase:=False)
+
+    LastUsedRow = rLastCell.Row
+
+End Function
