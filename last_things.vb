@@ -63,6 +63,7 @@ Public Function LastUsedRow() As Long
 
 End Function
 
+
 '---------------------------------------------------------------------------------------
 ' Procedure : fnLngLocateValueRow
 ' Author    : v.doynov
