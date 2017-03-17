@@ -6,7 +6,7 @@ Public Sub TestMe()
     Dim strURL              As String
     Dim IE                  As Object
     Dim colCurrent          As Object
-    Dim link                As Object
+    Dim link
     Dim colLinks            As Collection
     
     strURL = "vitoshacademy.com"
@@ -28,10 +28,10 @@ Public Sub TestMe()
         'Debug.Print "-------------------"
     Next link
     
-    For Each link In colLinks
-        IE.navigate strURL
-        If Not Contains(colLinks, link) Then colLinks.Add (link)
-    Next link
+'    For Each link In colLinks
+'        IE.navigate strURL
+'        If Not Contains(colLinks, link) Then colLinks.Add (link)
+'    Next link
     
     
     

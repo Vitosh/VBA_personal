@@ -1,68 +1,72 @@
+Option Explicit
 
-Sub change_all_names()
+
+'Application.Run "Personal.xlsb!DeleteName", "NAME_HERE"
+Public Sub DeleteName(sName As String)
+
+   On Error GoTo DeleteName_Error
+
+    ActiveWorkbook.Names(sName).Delete
     
-    Dim i               As Long
-    Dim s               As String
-    Dim s_old           As String
-    Dim s_new           As String
+    Debug.Print sName & " is deleted!"
     
-    For i = 1 To ActiveWorkbook.Names.Count
-'        Debug.Print ActiveWorkbook.Names(i).name
-'        Debug.Print ActiveWorkbook.Names(i).RefersToR1C1
-'        Debug.Print ActiveWorkbook.Names(i)
+   On Error GoTo 0
+   Exit Sub
 
-        If InStr(1, ActiveWorkbook.Names(i), "old", vbTextCompare) Then
-            s_old = ActiveWorkbook.Names(i).RefersToR1C1
-            s_new = Replace(s_old, "old", "")
-            Debug.Print s_new
-            
-            With ActiveWorkbook.Names(ActiveWorkbook.Names(i).name)
-                .RefersToR1C1 = s_new
+DeleteName_Error:
 
-            End With
-        End If
-    Next i
-
+    Debug.Print sName & " not present or some error"
+    On Error GoTo 0
+    
 End Sub
 
-Public Sub MakeNegativesOne(l_col As Long)
+Public Sub RemoveNamedRanges()
+    
+    Dim nName                   As Name
+    Dim strNameReserved         As String
+    
+    On Error Resume Next
+    
+    strNameReserved = "set_in_production"
+    
+    For Each nName In Names
+        If nName.Name <> strNameReserved And Left(nName.Name, 1) <> "_" Then
+            Debug.Print nName.Name
+            nName.Delete
+        End If
+    Next nName
+    
+    On Error GoTo 0
+    
+End Sub
 
-    Dim l_counter           As Long
-    Dim b_negative          As Long
-    Dim my_cell             As Range
-    Dim my_first_negative   As Range
+
+Sub get_names_of_cells()
     
-    Dim dbl_negative_sum    As Double
+    Dim cell        As Range
     
-    For l_counter = 1 To 13
-        Set my_cell = Cells(l_col, l_counter)
+    On Error Resume Next
+    
+    For Each cell In Selection
+        cell = cell.Name.Name
+    Next cell
+    
+    On Error GoTo 0
+    
+End Sub
+
+Sub set_names_of_cells()
+
+    Dim sample_range        As Range
+    Dim cell                As Range
+    
+    Set sample_range = Selection
         
-        If my_cell < 0 And my_cell.HasFormula Then
-            dbl_negative_sum = dbl_negative_sum + my_cell.Value
-            
-            If Not b_negative Then
-                b_negative = True
-                Set my_first_negative = my_cell
-            End If
-            
-            my_cell = 0
+    For Each cell In sample_range
+        If Not IsEmpty(cell) Then
+            cell.Name = cell.Text
+            cell.Clear
         End If
-    Next l_counter
-    
-    If b_negative Then
-        my_first_negative = dbl_negative_sum
-    End If
-    
-End Sub
-
-Public Sub NegativeSelection(Optional my_rng As Variant)
-
-    Dim my_cell As Range
-
-    If IsMissing(my_rng) Then Set my_rng = Selection
-    
-    For Each my_cell In my_rng
-        my_cell = my_cell * -1
-    Next my_cell
+    Next cell
 
 End Sub
