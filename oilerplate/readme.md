@@ -23,4 +23,4 @@ License
 
 ----
 The boilerplate is password protected, just because. Anyhow, if you want the password,
-feel free to write me a mail about it here: [VitoshAcademy](mailto::review@vitoshacademy.com)
+feel free to write me a mail about it here: [VitoshAcademy](mailto:review@vitoshacademy.com)
