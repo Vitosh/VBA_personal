@@ -15,7 +15,6 @@ Public Sub GetSomething(str_something As String)
 
 End Sub
 
-Option Explicit
 
 'Makes shape visible and invisble.
 Sub translatorField_Klicken()
