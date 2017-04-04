@@ -70,3 +70,22 @@ Sub set_names_of_cells()
     Next cell
 
 End Sub
+
+Public Sub RemoveNamedRangesWithErrors()
+    
+    Dim nName                   As name
+    Dim strNameReserved         As String
+    
+    On Error Resume Next
+    
+    For Each nName In Names
+            Debug.Print nName.RefersTo
+            If Left(nName.RefersTo, 2) = "=#" Then
+                Debug.Print nName.RefersTo
+                'nName.Delete
+            End If
+    Next nName
+    
+    On Error GoTo 0
+    
+End Sub
