@@ -10,7 +10,7 @@ Option Explicit
 Public Sub ErrorsNumber()
 
     Const DIFF_DEFAULT = 0.1
-    ThisWorkbook.PrecisionAsDisplayed = True
+    ThisWorkbook.PrecisionAsDisplayed = False
     Dim lngEndNumber        As Long: lngEndNumber = 30
 
     Dim dblStarter          As Double
@@ -92,3 +92,4 @@ Public Sub OnStart()
     ActiveWindow.View = xlNormalView
 
 End Sub
+
