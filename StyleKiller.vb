@@ -2,15 +2,21 @@ Option Explicit
 
 Sub StyleKiller()
 
-    Dim my_style                As Style
-
-    For Each my_style In ThisWorkbook.Styles
-        If Not my_style.BuiltIn Then
-            Debug.Print my_style.Name
-            my_style.Delete
+    Dim myStyle                As Style
+    Dim lngCounter              As Long
+    
+    For Each myStyle In ThisWorkbook.Styles        
+        
+        If Not myStyle.BuiltIn Then
+            Debug.Print myStyle.name
+            myStyle.Delete
+            lngCounter = lngCounter + 1
         End If
-    Next my_style
-
+    Next myStyle
+    
+    Debug.Print "Ende"
+    Debug.Print "Deleted " & lngCounter
+    
 End Sub
 
 'FANCY ONE:
