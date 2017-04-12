@@ -74,10 +74,15 @@ End Function
 Public Sub FixComments()
 
     Dim xComment As Comment
-    
-    For Each xComment In Application.ActiveSheet.Comments
-        xComment.Shape.TextFrame.AutoSize = True
-    Next xComment
-    
-End Sub
 
+    For Each xComment In Application.ActiveSheet.Comments
+
+        'it is locked!--------------------------v
+        'xComment.Shape.TextFrame.AutoSize = True
+        xComment.Visible = False
+        Debug.Print xComment.Text
+        Debug.Print xComment.Parent.Address
+
+    Next xComment
+
+End Sub
