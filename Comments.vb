@@ -1,4 +1,4 @@
-Public Sub add_comment_to_selection(my_comment As Range)
+Public Sub AddCommentToSelection(my_comment As Range)
   
   'b is used only if the cells are merged by 2.
   
@@ -70,3 +70,14 @@ Public Function generate_info_for_comment(my_cell As Range) As String
     generate_info_for_comment = str_text
     
 End Function
+
+Public Sub FixComments()
+
+    Dim xComment As Comment
+    
+    For Each xComment In Application.ActiveSheet.Comments
+        xComment.Shape.TextFrame.AutoSize = True
+    Next xComment
+    
+End Sub
+
