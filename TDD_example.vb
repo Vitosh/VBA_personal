@@ -84,6 +84,33 @@ Public Sub MakeAllValues()
 
 End Sub
 
+Public Sub MakeColorsAllValues()
+    
+    Dim myCell                  As Range
+    Dim lngCounter              As Long
+    Dim str                     As String
+    Dim strResult               As String
+        
+    STR_ERROR_REPORT = ""
+    
+    For Each myCell In Selection
+        Call Increment(lngCounter)
+        str = vbTab & "my_arr(" & lngCounter & ")= "
+        str = str & myCell.Interior.Color
+                        
+        If Len(strResult) = 0 Then
+            strResult = str
+        Else
+            strResult = strResult & vbCrLf & str
+        End If
+                
+    Next myCell
+    
+    Debug.Print strResult
+    Call CreateLogFile(strResult)
+    
+End Sub
+
 Public Function codify_time(Optional b_make_str As Boolean = False) As String
 
     If [set_in_production] Then On Error GoTo codify_Error
