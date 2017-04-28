@@ -1,3 +1,30 @@
+Option Explicit
+Option Private Module
+
+Public Sub TestMe()
+        
+    Dim arrProducts     As Variant
+    Dim lngCounter      As Long
+    Dim lngValue        As Long
+    Dim strBinary       As String
+    Dim lngNumber       As Long
+    
+    arrProducts = Array("AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "GGG")
+                           '1,     2,     4,     8,    16,    32,    64
+    lngNumber = 65 '1+2+8+16
+    strBinary = StrReverse(LngToBinary(lngNumber))
+    
+    For lngCounter = 1 To Len(strBinary)
+        lngValue = Mid(strBinary, lngCounter, 1)
+        
+        If lngValue Then
+            Debug.Print arrProducts(lngCounter - 1)
+        End If
+        
+    Next lngCounter
+    
+End Sub
+
 Function LngToBinary(ByVal n As Long) As String
 
     Dim k As Long
