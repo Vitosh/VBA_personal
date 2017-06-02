@@ -19,3 +19,8 @@ End Function
 Public Function date_diff_in_months(a As Date, b As Date) As Long
     date_diff_in_months = DateDiff("m", a, b)
 End Function
+
+' change the style
+Public Function fnDatLastDayOfMonth(ByVal myDate As Date) As Date
+    fnDatLastDayOfMonth = DateSerial(Year(myDate), Month(myDate) + 1, 0)
+End Function
