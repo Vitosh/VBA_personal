@@ -13,15 +13,20 @@ Public Sub ShowErrors()
     
 End Sub
 
+Public Function fnStrChangeCommas(ByVal myValue As Variant) As String
 
-Public Function change_commas(ByVal myValue As Variant) As String
-
-    Dim str_temp As String
-
-    str_temp = CStr(myValue)
-    change_commas = Replace(str_temp, ",", ".")
+    fnStrChangeCommas = Replace(CStr(myValue), ",", ".")
 
 End Function
+
+'Public Function change_commas(ByVal myValue As Variant) As String
+'
+'    Dim str_temp As String
+'
+'    str_temp = CStr(myValue)
+'    change_commas = Replace(str_temp, ",", ".")
+'
+'End Function
 
 Public Sub EnableMySaves()
 
