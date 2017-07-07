@@ -12,23 +12,20 @@ I have updated a few points, making it more suitable for my purposes:
  - checker whether an array is assigned
  
 This is what we get in the immediate window:
-<immediate window>
-Test report from v.doynov
+
+**Test report from v.doynov
 START: 07-07-2017 22:14:38
-999 expected.
+999 expected.**
 
-= PASS (2 of 2 passed) = 07-07-2017 22:14:38 =========================
-  Tests:2
+**= PASS (2 of 2 passed) = 07-07-2017 22:14:38 =========================
+  Tests:2**
 
-Tests expected: 999
+**Tests expected: 999
 Total Tests:
 2
-END: 07-07-2017 22:14:38
-</immediate window>
+END: 07-07-2017 22:14:38**
 
 This is the original Readme from the source:
-
-VBA-TDD
 =======
 
 Bring the reliability of other programming realms to VBA with Test-Driven Development (TDD) for VBA on Windows and Mac.
