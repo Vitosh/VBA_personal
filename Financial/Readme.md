@@ -11,4 +11,3 @@ It looks like this:
  <hr>
  
  ![Screenshot is here](https://ibb.co/eSUm9a)
-
