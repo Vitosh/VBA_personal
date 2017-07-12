@@ -1,6 +1,5 @@
 ## Financial
 <br/>
-
 For the **SUMPRODUCT** formula in SumProductCountAndSum.xlsx. <br />
 It looks like this:
 ======
