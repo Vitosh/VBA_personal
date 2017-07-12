@@ -1,4 +1,4 @@
-For the SUMPRODUCT formula in SumProductCountAndSum.xlsx. 
+For the **SUMPRODUCT** formula in SumProductCountAndSum.xlsx. 
 It looks like this:
  <hr>
 =SUMMENPRODUKT((B2:B6=C2)*1)<br />
