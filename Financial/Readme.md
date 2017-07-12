@@ -10,4 +10,4 @@ It looks like this:
 +SUMMENPRODUKT(((B16:B20=C16)*1)*(A16:A20=D16))<br />
  <hr>
  
- [Screenshot is here] (https://ibb.co/eSUm9a/)
+ ![Screenshot is here] (https://ibb.co/eSUm9a/)
