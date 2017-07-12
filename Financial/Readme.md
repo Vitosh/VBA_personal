@@ -1,7 +1,7 @@
 ## Financial
 <br/>
 For the **SUMPRODUCT** formula in SumProductCountAndSum.xlsx. <br />
-It looks like this:
+It looks like this:<br/>
 ======
 =SUMMENPRODUKT((B2:B6=C2)*1)<br />
 +SUMMENPRODUKT((B8:B13=C8)*1)<br />
