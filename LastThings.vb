@@ -17,19 +17,19 @@ Function last_col(Optional str_sheet As String, Optional row_to_check As Long = 
 End Function
 
 
-Function last_row(Optional str_sheet As String, Optional column_to_check As Long = 1) As Long
-    
-    Dim shSheet  As Worksheet
-    
-        If str_sheet = vbNullString Then
-            Set shSheet = ActiveSheet
-        Else
-            Set shSheet = Worksheets(str_sheet)
-        End If
-    
-    last_row = shSheet.Cells(shSheet.Rows.Count, column_to_check).End(xlUp).Row
+Function lastRow(Optional strSheet As String, Optional column_to_check As Long = 1) As Long
 
-End Function         
+    Dim shSheet As Worksheet
+
+    If strSheet = vbNullString Then
+        Set shSheet = ActiveSheet
+    Else
+        Set shSheet = Worksheets(strSheet)
+    End If
+
+    lastRow = shSheet.Cells(shSheet.Rows.Count, column_to_check).End(xlUp).Row
+
+End Function
             
 Public Function LastUsedColumn() As Long
     
