@@ -4,6 +4,7 @@ Public Sub MakeValues()
 
     Dim my_cell         As Range
     Dim str             As String
+    Dim strAll          As String
     Dim l_counter       As Long
 
     For Each my_cell In Selection
@@ -15,9 +16,12 @@ Public Sub MakeValues()
         Else
             str = str & 0
         End If
-
+        
+        strAll = IIf(Len(strAll), strAll & vbCrLf & str, str)
         Debug.Print str
 
     Next my_cell
+    
+    CreateLogFile (strAll)
 
 End Sub
