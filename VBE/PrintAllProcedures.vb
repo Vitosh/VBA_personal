@@ -3,6 +3,9 @@
 ' Prerequisites:    Microsoft Visual Basic for Applications Extensibility 5.3 library
 '                   CreateLogFile
 ' How to run:       Run GetFunctionAndSubNames, set a parameter to blnWithParentInfo
+'                   If ComponentTypeToString(vbext_ct_StdModule) = "Code Module" Then
+'
+' Used:             ComponentTypeToString from -> http://www.cpearson.com/excel/vbe.aspx
 '---------------------------------------------------------------------------------------
 
 Option Explicit
@@ -16,8 +19,12 @@ Public Sub GetFunctionAndSubNames()
     strSubsInfo = ""
     
     For Each item In ThisWorkbook.VBProject.VBComponents
-        ListProcedures item.name, False
-        'Debug.Print item.CodeModule.lines(1, item.CodeModule.CountOfLines)
+        
+        If ComponentTypeToString(vbext_ct_StdModule) = "Code Module" Then
+            ListProcedures item.name, False
+            'Debug.Print item.CodeModule.lines(1, item.CodeModule.CountOfLines)
+        End If
+        
     Next item
     
     CreateLogFile strSubsInfo
@@ -41,6 +48,7 @@ Private Sub ListProcedures(strName As String, Optional blnWithParentInfo = False
 
     With CodeMod
         LineNum = .CountOfDeclarationLines + 1
+        
         Do Until LineNum >= .CountOfLines
             ProcName = .ProcOfLine(LineNum, ProcKind)
 
@@ -52,6 +60,33 @@ Private Sub ListProcedures(strName As String, Optional blnWithParentInfo = False
 
             LineNum = .ProcStartLine(ProcName, ProcKind) + .ProcCountLines(ProcName, ProcKind) + 1
         Loop
+        
     End With
 
 End Sub
+
+Function ComponentTypeToString(ComponentType As VBIDE.vbext_ComponentType) As String
+    
+    Select Case ComponentType
+    
+        Case vbext_ct_ActiveXDesigner
+            ComponentTypeToString = "ActiveX Designer"
+            
+        Case vbext_ct_ClassModule
+            ComponentTypeToString = "Class Module"
+            
+        Case vbext_ct_Document
+            ComponentTypeToString = "Document Module"
+            
+        Case vbext_ct_MSForm
+            ComponentTypeToString = "UserForm"
+            
+        Case vbext_ct_StdModule
+            ComponentTypeToString = "Code Module"
+            
+        Case Else
+            ComponentTypeToString = "Unknown Type: " & CStr(ComponentType)
+            
+    End Select
+    
+End Function
