@@ -20,6 +20,7 @@ It looks like this:<br/>
 ![Screenshot is here](https://image.ibb.co/nJ9WaF/Paint.png)
 
 <br/>
+Array formula:
 Which value in array is found in a range? 
 
 =INDEX(C1:C6,MATCH(TRUE,COUNTIF(D:D,C1:C6)>0,0))
