@@ -47,3 +47,24 @@ FixRangeError_Error:
 
 End Sub
 
+'---------------------------------------------------------------------------------------
+' Method : FindMeTheCellWithError
+' Author : v.doynov
+' Date   : 01.09.2017
+' Purpose: Show the errors. Print the errors in a worksheet. Look for errors. Search errors.
+'---------------------------------------------------------------------------------------
+Public Sub FindMeTheCellWithError()
+
+    Dim rngCell     As Range
+    Dim wks         As Worksheet
+
+    For Each wks In ThisWorkbook.Worksheets
+        For Each rngCell In wks.UsedRange
+            If IsError(rngCell) Then
+                Debug.Print rngCell.Address
+                Debug.Print rngCell.Parent.name
+            End If
+        Next rngCell
+    Next wks
+
+End Sub
