@@ -42,12 +42,12 @@ Public Sub RunSuites(SuiteCol As Collection, _
         End If
     Next Suite
 
-    Debug.Print "= " & SummaryMessage(TotalCount, FailedSpecs, PendingSpecs) & " = " & GetDateAndTime & " ========================="
-    STR_ERROR_REPORT = STR_ERROR_REPORT & "= " & SummaryMessage(TotalCount, FailedSpecs, PendingSpecs) & " = " & GetDateAndTime & " ========================="
+    Debug.Print "= " & SummaryMessage(TotalCount, FailedSpecs, PendingSpecs) & " = " & GetDateAndTime & " =========================" & vbCrLf
+    str_error_report = str_error_report & "= " & SummaryMessage(TotalCount, FailedSpecs, PendingSpecs) & " = " & GetDateAndTime & " ========================="
     
     For Each Suite In SuiteCol
-    
         If Not Suite Is Nothing Then
+        
             If ShowSuiteDetails Then
                 Debug.Print SuiteMessage(Suite)
                 Indentation = "  "
@@ -55,29 +55,28 @@ Public Sub RunSuites(SuiteCol As Collection, _
             Else
                 Indentation = ""
             End If
-
+            
             For Each Spec In Suite.SpecsCol
                 If Spec.result = SpecResult.FAIL Then
                     Debug.Print Indentation & FailureMessage(Spec, ShowFailureDetails, Indentation)
-                    STR_ERROR_REPORT = STR_ERROR_REPORT & Indentation & FailureMessage(Spec, ShowFailureDetails, Indentation)
+                    str_error_report = str_error_report & vbCrLf & Indentation & FailureMessage(Spec, ShowFailureDetails, Indentation)
                     ShowingResults = True
                 ElseIf Spec.result = SpecResult.Pending Then
                     Debug.Print Indentation & PendingMessage(Spec)
-                    STR_ERROR_REPORT = STR_ERROR_REPORT & Indentation & PendingMessage(Spec)
+                    str_error_report = str_error_report & vbCrLf & Indentation & PendingMessage(Spec)
                     ShowingResults = True
                 ElseIf ShowPassed Then
                     Debug.Print Indentation & PassingMessage(Spec)
-                    STR_ERROR_REPORT = STR_ERROR_REPORT & Indentation & PassingMessage(Spec)
+                    str_error_report = str_error_report & vbCrLf & Indentation & PassingMessage(Spec)
                     ShowingResults = True
                 End If
             Next Spec
         End If
-        
     Next Suite
 
     If ShowingResults Then
         Debug.Print "==="
-        STR_ERROR_REPORT = STR_ERROR_REPORT & "===" & vbCrLf
+        str_error_report = str_error_report & vbCrLf & "===" & vbCrLf
     End If
 
 End Sub
@@ -89,19 +88,19 @@ Private Function SummaryMessage(TotalCount As Long, FailedSpecs As Long, Pending
     Else
         SummaryMessage = "FAIL (" & FailedSpecs & " of " & TotalCount & " failed"
     End If
-    
+
     If PendingSpecs = 0 Then
         SummaryMessage = SummaryMessage & ")"
     Else
         SummaryMessage = SummaryMessage & ", " & PendingSpecs & " pending)"
     End If
-    
+
 End Function
 
 Private Function FailureMessage(Spec As SpecDefinition, ShowFailureDetails As Boolean, Indentation As String) As String
 
     Dim FailedExpectation   As SpecExpectation
-    Dim I                   As Long
+    Dim i                   As Long
     
     FailureMessage = ResultMessage(Spec, "X")
     
@@ -111,8 +110,8 @@ Private Function FailureMessage(Spec As SpecDefinition, ShowFailureDetails As Bo
         For Each FailedExpectation In Spec.FailedExpectations
             FailureMessage = FailureMessage & Indentation & "  " & FailedExpectation.FailureMessage
             
-            If I + 1 <> Spec.FailedExpectations.Count Then: FailureMessage = FailureMessage & vbNewLine
-            I = I + 1
+            If i + 1 <> Spec.FailedExpectations.Count Then FailureMessage = FailureMessage & vbNewLine
+            i = i + 1
         Next FailedExpectation
     End If
     
@@ -131,33 +130,35 @@ Private Function PassingMessage(Spec As SpecDefinition) As String
 End Function
 
 Private Function ResultMessage(Spec As SpecDefinition, Symbol As String) As String
+
     ResultMessage = Symbol & " "
-    
+
     If Spec.ID <> "" Then
         ResultMessage = ResultMessage & Spec.ID & ": "
     End If
-    
+
     ResultMessage = ResultMessage & Spec.Description
+
 End Function
 
 Private Function SuiteMessage(Suite As SpecSuite) As String
-    
+
     Dim HasFailures     As Boolean
     Dim Spec            As SpecDefinition
-    
+
     For Each Spec In Suite.SpecsCol
         If Spec.result = SpecResult.FAIL Then
             HasFailures = True
             Exit For
         End If
     Next Spec
-    
+
     If HasFailures Then
         SuiteMessage = "X "
     Else
         SuiteMessage = "+ "
     End If
-    
+
     If Suite.Description <> "" Then
         SuiteMessage = SuiteMessage & Suite.Description
     Else
@@ -165,5 +166,3 @@ Private Function SuiteMessage(Suite As SpecSuite) As String
     End If
 
 End Function
-
-
