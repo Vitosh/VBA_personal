@@ -1,5 +1,3 @@
-Option Explicit
-
 Private pExpectations           As Collection
 Private pFailedExpectations     As Collection
 
@@ -8,10 +6,6 @@ Public Enum SpecResult
     FAIL
     Pending
 End Enum
-
-' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ '
-' Properties
-' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ '
 
 Public Description As String
 Public ID As String
@@ -45,10 +39,6 @@ Private Property Let FailedExpectations(value As Collection)
     Set pFailedExpectations = value
     
 End Property
-
-' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ '
-' Public Methods
-' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ '
 
 Public Function Expect(Optional value As Variant) As SpecExpectation
 
@@ -103,4 +93,3 @@ Public Function ResultName() As String
     End Select
     
 End Function
-
