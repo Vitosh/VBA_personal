@@ -27,3 +27,13 @@ Sub MyExecutiveMain()
     MyTest
 
 End Sub
+
+Sub WhichVersion()
+
+    #If VBA7 Then
+        Debug.Print "VBA7"
+    #Else
+        Debug.Print "NOT VBA7"
+    #End If
+
+End Sub
