@@ -37,3 +37,10 @@ Sub WhichVersion()
     #End If
 
 End Sub
+
+#If VBA7 And Win64 Then
+    Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+#Else
+    Private Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+#End If
+
