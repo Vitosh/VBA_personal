@@ -1,5 +1,0 @@
-In the Internet, VBA is usually given as an example of a scripting language, with PHP, JS and VBScript. 
-
-Plenty of the few people, who have heard about it believe that it is a scripting language, because it does not compiles. And the fact, that there are some precompiling variables (link) or a variation showing Debug>Compile, is just left as ok.
-
-The truth is that VBA compiles to P-Code(link), as you type it in the editor, i.e. the source code you see in the editor after you modified a line of code, is not the code you typed, but the editor's rendition of the underlying P-Code. Thus, we have pre-compiling variables and we can force compilation with Debug>Compile or we may force declaration of variables with "Option Explicit", which is checked upon compilation.
