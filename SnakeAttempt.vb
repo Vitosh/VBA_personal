@@ -35,24 +35,6 @@ Public Sub GoMove(moveDir As Direction)
 
 End Sub
 
-Private Sub ReSetShortcuts()
-
-    Application.OnKey "{UP}"
-    Application.OnKey "{DOWN}"
-    Application.OnKey "{LEFT}"
-    Application.OnKey "{RIGHT}"
-
-End Sub
-
-'Private Sub SetShortcuts()
-'
-'    Application.OnKey "{UP}", "'GoMove GoUp'"
-'    Application.OnKey "{DOWN}", "'GoMove GoDown'"
-'    Application.OnKey "{LEFT}", "'GoMove GoLeft'"
-'    Application.OnKey "{RIGHT}", "'GoMove GoRight'"
-'
-'End Sub
-
 Public Sub ColorSnake()
 
     wks.Cells.Clear
@@ -127,9 +109,7 @@ Private Sub MoveAround()
         MoveFurther
         Sleep (500)
         cnt = cnt + 1
-        Debug.Assert cnt < 10
-        'Stop
-        'Exit Do
+        Debug.Assert cnt < 20
     Loop
 
 End Sub
