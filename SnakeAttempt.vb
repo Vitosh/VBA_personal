@@ -1,5 +1,8 @@
 Option Explicit
 
+'https://msdn.microsoft.com/en-us/library/windows/desktop/ms646299(v=vs.85).aspx
+'https://msdn.microsoft.com/en-us/library/windows/desktop/ms646293(v=vs.85).aspx
+
 Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 Public Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 
@@ -134,3 +137,4 @@ Private Sub FixThePitch()
     End With
 
 End Sub
+
