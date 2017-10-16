@@ -1,6 +1,7 @@
 Option Explicit
 
 Private Declare PtrSafe Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+Public Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 
 Private Const SIZE_WIDTH    As Long = 7
 Private Const SIZE_HEIGTH   As Long = 5
@@ -23,14 +24,15 @@ End Enum
 Private Sub Main()
     
     FixThePitch
-    SetShortcuts
     InitializePoint
     MoveAround
     
 End Sub
 
 Public Sub GoMove(moveDir As Direction)
+
     Debug.Print moveDir
+
 End Sub
 
 Private Sub ReSetShortcuts()
@@ -42,14 +44,14 @@ Private Sub ReSetShortcuts()
 
 End Sub
 
-Private Sub SetShortcuts()
-
-    Application.OnKey "{UP}", "'GoMove GoUp'"
-    Application.OnKey "{DOWN}", "'GoMove GoDown'"
-    Application.OnKey "{LEFT}", "'GoMove GoLeft'"
-    Application.OnKey "{RIGHT}", "'GoMove GoRight'"
-
-End Sub
+'Private Sub SetShortcuts()
+'
+'    Application.OnKey "{UP}", "'GoMove GoUp'"
+'    Application.OnKey "{DOWN}", "'GoMove GoDown'"
+'    Application.OnKey "{LEFT}", "'GoMove GoLeft'"
+'    Application.OnKey "{RIGHT}", "'GoMove GoRight'"
+'
+'End Sub
 
 Public Sub ColorSnake()
 
@@ -69,14 +71,12 @@ Private Sub MoveFurther()
                 Set leadPoint = Cells(leadPoint.Row - 1, leadPoint.Column)
             End If
             
-            
         Case GoRight:
             If leadPoint.Column = SIZE_WIDTH Then
                 Set leadPoint = Cells(leadPoint.Row, 1)
             Else
                 Set leadPoint = Cells(leadPoint.Row, leadPoint.Column + 1)
             End If
-
         
         Case GoDown:
             If leadPoint.Row = SIZE_HEIGTH Then
@@ -95,6 +95,26 @@ Private Sub MoveFurther()
     
 End Sub
 
+Private Sub ReadKey()
+
+    Select Case True
+        
+        Case GetAsyncKeyState(vbKeyUp):
+            movingDirection = GoUp
+            
+        Case GetAsyncKeyState(vbKeyRight):
+            movingDirection = GoRight
+            
+        Case GetAsyncKeyState(vbKeyDown):
+            movingDirection = GoDown
+                    
+        Case GetAsyncKeyState(vbKeyLeft):
+            movingDirection = GoLeft
+
+    End Select
+    
+End Sub
+
 Private Sub MoveAround()
 
     movingDirection = Direction.GoRight
@@ -102,6 +122,7 @@ Private Sub MoveAround()
     
     Do While True
         DoEvents
+        ReadKey
         ColorSnake
         MoveFurther
         Sleep (500)
@@ -125,6 +146,7 @@ Private Sub FixThePitch()
     
     wks.visible = xlSheetVisible
     wks.Activate
+    
     With wks
         .Cells.Delete
         .Cells(1, 1).Select
