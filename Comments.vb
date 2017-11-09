@@ -86,3 +86,45 @@ Public Sub FixComments()
     Next xComment
 
 End Sub
+'-------------------------------------------------------
+Public Sub ValueToCommentMain()
+    Dim cnt As Long
+    For cnt = 1 To 100
+        ValueToCommentEngine cnt
+    Next cnt
+End Sub
+
+Public Sub ValueToCommentEngine(counter As Long)
+
+    Dim rangeWithComment        As Range
+    Dim commentText             As String
+    Dim commentArray            As Variant
+    Dim cnt                     As Long
+    
+    Const DELIM = " >> "
+    Const NUMBER_OF_COMMENTS = 12
+
+    Set rangeWithComment = Cells(2, 2)
+    rangeWithComment = "TEST 00" & counter
+    commentText = DELIM & rangeWithComment
+    rangeWithComment.ClearContents
+
+    If rangeWithComment.Comment Is Nothing Then
+        rangeWithComment.AddComment
+        rangeWithComment.Comment.Text (commentText)
+        Exit Sub
+    Else
+        commentArray = Split(rangeWithComment.Comment.Text, DELIM)
+    End If
+
+    For cnt = LBound(commentArray) + 1 To UBound(commentArray)
+    
+        If cnt >= NUMBER_OF_COMMENTS Then Exit For
+        commentText = commentText & IIf(cnt = 1, vbCrLf, vbNullString) & DELIM & commentArray(cnt)
+    Next cnt
+    
+    rangeWithComment.Comment.Text (commentText)
+
+End Sub
+'-------------------------------------------------------
+
