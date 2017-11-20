@@ -229,7 +229,9 @@ Public Function sum_range(my_range As Range) As Double
 
     sum_range = 0
     For Each cell In my_range
-        sum_range = sum_range + cell.Value
+        sum_range = sum_range + cell.
+
+
     Next
 
 End Function
@@ -650,6 +652,24 @@ Public Function b_value_in_array(my_value As Variant, _
     b_value_in_array = Not IsError(Application.Match(CStr(my_value), my_array, 0))
     
 End Function
+
+Public Function valueInArray(myValue As Variant, _
+                myArray As Variant, Optional isString As Boolean = False) As Boolean
+
+    Dim counter  As Long
+
+    If isString Then
+        myArray = Split(myArray, ":")
+    End If
+
+    For counter = LBound(myArray) To UBound(myArray)
+        myArray(counter) = CStr(myArray(counter))
+    Next counter
+
+    valueInArray = Not IsError(Application.Match(CStr(myValue), myArray, 0))
+
+End Function
+
 
 'call lockscroll(Array(tbl_main.Name,"A1:W100"))
 Public Sub LockScroll(ByRef my_array As Variant)
