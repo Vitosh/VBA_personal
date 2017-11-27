@@ -20,9 +20,10 @@ Public Function valueInArray(myValue As Variant, myArray As Variant) As Boolean
     Dim cnt As Long
 
     For cnt = LBound(myArray) To UBound(myArray)
-        myArray(cnt) = CStr(myArray(cnt))
+        If CStr(myValue) = CStr(myArray(cnt)) Then
+            valueInArray = True
+            Exit Function
+        End If
     Next cnt
-
-    valueInArray = Not IsError(Application.Match(CStr(myValue), myArray, 0))
 
 End Function
