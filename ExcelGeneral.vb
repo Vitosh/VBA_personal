@@ -13,3 +13,16 @@ Public Sub CloseAllExcelFilesExceptCurrent()
     Next wb
     
 End Sub
+
+
+Public Function valueInArray(myValue As Variant, myArray As Variant) As Boolean
+
+    Dim cnt As Long
+
+    For cnt = LBound(myArray) To UBound(myArray)
+        myArray(cnt) = CStr(myArray(cnt))
+    Next cnt
+
+    valueInArray = Not IsError(Application.Match(CStr(myValue), myArray, 0))
+
+End Function
