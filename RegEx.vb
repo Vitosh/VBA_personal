@@ -21,3 +21,45 @@ Public Sub RegExExample()
     Next lngCounter
 
 End Sub
+
+'===============================================================================
+'===============================================================================
+'removes anything that is not a digit or word from the string===================
+
+Public Function removeInvisibleThings(s As String) As String
+
+    Dim regEx           As Object
+    Dim inputMatches    As Object
+    Dim regExString     As String
+
+    Set regEx = CreateObject("VBScript.RegExp")
+
+    With regEx
+        .pattern = "[^a-zA-Z0-9]"
+        .IgnoreCase = True
+        .Global = True
+
+        Set inputMatches = .Execute(s)
+
+        If regEx.test(s) Then
+            removeInvisibleThings = .Replace(s, vbNullString)
+        Else
+            removeInvisibleThings = s
+        End If
+
+    End With
+
+End Function
+
+Public Sub TestMe()
+
+    Debug.Print removeInvisibleThings("aa1 Abc 67 ( *^ 45 ")
+    Debug.Print removeInvisibleThings("aa1 ???!")
+    Debug.Print removeInvisibleThings("   aa1 Abc 1267 ( *^ 45 ")
+
+End Sub
+
+'===============================================================================
+'===============================================================================
+'===============================================================================
+
