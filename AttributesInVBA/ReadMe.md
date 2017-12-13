@@ -1,6 +1,5 @@
 ## VBTricks
 <br/>
-
 3 classes are in the sample:
 - with a default property (CarWithDefaultPropery.cls)
 - with a default procedure (TruckWithDefaultProcedure.cls)
