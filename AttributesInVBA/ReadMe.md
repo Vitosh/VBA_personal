@@ -1,11 +1,11 @@
 ## VBTricks
 <br/>
 3 classes are in the sample:
-- with a default property (CarWithDefaultPropery.cls)
-- with a default procedure (TruckWithDefaultProcedure.cls)
-- with a non required initialization (CarGlobal.cls)
 
-Plus automatic export of everything but the worksheets to a set up file.
+ - with a default property (CarWithDefaultPropery.cls)
+ - with a default procedure (TruckWithDefaultProcedure.cls)
+ - with a non required initialization (CarGlobal.cls)
+ - automatic export of everything but the worksheets to a set up file.
 
 With courtesy to:
  - http://www.stackoverflow.com
