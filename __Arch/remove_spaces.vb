@@ -1,12 +1,12 @@
-Public Sub remove_space_in_string()
+Public Sub removeSpaceInString()
 
-    Dim r_range As Range
+    Dim myCell As Range
         
-    For Each r_range In Selection
-        r_range = Trim(r_range)
-        r_range = Replace(r_range, vbTab, "")
-        r_range = Replace(r_range, " ", "")
-        r_range = Replace(r_range, Chr(160), "")
-    Next r_range
+    For Each myCell In Selection
+        myCell = Trim(myCell)
+        myCell = Replace(myCell, vbTab, "")
+        myCell = Replace(myCell, " ", "")
+        myCell = Replace(myCell, Chr(160), "")
+    Next myCell
 
 End Sub
