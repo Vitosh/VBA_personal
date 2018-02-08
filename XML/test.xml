@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+  <gfi_message version="1.0">
+    <header>
+      <transactionId>123</transactionId>
+      <timestamp>2018-02-08T15:59:41+08:00</timestamp>
+      <processingTime>0.15</processingTime>
+    </header>
+    <body>
+      <response name="action1" function="PRICING" version="1.0">
+        <option name="data" ref="price169" />
+      </response>
+      <data format="NAME_VALUE" name="price169">
+        <node name="European Call">
+          <field name="Scenario" value="Trading" />
+          <field name="Currency" value="USD" status="input" />
+          <field name="CtrCcy" value="HKD" status="input" />
+          <field name="Strategy" value="Call" status="input" />
+          <field name="Model" value="Analytic" />
+          <field name="Class" value="European" status="input" />
+          <field name="Direction" value="Buy" status="input" />
+          <field name="Spot" value="7.81241/7.82871" />
+          <field name="Cutoff" value="TOK" />
+          <field name="Market" value="OTC" />
+          <field name="HorDate" value="15:59 Thu 8 Feb 18" status="input" />
+          <field name="ValDate" value="12 Feb 18" />
+          <field name="SpotDate" value="12 Feb 18" />
+          <field name="Maturity" value="Odd Date" />
+          <field name="ExDate" value="8 Feb 18" status="input" />
+          <field name="ExDays" value="0" />
+          <field name="ExTime" value="14:00 SGT" />
+          <field name="DelDate" value="12 Feb 18" />
+          <field name="DelDays" value="0" />
+          <field name="PremDate" value="Mon 12 Feb 18" />
+          <field name="PremType" value="Spot" />
+          <field name="Strike" value="7.81241" />
+          <field name="CtrStk" value="0.128001474576987" />
+          <field name="FwdWealth" value="0\-0.002082079933987" status="input" />
+      </node>
+    </data>
+  </body>
+</gfi_message>

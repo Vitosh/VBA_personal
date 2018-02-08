@@ -1,0 +1,29 @@
+Option Explicit
+
+Sub TestMe()
+
+    Dim xmlObj As Object
+    Set xmlObj = CreateObject("MSXML2.DOMDocument")
+    
+    xmlObj.async = False
+    xmlObj.validateOnParse = False
+    xmlObj.Load ("C:\Desktop\test.xml")
+    
+    Dim nodesThatMatter As Object
+    Dim node            As Object
+    
+    Set nodesThatMatter = xmlObj.SelectNodes("//gfi_message/body/data/node")
+    For Each node In nodesThatMatter
+        Dim child   As Variant
+        For Each child In node.ChildNodes
+            Dim childOfChild        As Object
+            Dim childOfChildInfo    As String
+            
+            For Each childOfChild In child.Attributes
+                childOfChildInfo = childOfChildInfo & " -> " & childOfChild.Text
+            Next childOfChild
+            Debug.Print Right(childOfChildInfo, Len(childOfChildInfo) - 4)
+            childOfChildInfo = vbNullString
+        Next child
+    Next node
+End Sub
