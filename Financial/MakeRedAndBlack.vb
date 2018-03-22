@@ -247,19 +247,20 @@ RedAndBlackRecalculation_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure RedAndBlackRecalculation of Modul mod_RedAndBlackRecalculation"
 End Sub
 
-Function last_column(Optional str_sheet As String, Optional row_to_check As Long = 1) As Long
+Function lastColumn(Optional sheetName As String, Optional rowToCheck As Long = 1) As Long
 
-    Dim shSheet  As Worksheet
+    Dim ws  As Worksheet
     
-    If str_sheet = vbNullString Then
-        Set shSheet = ActiveSheet
+    If sheetName = vbNullString Then
+        Set ws = ActiveSheet
     Else
-        Set shSheet = Worksheets(str_sheet)
+        Set ws = Worksheets(sheetName)
     End If
     
-    last_column = shSheet.Cells(row_to_check, shSheet.Columns.Count).End(xlToLeft).Column
+    lastColumn = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
 
 End Function
+
 
 Public Function RGB2HTMLColor(B As Byte, G As Byte, R As Byte) As String
 
