@@ -13,17 +13,17 @@ Function lastCol(Optional strSheet As String, Optional rowToCheck As Long = 1) A
     lastCol = shSheet.Cells(rowToCheck, shSheet.Columns.Count).End(xlToLeft).Column
 End Function
 
-Function lastRow(Optional strSheet As String, Optional column_to_check As Long = 1) As Long
+Function lastRow(Optional wsName As String, Optional columnToCheck As Long = 1) As Long
 
-    Dim shSheet As Worksheet
+    Dim ws As Worksheet
 
-    If strSheet = vbNullString Then
-        Set shSheet = ActiveSheet
+    If wsName = vbNullString Then
+        Set ws = ActiveSheet
     Else
-        Set shSheet = Worksheets(strSheet)
+        Set ws = Worksheets(wsName)
     End If
 
-    lastRow = shSheet.Cells(shSheet.Rows.Count, column_to_check).End(xlUp).Row
+    lastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
 
 End Function
             
