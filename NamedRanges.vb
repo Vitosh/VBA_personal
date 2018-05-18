@@ -92,11 +92,11 @@ End Sub
 
 Sub UnhideAllNames()
 
-    Dim tempname As Name
+    Dim tempName As Name
     
-    For Each tempname In Names
+    For Each tempName In Names
         'Debug.Print tempname.Name
-        tempname.Visible = False
-    Next tempname
+        tempName.Visible = False
+    Next tempName
 
 End Sub
