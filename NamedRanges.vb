@@ -89,3 +89,14 @@ Public Sub RemoveNamedRangesWithErrors()
     On Error GoTo 0
     
 End Sub
+
+Sub UnhideAllNames()
+
+    Dim tempname As Name
+    
+    For Each tempname In Names
+        'Debug.Print tempname.Name
+        tempname.Visible = False
+    Next tempname
+
+End Sub
