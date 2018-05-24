@@ -10,11 +10,11 @@ Function GetFolder(Optional InitialLocation As String) As String
 
     Dim FolderDialog        As FileDialog
     Dim SelectedFolder      As String
-    
+
     If Len(InitialLocation) = 0 Then InitialLocation = ThisWorkbook.Path
-    
+
     Set FolderDialog = Excel.Application.FileDialog(msoFileDialogFolderPicker)
-    
+
     With FolderDialog
         .Title = "My Title For Dialog"
         .AllowMultiSelect = False
@@ -22,19 +22,18 @@ Function GetFolder(Optional InitialLocation As String) As String
         If .Show <> -1 Then GoTo GetFolder_Error
         SelectedFolder = .SelectedItems(1)
     End With
-    
+
     GetFolder = SelectedFolder
-    Set FolderDialog = Nothing
-    
+
     On Error GoTo 0
     Exit Function
 
 GetFolder_Error:
 
-    Debug.Print "Error " & Err.Number & " (" & Err.Description & ") in procedure GetFolder of Function Modul1"
-    Set FolderDialog = Nothing
-    
+    Debug.Print "Error " & Err.Number & " (" & Err.Description & ")
+
 End Function
+
 '---------------------------------------------------------------------------------------------------------------
 '---------------------------------------------------------------------------------------------------------------
 '---------------------------------------------------------------------------------------------------------------
