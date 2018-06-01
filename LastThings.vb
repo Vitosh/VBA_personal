@@ -2,15 +2,20 @@
 'locate last row
 'last things
 
-Function lastCol(Optional strSheet As String, Optional rowToCheck As Long = 1) As Long
+Option Explicit
 
-    Dim shSheet  As Worksheet
-        If strSheet = vbNullString Then
-            Set shSheet = ActiveSheet
-        Else
-            Set shSheet = Worksheets(strSheet)
-        End If
-    lastCol = shSheet.Cells(rowToCheck, shSheet.Columns.Count).End(xlToLeft).Column
+Function lastCol(Optional wsName As String, Optional rowToCheck As Long = 1) As Long
+
+    Dim ws  As Worksheet
+    
+    If wsName = vbNullString Then
+        Set ws = ActiveSheet
+    Else
+        Set ws = Worksheets(wsName)
+    End If
+    
+    lastCol = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
+    
 End Function
 
 Function lastRow(Optional wsName As String, Optional columnToCheck As Long = 1) As Long
