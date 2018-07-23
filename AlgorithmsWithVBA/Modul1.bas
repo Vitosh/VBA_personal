@@ -102,7 +102,8 @@ Public Function MainTest(ByVal consoleInput As String) As String
 
 End Function
 
-Public Function ReadFileLineByLineToString(path As String) As String
+
+Public Function ReadFromFile(path As String) As String
 
     Dim fileNo As Long
     fileNo = FreeFile
@@ -112,14 +113,39 @@ Public Function ReadFileLineByLineToString(path As String) As String
     Do While Not EOF(fileNo)
         Dim textRowInput As String
         Line Input #fileNo, textRowInput
-        ReadFileLineByLineToString = ReadFileLineByLineToString & textRowInput
+        ReadFromFile = ReadFromFile & textRowInput
         If Not EOF(fileNo) Then
-            ReadFileLineByLineToString = ReadFileLineByLineToString & vbCrLf
+            ReadFromFile = ReadFromFile & vbCrLf
         End If
     Loop
 
     Close #fileNo
 
 End Function
+
+Sub WriteToFile(filePath As String, text As String)
+
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Dim oFile As Object
+    Set oFile = fso.CreateTextFile(filePath)
+    oFile.Write text
+    oFile.Close
+    
+End Sub
+
+Sub TestMe()
+
+    Dim readTxt As String
+    Dim filePath As String: filePath = "C:\text.txt"
+
+    readTxt = ReadFromFile(filePath)
+    readTxt = Replace(readTxt, "name=", "")
+    readTxt = Replace(readTxt, "correo=", "")
+
+    WriteToFile filePath, readTxt
+
+End Sub
+
 
 
