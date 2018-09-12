@@ -47,3 +47,10 @@ Public Sub Main()
     Call OnEnd
         
 End Sub
+    
+Function WorksheetExists(sheetName As String) As Boolean
+        
+    WorksheetExists = Not WorksheetFunction.IsErr(Evaluate("'" & sheetName & "'!A1"))
+        
+End Function
+
