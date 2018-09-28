@@ -5,30 +5,19 @@ Option Private Module
 'locate last row
 'last things
 
-Function lastCol(Optional wsName As String, Optional rowToCheck As Long = 1) As Long
+Function lastCol(wsName As String, Optional rowToCheck As Long = 1) As Long
 
-    Dim ws  As Worksheet
-    
-    If wsName = vbNullString Then
-        Set ws = ActiveSheet
-    Else
-        Set ws = Worksheets(wsName)
-    End If
-    
+    Dim ws  As Worksheet    
+    Set ws = Worksheets(wsName)    
     lastCol = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
     
 End Function
 
-Function lastRow(Optional wsName As String, Optional columnToCheck As Long = 1) As Long
+Function lastRow(wsName As String, Optional columnToCheck As Long = 1) As Long
 
     Dim ws As Worksheet
 
-    If wsName = vbNullString Then
-        Set ws = ActiveSheet
-    Else
-        Set ws = Worksheets(wsName)
-    End If
-
+    Set ws = Worksheets(wsName)
     lastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
 
 End Function
