@@ -3,6 +3,7 @@
 'last things
 
 Option Explicit
+Option Private Module
 
 Function lastCol(Optional wsName As String, Optional rowToCheck As Long = 1) As Long
 
