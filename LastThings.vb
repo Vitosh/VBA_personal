@@ -16,7 +16,6 @@ End Function
 Function lastRow(wsName As String, Optional columnToCheck As Long = 1) As Long
 
     Dim ws As Worksheet
-
     Set ws = Worksheets(wsName)
     lastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
 
