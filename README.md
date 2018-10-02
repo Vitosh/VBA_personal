@@ -6,6 +6,6 @@ Now it is pretty much anything good that I write, that could be reused, so I do 
     
 Good luck, have fun from [VitoshAcademy](http://www.vitoshacademy.com)
 
-Feel free to make pull requests, I would take a look at anyone of them.
+Feel free to make pull requests, I would take a look at each one of them.
 
 :cat::dog::bird:
