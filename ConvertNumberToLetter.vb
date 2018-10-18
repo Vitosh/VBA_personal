@@ -13,3 +13,7 @@ Public Function convert_number_to_letter(ByVal l_number As Long) As String
     End If
 
 End Function
+
+Public Function ConvertNumberToLetterAlternative(ByVal number As Long) As String
+    ConvertNumberToLetterAlternative = Split(Cells(1, number).Address, "$")(1)
+End Function
