@@ -145,3 +145,9 @@ Public Function fnLngLocateValueCol(ByVal strTarget As String, _
     Next rngMyCell
 
 End Function
+                    
+'LastRow Last Row Formula
+=IFERROR(LOOKUP(2,1/(NOT(ISBLANK(A:A))),ROW(A:A)),0)
+
+'LastColumn Last Column Formula
+=IFERROR(LOOKUP(2,1/(NOT(ISBLANK(1:1))),COLUMN(1:1)),0)
