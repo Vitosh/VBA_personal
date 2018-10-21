@@ -151,3 +151,10 @@ End Function
 
 'LastColumn Last Column Formula
 =IFERROR(LOOKUP(2,1/(NOT(ISBLANK(1:1))),COLUMN(1:1)),0)
+                                    
+'Last Row Value of Column A
+=LOOKUP(2,1/(NOT(ISBLANK(A:A))),A:A)
+                                    
+'Last Column Value of the first row
+=LOOKUP(2,1/(NOT(ISBLANK(1:1))),1:1)
+
