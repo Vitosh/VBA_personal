@@ -27,3 +27,17 @@ Public Function valueInArray(myValue As Variant, myArray As Variant) As Boolean
     Next cnt
 
 End Function
+
+Sub CheckUser()
+
+    Dim userNames As Variant
+    userNames = Array("User1", "User2", "User3")
+
+    If valueInArray(Environ("UserName"), userNames) Then
+        Debug.Print "User Present"
+    Else
+        Debug.Print "User Not Present"
+    End If
+    
+End Sub
+
