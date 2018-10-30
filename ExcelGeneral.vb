@@ -20,7 +20,7 @@ Public Function valueInArray(myValue As Variant, myArray As Variant) As Boolean
     Dim cnt As Long
 
     For cnt = LBound(myArray) To UBound(myArray)
-        If CStr(myValue) = CStr(myArray(cnt)) Then
+        If LCase(CStr(myValue)) = LCase(CStr(myArray(cnt))) Then
             valueInArray = True
             Exit Function
         End If
