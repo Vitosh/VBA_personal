@@ -41,3 +41,15 @@ Sub CheckUser()
     
 End Sub
 
+
+Sub ChangeTheFont(lookFor As String, currentRange As Range, myColor As Long)
+
+    Dim startPosition As Long: startPosition = InStr(1, currentRange.Value2, lookFor)
+    Dim endPosition As Long: endPosition = startPosition + Len(currentRange.Value2)
+
+    With currentRange.Characters(startPosition, Len(lookFor)).Font
+        .Color = myColor
+        .Bold = True
+    End With
+End Sub
+
