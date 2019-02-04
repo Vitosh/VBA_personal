@@ -63,3 +63,30 @@ End Sub
 '===============================================================================
 '===============================================================================
 
+Public Function findTheSubString(wholeString As String, subString As String) As String
+
+    Dim regEx           As Object
+    Dim inputMatches    As Object
+    Dim regExString     As String
+
+    Set regEx = CreateObject("VBScript.RegExp")
+
+    With regEx
+        .Pattern = Split(subString, "*")(0) & "[\s\S]*" & Split(subString, "*")(1)
+        .IgnoreCase = True
+        .Global = True
+
+        Set inputMatches = .Execute(wholeString)
+        If regEx.test(wholeString) Then
+            findTheSubString = inputMatches(0)
+        Else
+            findTheSubString = "Not Found!"
+        End If
+
+    End With
+
+End Function
+
+'===============================================================================
+'===============================================================================
+'===============================================================================
