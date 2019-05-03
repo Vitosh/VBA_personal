@@ -5,27 +5,27 @@ Option Private Module
 'locate last row
 'last things
 
-Function lastCol(wsName As String, Optional rowToCheck As Long = 1) As Long
+Public Function LastCol(wsName As String, Optional rowToCheck As Long = 1) As Long
 
-    Dim ws  As Worksheet    
-    Set ws = Worksheets(wsName)    
-    lastCol = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
+    Dim ws  As Worksheet
+    Set ws = Worksheets(wsName)
+    LastCol = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
     
 End Function
 
-Function lastRow(wsName As String, Optional columnToCheck As Long = 1) As Long
+Public Function LastRow(wsName As String, Optional columnToCheck As Long = 1) As Long
 
     Dim ws As Worksheet
     Set ws = Worksheets(wsName)
-    lastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
+    LastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
 
 End Function
             
 Public Function LastUsedColumn() As Long
     
-    Dim rLastCell As Range
+    Dim lastCell As Range
     
-    Set rLastCell = ActiveSheet.Cells.Find(What:="*", _
+    Set lastCell = ActiveSheet.Cells.Find(What:="*", _
                                     After:=ActiveSheet.Cells(1, 1), _
                                     LookIn:=xlFormulas, _
                                     LookAt:=xlPart, _
@@ -33,7 +33,7 @@ Public Function LastUsedColumn() As Long
                                     SearchDirection:=xlPrevious, _
                                     MatchCase:=False)
     
-    LastUsedColumn = rLastCell.Column
+    LastUsedColumn = lastCell.Column
 
 End Function
 
@@ -53,98 +53,95 @@ Public Function LastUsedRow() As Long
 
 End Function
 
+Public Function LocateValueRow(ByVal textTarget As String, _
+                ByRef wksTarget As Worksheet, _
+                Optional col As Long = 1, _
+                Optional moreValuesFound As Long = 1, _
+                Optional lookForPart = False, _
+                Optional lookUpToBottom = True) As Long
 
-'---------------------------------------------------------------------------------------
-' Procedure : fnLngLocateValueRow
-' Author    : v.doynov
-' Date      : 16.03.2017
-' Purpose   : blnLookUpToBottom is more powerful than lngMoreValuesFound and makes it useless.
-'---------------------------------------------------------------------------------------
-'
-Public Function fnLngLocateValueRow(ByVal strTarget As String, _
-    ByRef wksTarget As Worksheet, _
-    Optional lngCol As Long = 1, _
-    Optional lngMoreValuesFound As Long = 1, _
-    Optional blnLookForPart = False, _
-    Optional blnLookUpToBottom = True) As Long
+    Dim valuesFound      As Long
+    Dim localRange            As Range
+    Dim myCell           As Range
 
-    Dim lngValuesFound      As Long
-    Dim rngLocal            As Range
-    Dim rngMyCell           As Range
+    LocateValueRow = -999
+    valuesFound = moreValuesFound
+    Set localRange = wksTarget.Range(wksTarget.Cells(1, col), wksTarget.Cells(Rows.Count, col))
 
-    fnLngLocateValueRow = -999
-    lngValuesFound = lngMoreValuesFound
-    Set rngLocal = wksTarget.Range(wksTarget.Cells(1, lngCol), wksTarget.Cells(Rows.Count, lngCol))
-
-    For Each rngMyCell In rngLocal
-        If blnLookForPart Then
-            If strTarget = Left(rngMyCell, Len(strTarget)) Then
-                If lngValuesFound = 1 Then
-                    fnLngLocateValueRow = rngMyCell.row
-                    If blnLookUpToBottom Then Exit Function
+    For Each myCell In localRange
+        If lookForPart Then
+            If textTarget = Left(myCell, Len(textTarget)) Then
+                If valuesFound = 1 Then
+                    LocateValueRow = myCell.Row
+                    If lookUpToBottom Then Exit Function
                 Else
-                    Call Decrement(lngValuesFound)
+                    Decrement valuesFound
                 End If
             End If
         Else
-            If strTarget = Trim(rngMyCell) Then
-                If lngValuesFound = 1 Then
-                    fnLngLocateValueRow = rngMyCell.row
-                    If blnLookUpToBottom Then Exit Function
+            If textTarget = Trim(myCell) Then
+                If valuesFound = 1 Then
+                    LocateValueRow = myCell.Row
+                    If lookUpToBottom Then Exit Function
                 Else
-                    Call Decrement(lngValuesFound)
+                    Decrement valuesFound
                 End If
             End If
         End If
-    Next rngMyCell
+    Next myCell
 
 End Function
 
-'---------------------------------------------------------------------------------------
-' Procedure : fnLngLocateValueCol
-' Author    : v.doynov
-' Date      : 16.03.2017
-' Purpose   : blnLookUpToBottom is more powerful than lngMoreValuesFound and makes it useless.
-'---------------------------------------------------------------------------------------
-'
-Public Function fnLngLocateValueCol(ByVal strTarget As String, _
-    ByRef wksTarget As Worksheet, _
-    Optional lngRow As Long = 1, _
-    Optional lngMoreValuesFound As Long = 1, _
-    Optional blnLookForPart = False, _
-    Optional blnLookUpToBottom = True) As Long
+Public Function LocateValueCol(ByVal textTarget As String, _
+                ByRef wksTarget As Worksheet, _
+                Optional lngRow As Long = 1, _
+                Optional moreValuesFound As Long = 1, _
+                Optional lookForPart = False, _
+                Optional lookUpToBottom = True) As Long
 
-    Dim lngValuesFound          As Long
-    Dim rngLocal                As Range
-    Dim rngMyCell               As Range
+    Dim valuesFound          As Long
+    Dim localRange                As Range
+    Dim myCell               As Range
 
-    fnLngLocateValueCol = -999
-    lngValuesFound = lngMoreValuesFound
-    Set rngLocal = wksTarget.Range(wksTarget.Cells(lngRow, 1), wksTarget.Cells(lngRow, Columns.Count))
+    LocateValueCol = -999
+    valuesFound = moreValuesFound
+    Set localRange = wksTarget.Range(wksTarget.Cells(lngRow, 1), wksTarget.Cells(lngRow, Columns.Count))
 
-    For Each rngMyCell In rngLocal
-        If blnLookForPart Then
-            If strTarget = Left(rngMyCell, Len(strTarget)) Then
-                If lngValuesFound = 1 Then
-                    fnLngLocateValueCol = rngMyCell.Column
-                    If blnLookUpToBottom Then Exit Function
+    For Each myCell In localRange
+        If lookForPart Then
+            If textTarget = Left(myCell, Len(textTarget)) Then
+                If valuesFound = 1 Then
+                    LocateValueCol = myCell.Column
+                    If lookUpToBottom Then Exit Function
                 Else
-                    Call Decrement(lngValuesFound)
+                    Decrement valuesFound
                 End If
             End If
         Else
-            If strTarget = Trim(rngMyCell) Then
-                If lngValuesFound = 1 Then
-                    fnLngLocateValueCol = rngMyCell.Column
-                    If blnLookUpToBottom Then Exit Function
+            If textTarget = Trim(myCell) Then
+                If valuesFound = 1 Then
+                    LocateValueCol = myCell.Column
+                    If lookUpToBottom Then Exit Function
                 Else
-                    Call Decrement(lngValuesFound)
+                    Decrement valuesFound
                 End If
             End If
         End If
-    Next rngMyCell
+    Next myCell
 
 End Function
+
+Private Sub Increment(ByRef valueToIncrement As Variant, Optional incrementWith As Double = 1)
+    
+    valueToIncrement = valueToIncrement + incrementWith
+
+End Sub
+
+Private Sub Decrement(ByRef valueToDecrement As Variant, Optional decrementWith As Double = 1)
+
+    valueToDecrement = valueToDecrement - decrementWith
+
+End Sub
                     
 'LastRow Last Row Formula
 =IFERROR(LOOKUP(2,1/(NOT(ISBLANK(A:A))),ROW(A:A)),0)
