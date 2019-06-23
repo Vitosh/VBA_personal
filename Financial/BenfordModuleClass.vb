@@ -1,81 +1,75 @@
 Option Explicit
 
-Private m_CheckValues       As Variant
-Private m_lCount            As Long
+Private benfordCheckValues As Variant
+Private benfordCount As Long
 
-Private Sub Class_Initialize()
+Sub Class_Initialize()
 
-    Dim lngCounter As Long
-    ReDim m_CheckValues(10)
+    Dim counter As Long
+    ReDim benfordCheckValues(9)
 
-    For lngCounter = LBound(m_CheckValues) To UBound(m_CheckValues)
-        m_CheckValues(lngCounter) = 0
-    Next lngCounter
+    For counter = LBound(benfordCheckValues) To UBound(benfordCheckValues)
+        benfordCheckValues(counter) = 0
+    Next counter
 
 End Sub
 
-Public Function ValuesBenford() As String
+Function InitialValuesBenford(val As Long) As Double
+        
+    '1 = "30,1%"
+    '2 = "17,6%"
+    '3 = "12,5%"
+    '4 = " 9,7%"
+    '5 = " 7,9%"
+    '6 = " 6,7%"
+    '7 = " 5,8%"
+    '8 = " 5,1%"
+    '9 = " 4,6%"
     
-    Dim cnt As Long
-    ValuesBenford = ""
-    
-    For cnt = 1 To 9
-        ValuesBenford = ValuesBenford & Round(WorksheetFunction.Log10(1 + 1 / cnt), 4) & vbCrLf
-    Next cnt
+    InitialValuesBenford = Round(WorksheetFunction.Log10(1 + 1 / val), 3)
     
 End Function
 
-Public Function CalculateBenfordValue(lngDouble As Long) As Double
-    
-    CalculateBenfordValue = Round(WorksheetFunction.Log10(1 + 1 / lngDouble), 3)
+Function PercentageFixer(valToReturn As Double) As String
+                    
+    If valToReturn > 0.1 Then
+        PercentageFixer = Trim(Format(valToReturn, "##.0%"))
+    ElseIf valToReturn = 0 Then
+        PercentageFixer = " " & Format(valToReturn, "0.0%")
+    Else
+        PercentageFixer = " " & Format(valToReturn, "#.0%")
+    End If
     
 End Function
 
-Public Function InitialValuesBenford(lngVal As Long) As Variant
+Function CreateBenfordLawReport() As String
 
-    ReDim varB(10)
-    varB(0) = "  N/A"
-    varB(1) = "30,1%"
-    varB(2) = "17,6%"
-    varB(3) = "12,5%"
-    varB(4) = " 9,7%"
-    varB(5) = " 7,9%"
-    varB(6) = " 6,7%"
-    varB(7) = " 5,8%"
-    varB(8) = " 5,1%"
-    varB(9) = " 4,6%"
-    varB(10) = "  N/A"
-    InitialValuesBenford = varB(lngVal)
-
-End Function
-
-Public Function CreateBenfordLawReport() As String
-
-    Dim strLine As String: strLine = "---------------------------------"
+    Dim line As String: line = "---------------------------------"
     On Error GoTo CreateBenfordLawReport_Error
 
-    Dim lngCounter      As Long
-    CreateBenfordLawReport = vbCrLf _
-                                & strLine & strLine & strLine & vbCrLf _
-                                & strLine & strLine & strLine & vbCrLf _
-                                & strLine & strLine & strLine & vbCrLf _
-                                & "Benford's Law" & vbCrLf & "https://en.wikipedia.org/wiki/Benford%27s_law" & vbCrLf
+    Dim counter      As Long
+    CreateBenfordLawReport = line & line & line & vbCrLf _
+                            & line & line & line & vbCrLf _
+                            & line & line & line & vbCrLf _
+                            & "Benford's Law" & vbCrLf & "https://en.wikipedia.org/wiki/Benford%27s_law" & vbCrLf
 
-    For lngCounter = LBound(CheckValues) To UBound(CheckValues)
-        CreateBenfordLawReport = CreateBenfordLawReport & vbCrLf _
-                                & lngCounter & vbTab & _
-                                "-> " & CheckValues(lngCounter) & vbTab & _
-                                Round(CheckValues(lngCounter) / Me.Count, 3) * 100 & "%" & vbTab & _
-                                Me.InitialValuesBenford(lngCounter) & vbTab & "|"
-                
-        If lngCounter = 0 Or lngCounter = 9 Then
-            CreateBenfordLawReport = CreateBenfordLawReport & vbCrLf & strLine
+    For counter = LBound(CheckValues) To UBound(CheckValues)
+        If counter = 0 Then
+            Dim header As String
+            header = CreateBenfordLawReport & vbCrLf & "#" & vbTab & _
+                                    "-> " & "Val." & vbTab & "Real%" & vbTab & "Expected"
+            CreateBenfordLawReport = header
+        Else
+            CreateBenfordLawReport = CreateBenfordLawReport & vbCrLf & counter & vbTab & _
+                                    "-> " & CheckValues(counter) & vbTab & _
+                                    PercentageFixer(Round(CheckValues(counter) / Me.Count, 3)) & vbTab & _
+                                    PercentageFixer(InitialValuesBenford(counter)) & vbTab & "|"
         End If
         
-    Next lngCounter
-
-    CreateBenfordLawReport = CreateBenfordLawReport & vbCrLf & IIf(Len(STR_UNKNOWN_VALUES), vbCrLf & "Unknown values:" & vbCrLf & STR_UNKNOWN_VALUES, "")
-    CreateBenfordLawReport = CreateBenfordLawReport & vbCrLf & IIf(Len(STR_ZERO_VALUES), "Zero values:" & vbCrLf & STR_ZERO_VALUES, "")
+        If counter = 0 Or counter = 9 Then
+            CreateBenfordLawReport = CreateBenfordLawReport & vbCrLf & line
+        End If
+    Next counter
 
     On Error GoTo 0
     Exit Function
@@ -86,44 +80,22 @@ CreateBenfordLawReport_Error:
 
 End Function
 
-Public Property Get CheckValues() As Variant
-
-    CheckValues = m_CheckValues
-
+Property Get CheckValues() As Variant
+    CheckValues = benfordCheckValues
 End Property
 
-Public Property Get Count() As Long
-
-    Count = m_lCount
-
+Property Get Count() As Long
+    Count = benfordCount
 End Property
 
-Public Sub IncrementCount()
-
-    m_lCount = m_lCount + 1
-
+Sub IncrementCount()
+    benfordCount = benfordCount + 1
 End Sub
 
-Public Sub IncrementValue(varInput As Variant, strWksName As String, strInvoiceNumber As String)
+Sub IncrementValue(valToInput As Variant)
 
-    Dim varInputLeft    As Variant
-
-    varInputLeft = Left(varInput, 1)
-
-    If IsNumeric(varInputLeft) Then
-        m_CheckValues(varInputLeft) = m_CheckValues(varInputLeft) + 1
-        If varInputLeft > 0 Then
-            Me.IncrementCount
-        Else
-            STR_ZERO_VALUES = STR_ZERO_VALUES & varInput & vbTab & vbTab & strWksName & vbTab & vbTab & strInvoiceNumber & vbCrLf
-        End If
-    Else
-        m_CheckValues(10) = m_CheckValues(10) + 1
-        STR_UNKNOWN_VALUES = STR_UNKNOWN_VALUES & varInput & vbTab & vbTab & strWksName & vbTab & vbTab & strInvoiceNumber & vbCrLf
-    End If
-
+    Dim leftDigit As Variant
+    leftDigit = Left(valToInput, 1)
+    benfordCheckValues(leftDigit) = benfordCheckValues(leftDigit) + 1
+    
 End Sub
-
-
-
-
