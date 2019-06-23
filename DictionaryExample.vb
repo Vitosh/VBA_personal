@@ -1,42 +1,53 @@
-Option Explicit
-
-Public Sub NumbersAndDictionary()
-
-    Dim l_counter_0     As Long
-    Dim l_counter_1     As Long
-    Dim l_counter_2     As Long
-    Dim l_value         As Long
+Sub MyDictionary()
     
-    Dim my_dict         As Object
-    Dim my_str          As String
+    'Add
+    Dim myDict As New Scripting.Dictionary
+    myDict.Add "Peter", "Peter is a friend."
+    myDict.Add "George", "George is a guy I know."
+    myDict.Add "Salary", 1000
     
-    Set my_dict = CreateObject("Scripting.Dictionary")
+    'Exists
+    If myDict.Exists("Salary") Then
+        Debug.Print myDict("Salary")
+        myDict("Salary") = myDict("Salary") * 2
+        Debug.Print myDict("Salary")
+    End If
     
-    For l_counter_0 = 65 To 76
-        my_str = CStr(l_counter_0)
-        For l_counter_1 = 1 To Len(my_str)
-            l_value = CLng(Mid(my_str, l_counter_1, 1))
-            
-            If Not my_dict.Exists(l_value) Then
-                my_dict.Add l_value, 1
-            Else
-                my_dict(l_value) = my_dict(l_value) + 1
-            End If
-            
-        Next l_counter_1
-    Next l_counter_0
+    'Remove
+    If myDict.Exists("George") Then
+        myDict.Remove ("George")
+    End If
     
-    Call PrintDictionary(my_dict)
+    'Items
+    Dim item As Variant
+    For Each item In myDict.Items
+        Debug.Print item
+    Next item
+        
+    'Keys
+    Dim key As Variant
+    For Each key In myDict.Keys
+        Debug.Print key
+    Next key
     
-    Set my_dict = Nothing
+    'Remove All
+    myDict.RemoveAll
+    
+    'Compare Mode
+    myDict.CompareMode = BinaryCompare
+    
+    myDict.Add "PeTeR", "Peter written as PeTeR"
+    myDict.Add "PETeR", "Peter written as PETeR"
+    PrintDictionary myDict
     
 End Sub
 
-Public Sub PrintDictionary(my_dict As Object)
-    
-    Dim l_counter_0     As Long
 
-    For l_counter_0 = 0 To my_dict.Count - 1
-        Debug.Print l_counter_0; " "; my_dict.Item(l_counter_0)
-    Next l_counter_0
+Public Sub PrintDictionary(myDict As Object)
+    
+    Dim key     As Variant
+    For Each key In myDict.Keys
+        Debug.Print key; "-->"; myDict(key)
+    Next key
+    
 End Sub
