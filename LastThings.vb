@@ -94,18 +94,18 @@ End Function
 
 Public Function LocateValueCol(ByVal textTarget As String, _
                 ByRef wksTarget As Worksheet, _
-                Optional lngRow As Long = 1, _
+                Optional rowNeeded As Long = 1, _
                 Optional moreValuesFound As Long = 1, _
                 Optional lookForPart = False, _
                 Optional lookUpToBottom = True) As Long
 
-    Dim valuesFound          As Long
-    Dim localRange                As Range
-    Dim myCell               As Range
-
+    Dim valuesFound As Long
+    Dim localRange  As Range
+    Dim myCell  As Range
+    
     LocateValueCol = -999
     valuesFound = moreValuesFound
-    Set localRange = wksTarget.Range(wksTarget.Cells(lngRow, 1), wksTarget.Cells(lngRow, Columns.Count))
+    Set localRange = wksTarget.Range(wksTarget.Cells(rowNeeded, 1), wksTarget.Cells(rowNeeded, Columns.Count))
 
     For Each myCell In localRange
         If lookForPart Then
@@ -130,7 +130,7 @@ Public Function LocateValueCol(ByVal textTarget As String, _
     Next myCell
 
 End Function
-
+                                    
 Private Sub Increment(ByRef valueToIncrement As Variant, Optional incrementWith As Double = 1)
     
     valueToIncrement = valueToIncrement + incrementWith
