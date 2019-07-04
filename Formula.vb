@@ -1,16 +1,16 @@
 Public Sub PrintMeUsefulFormula()
 
-    Dim strFormula  As String
-    Dim strParenth  As String
+    Dim selectedFormula  As String
+    Dim parenthesis  As String
 
-    strParenth = """"
+    parenthesis = """"
 
-    strFormula = Selection.Formula
-    strFormula = Replace(strFormula, """", """""")
+    selectedFormula = Selection.Formula
+    selectedFormula = Replace(selectedFormula, """", """""")
 
-    strFormula = strParenth & strFormula & strParenth
-    Debug.Print strFormula
-
+    selectedFormula = parenthesis & selectedFormula & parenthesis
+    Debug.Print selectedFormula
+    
 End Sub
 
 'A bit untested, use with caution --------v
