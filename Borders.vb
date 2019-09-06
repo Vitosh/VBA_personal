@@ -29,3 +29,16 @@ Public Sub MakeSelectionWithCells_Separated(l_line_style As Long, _
     End With
     
 End Sub
+
+Public Sub BorderMe(myRange As Range)
+
+    Dim cnt As Long
+
+    For cnt = 7 To 10 '7 to 10 are the magic numbers for xlEdgeLeft etc
+        With myRange.Borders(cnt)
+            .LineStyle = xlContinuous
+            .Weight = xlMedium
+        End With
+    Next
+
+End Sub
