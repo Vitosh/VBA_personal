@@ -1,4 +1,4 @@
-Sub TestMe()
+Sub FormatHalfOfTheSelectedCell()
 
     Dim myRange As Range
     Set myRange = Selection
@@ -14,7 +14,7 @@ Sub TestMe()
     h = myRange.Height
     
     ActiveSheet.Shapes.AddConnector msoConnectorStraight, l, t, l + (w) / 2, t
-    ActiveSheet.Shapes.AddConnector msoConnectorStraight, l, t, l, t
+    ActiveSheet.Shapes.AddConnector msoConnectorStraight, l, t, l, t + myRange.Height
     
     Set myRange = myRange.Offset(1)
     l = myRange.Left
