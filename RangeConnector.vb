@@ -1,29 +1,36 @@
 Sub FormatHalfOfTheSelectedCell()
 
     Dim myRange As Range
-    Set myRange = Selection
+    Dim color As Long: color = RGB(0, 0, 0)
+    Dim myShape As Shape
     
-    Dim l As Long
-    Dim t As Long
-    Dim w As Long
-    Dim h As Long
+    With Worksheets("Sheet1") 'With ActiveSheet
     
-    l = myRange.Left
-    t = myRange.Top
-    w = myRange.Width
-    h = myRange.Height
-    
-    ActiveSheet.Shapes.AddConnector msoConnectorStraight, l, t, l + (w) / 2, t
-    ActiveSheet.Shapes.AddConnector msoConnectorStraight, l, t, l, t + myRange.Height
-    
-    Set myRange = myRange.Offset(1)
-    l = myRange.Left
-    t = myRange.Top
-    w = myRange.Width
-    h = myRange.Height
-    ActiveSheet.Shapes.AddConnector(msoConnectorStraight, l, t, l + (w) / 2, t).Select
-    
+        Set myRange = .Range("E10") 'Selection
+        Dim left As Long: left = myRange.left
+        Dim top As Long: top = myRange.top
+        Dim width As Long: width = myRange.width
+        Dim heigth As Long: heigth = myRange.Height
 
-    myRange.Select
+        'Top line:
+        Set myShape = .Shapes.AddConnector(, left, top, left + (width) / 2, top)
+        myShape.Line.ForeColor.RGB = color
+        
+        'Left line:
+        Set myShape = .Shapes.AddConnector(msoConnectorStraight, left, top, left, top + myRange.Height)
+        myShape.Line.ForeColor.RGB = color
+        
+        Set myRange = myRange.Offset(1)
+        left = myRange.left
+        top = myRange.top
+        width = myRange.width
+        heigth = myRange.Height
+                
+        'Bottom line:
+        Set myShape = .Shapes.AddConnector(msoConnectorStraight, left, top, left + (width) / 2, top)
+        myShape.Line.ForeColor.RGB = RGB(200, 0, 0)
+        
+    End With
 
 End Sub
+
