@@ -13,7 +13,7 @@ Sub FormatHalfOfTheSelectedCell()
         Dim heigth As Long: heigth = myRange.Height
 
         'Top line:
-        Set myShape = .Shapes.AddConnector(, left, top, left + (width) / 2, top)
+        Set myShape = .Shapes.AddConnector(msoConnectorStraight, left, top, left + (width) / 2, top)
         myShape.Line.ForeColor.RGB = color
         
         'Left line:
