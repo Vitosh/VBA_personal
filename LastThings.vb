@@ -8,7 +8,7 @@ Option Private Module
 Public Function LastCol(wsName As String, Optional rowToCheck As Long = 1) As Long
 
     Dim ws  As Worksheet
-        Set ws = ThisWorkbook.Worksheets(wsName)
+    Set ws = ThisWorkbook.Worksheets(wsName)
     LastCol = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
     
 End Function
