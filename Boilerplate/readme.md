@@ -20,7 +20,3 @@ License
 - my_arr
 - my_cell
 - my_date
-
-----
-The boilerplate is password protected, just because. Anyhow, if you want the password,
-feel free to write me a mail about it here: [VitoshAcademy](mailto:review@vitoshacademy.com)
