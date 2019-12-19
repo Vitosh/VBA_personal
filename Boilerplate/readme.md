@@ -11,8 +11,4 @@ Simply download it and use it!
 Plenty of stuff, which is useful for me. Take a look here for more info:
 [vitoshacademy.com/boilerplate](https://www.vitoshacademy.com/boilerplate/
 
-License
-----
-**MIT**
-
 :cactus::cat::dog::monkey:
