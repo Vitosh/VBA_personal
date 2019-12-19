@@ -1,4 +1,4 @@
-# Boilerplate
+# VBA Boilerplate
 
 ## The idea 
 Boilerplate is an Excel binary file with VBA code in it, which can be used for every new VBA project as a boilerplate.
