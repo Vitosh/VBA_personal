@@ -4,10 +4,11 @@ Public Sub OnEnd()
     Application.EnableEvents = True
     Application.AskToUpdateLinks = True
     Application.DisplayAlerts = True
+
+    ActiveWindow.View = xlNormalView
+    Application.StatusBar = False
     Application.Calculation = xlAutomatic
     ThisWorkbook.Date1904 = False
-    
-    Application.StatusBar = False
     
 End Sub
 
@@ -17,9 +18,10 @@ Public Sub OnStart()
     Application.EnableEvents = False
     Application.AskToUpdateLinks = False
     Application.DisplayAlerts = False
-    Application.Calculation = xlAutomatic
-    ThisWorkbook.Date1904 = False
     
     ActiveWindow.View = xlNormalView
+    Application.StatusBar = False
+    Application.Calculation = xlAutomatic
+    ThisWorkbook.Date1904 = False
 
 End Sub
