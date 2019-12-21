@@ -15,4 +15,4 @@ Good luck, have fun from [VitoshAcademy](http://www.vitoshacademy.com)
 
 Feel free to make pull requests, I would take a look at each one of them.
 
-:cat::dog::bird:
+:cat::dog::bird::icecream:
