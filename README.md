@@ -4,7 +4,7 @@ Building a boilerplate, which is to be used by as a start point for every VBA pr
 
 [Vitosh/VBA_personal/Boilerplate](https://github.com/Vitosh/VBA_personal/tree/master/Boilerplate)
 
-# VBA_personal
+# VBA Personal
 
 Inititally the idea was to have a repository, for the personal.xlsb.
 Then it grew bigger. Then I read an article about Hungarian Notation and I have decided to use it. Then I read [what Joel thought about it and it](https://www.joelonsoftware.com/2005/05/11/making-wrong-code-look-wrong/) and I have decided to abandon it completely. 
