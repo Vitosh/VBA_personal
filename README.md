@@ -1,3 +1,9 @@
+# VBA Boilerplate 
+
+Building a boilerplate, which is to be used by as a start point for every VBA project was long in my mind. Somewhere in 2016 I have decided to put all the useful VBA code that I am using in a single repository. This repository currently resides here:
+
+[Vitosh/VBA_personal/Boilerplate](https://github.com/Vitosh/VBA_personal/tree/master/Boilerplate)
+
 # VBA_personal
 
 Inititally the idea was to have a repository, for the personal.xlsb.
