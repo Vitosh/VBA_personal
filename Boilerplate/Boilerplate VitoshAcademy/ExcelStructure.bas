@@ -2,13 +2,21 @@ Attribute VB_Name = "ExcelStructure"
 Option Explicit
 Option Private Module
 
-Public Sub LockScroll(ByRef varMyArray As Variant)
+Public Sub LockScroll(lockArea As Range)
     
-    Dim i As Long
-    If Not Len(Join(varMyArray)) > 0 Then Exit Sub
-    For i = 0 To UBound(varMyArray) Step 2
-        ThisWorkbook.Sheets(varMyArray(i)).ScrollArea = varMyArray(i + 1)
-    Next i
+    Dim wks As Worksheet
+    For Each wks In ThisWorkbook.Worksheets
+        wks.ScrollArea = lockArea.Address
+    Next wks
+    
+End Sub
+
+Public Sub UnlockScroll()
+    
+    Dim wks As Worksheet
+    For Each wks In ThisWorkbook.Worksheets
+        wks.ScrollArea = ""
+    Next wks
     
 End Sub
 
@@ -66,23 +74,27 @@ Sub CoverRange(myRange As Range, wks As Worksheet)
 
 End Sub
 
-Public Sub PrintActiveSheetPDF(Optional isBlack As Boolean = False, _
-                    Optional inputPrintArea As Range = Nothing, _
-                    Optional inputObjectAddress As Range = Nothing, _
-                    Optional inputCalculationDate As Range = Nothing)
+Public Sub PrintSheetPDF(inputPrintArea As Range, _
+                                printedFileName As String, _
+                                Optional isBlack As Boolean = False)
 
-    On Error GoTo PrintPDF_Error
+    If SET_IN_PRODUCTION Then On Error GoTo PrintPDF_Error
     
-    ActiveSheet.PageSetup.Zoom = False
-    ActiveSheet.PageSetup.BlackAndWhite = isBlack
+    Dim wks As Worksheet
+    Set wks = Worksheets(inputPrintArea.Parent.Name)
+    
+    With wks
+        .PageSetup.Zoom = False
+        .PageSetup.BlackAndWhite = isBlack
 
-    inputPrintArea.ExportAsFixedFormat _
-        Type:=xlTypePDF, _
-        filename:=CStr(inputObjectAddress & "_" & inputCalculationDate), _
-        Quality:=xlQualityStandard, _
-        IncludeDocProperties:=True, _
-        IgnorePrintAreas:=False, _
-        OpenAfterPublish:=True
+        inputPrintArea.ExportAsFixedFormat _
+            Type:=xlTypePDF, _
+            fileName:=printedFileName, _
+            Quality:=xlQualityStandard, _
+            IncludeDocProperties:=True, _
+            IgnorePrintAreas:=False, _
+            OpenAfterPublish:=True
+    End With
 
     On Error GoTo 0
     Exit Sub
@@ -95,15 +107,15 @@ End Sub
 
 Public Sub PrintPage(printRange As Range, Optional isBlack As Boolean = False)
 
-    Dim wksSheet                    As Worksheet
-    Dim reducePaperTitle         As String
+    Dim wksSheet As Worksheet
+    Dim reducePaperTitle As String
 
     On Error GoTo PrintPage_Error
 
     reducePaperTitle = "Reduce printing and save trees!"
-    ActiveSheet.PageSetup.BlackAndWhite = isBlack
+    printRange.Parent.PageSetup.BlackAndWhite = isBlack
 
-    Set wksSheet = ActiveSheet
+    Set wksSheet = printRange.Parent
 
     With wksSheet.PageSetup
         .Orientation = xlPortrait
@@ -134,9 +146,7 @@ Sub DeleteDrawingObjects(wks As Worksheet)
     Dim i           As Long
     
     For i = wks.DrawingObjects().Count To 1 Step -1
-        If Left(wks.DrawingObjects(i).Name, 7) = "TextBox" Then
-            wks.DrawingObjects(i).Delete
-        End If
+        wks.DrawingObjects(i).Delete
     Next i
 
 End Sub
@@ -187,17 +197,15 @@ End Sub
 
 Public Sub AddCommentToSelection(myComment As Range)
     
-    Dim blnMyBoolean            As Boolean
     Dim myCell            As Range
 
     For Each myCell In Selection
-        If blnMyBoolean Then
-            myCell.ClearComments
+             myCell.ClearComments
             myCell.AddComment myComment.Text
             myCell.Comment.Visible = False
             myCell.Comment.Shape.ScaleWidth 4, msoFalse, msoScaleFromTopLeft
             myCell.Comment.Shape.ScaleHeight 1.5, msoFalse, msoScaleFromTopLeft
-        End If
+
     Next myCell
 
 End Sub
@@ -209,36 +217,6 @@ Public Sub PrintArray(myArray As Variant)
         Debug.Print i & " --> " & myArray(i)
     Next i
     
-End Sub
-
-Sub ChangeAllNames()
-
-    If SET_IN_PRODUCTION Then On Error GoTo ChangeAllNames_Error
-
-    Dim i As Long
-    Dim oldString  As String
-    Dim newString  As String
-    
-    For i = 1 To ThisWorkbook.Names.Count
-
-        If InStr(1, ThisWorkbook.Names(i), "old", vbTextCompare) Then
-            oldString = ThisWorkbook.Names(i).RefersToR1C1
-            oldString = Replace(oldString, "old", "")
-            Debug.Print newString
-            
-            With ActiveWorkbook.Names(ActiveWorkbook.Names(i).Name)
-                .RefersToR1C1 = newString
-            End With
-        End If
-    Next i
-
-    On Error GoTo 0
-    Exit Sub
-
-ChangeAllNames_Error:
-
-    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure change_all_names of Sub mod_StandardSubs"
-
 End Sub
 
 Sub PrintAllNames()
@@ -305,7 +283,8 @@ SelectMeA1RangeEverywhere_Error:
 
 End Sub
 
-Sub HideShowComments(Optional showComments As Boolean = False, Optional myRange As Range = Nothing)
+Sub HideShowComments(Optional showComments As Boolean = False, _
+                            Optional myRange As Range = Nothing)
     
     Dim myCell    As Range
     
@@ -361,9 +340,7 @@ Public Sub EnableMySaves()
 End Sub
 
 Public Sub DisabledCombination()
-
     'This is the disabled combination for Application.OnKey
-
 End Sub
 
 Public Sub DisableShortcutsAndSaves()

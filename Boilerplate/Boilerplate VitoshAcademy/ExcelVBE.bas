@@ -9,7 +9,6 @@ Sub PrintAllCode()
     Dim lineToPrint As String
     
     For Each item In ThisWorkbook.vbProject.VBComponents
-        ListProcedures item.Name, False
         lineToPrint = item.codeModule.lines(1, item.codeModule.CountOfLines)
         Debug.Print lineToPrint
         textToPrint = textToPrint & vbCrLf & lineToPrint
@@ -29,25 +28,6 @@ Sub PrintAllContainers()
         lineToPrint = item.Name
         Debug.Print lineToPrint
         textToPrint = textToPrint & vbCrLf & lineToPrint
-    Next item
-    
-    PrintToNotepad textToPrint
-    
-End Sub
-
-Sub PrintAllCodeModules()
-    
-    Dim item  As Variant
-    Dim textToPrint As String
-    Dim lineToPrint As String
-    
-    For Each item In ThisWorkbook.vbProject.VBComponents
-        If ComponentTypeToString(vbext_ct_StdModule) = "Code Module" Then
-            ListProcedures item.Name, False
-            lineToPrint = item.codeModule.lines(1, item.codeModule.CountOfLines)
-            textToPrint = textToPrint & vbCrLf & lineToPrint
-            Debug.Print lineToPrint
-        End If
     Next item
     
     PrintToNotepad textToPrint
@@ -86,34 +66,9 @@ Sub ListProcedures(Optional modName As String = "ExcelAdditional", Optional with
     End With
     
     Debug.Print subsInfo
-
+    PrintToNotepad subsInfo
+    
 End Sub
-
-Function ComponentTypeToString(ComponentType As VBIDE.vbext_ComponentType) As String
-    
-    Select Case ComponentType
-    
-        Case vbext_ct_ActiveXDesigner
-            ComponentTypeToString = "ActiveX Designer"
-            
-        Case vbext_ct_ClassModule
-            ComponentTypeToString = "Class Module"
-            
-        Case vbext_ct_Document
-            ComponentTypeToString = "Document Module"
-            
-        Case vbext_ct_MSForm
-            ComponentTypeToString = "UserForm"
-            
-        Case vbext_ct_StdModule
-            ComponentTypeToString = "Code Module"
-            
-        Case Else
-            ComponentTypeToString = "Unknown Type: " & CStr(ComponentType)
-            
-    End Select
-    
-End Function
 
 Sub ExportModules()
     
@@ -122,7 +77,7 @@ Sub ExportModules()
     On Error Resume Next
     Kill GetFolderOnDesktopPath & "\*.*"
     On Error GoTo 0
-       
+    
     Dim wkb As Workbook: Set wkb = Excel.Workbooks(ThisWorkbook.Name)
     
     If wkb.vbProject.Protection = vbext_pp_locked Then
@@ -188,7 +143,7 @@ Sub CreateFolderOnDesktop(specialFolderPath As String)
         If Err.Number = 75 Then
             Debug.Print "Folder exists - " & specialFolderPath
         Else
-            Err.Raise Err.Number, Err.Source, Err.Description
+            Err.Raise Err.Number, Err.source, Err.Description
         End If
     Else
         Debug.Print "Folder has been created - " & specialFolderPath
@@ -200,11 +155,11 @@ End Sub
 
 Public Sub ImportModules()
     
-    ' 1. The target workbook should be opened in the same Excel instance as the ThisWorkbook
-    ' 2. The target workbook should be in the same directory as ThisWorkbook
-    ' 3. The code to be added should be present in GetFolderOnDesktopPath
+    '1. The target workbook should be opened in the same Excel instance as the ThisWorkbook
+    '2. The target workbook should be in the same directory as ThisWorkbook
+    '3. The code to be added should be present in GetFolderOnDesktopPath
     
-    Dim targetName As String: targetName = "some.xlsm"
+    Dim targetName As String: targetName = "empty.xlsm"
     Dim targetPath As String: targetPath = ThisWorkbook.path & "\" & targetName
     
     Dim wkbTarget As Workbook

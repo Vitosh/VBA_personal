@@ -8,28 +8,29 @@ Sub PrintToNotepad(Optional dataToPrint As String = "")
     
     Dim fileSystem As Object
     Dim textObject As Object
-    Dim filename As String
+    Dim fileName As String
     Dim newFile  As String
-    Dim str_shell  As String
-    
+    Dim shellPath  As String
+
     newFile = "\Info"
     
-    filename = ThisWorkbook.path & newFile & CodifyTime(True)
+    fileName = ThisWorkbook.path & newFile & CodifyTime(True)
     If Dir(ThisWorkbook.path & newFile, vbDirectory) = vbNullString Then MkDir ThisWorkbook.path & newFile
     
     Set fileSystem = CreateObject("Scripting.FileSystemObject")
-    Set textObject = fileSystem.CreateTextFile(filename, True)
+    Set textObject = fileSystem.CreateTextFile(fileName, True)
     
     If dataToPrint <> "" Then
         textObject.WriteLine dataToPrint
     Else
         textObject.WriteLine PUB_STR_ERROR_REPORT
     End If
+    
     textObject.Close
     
-    str_shell = "C:\WINDOWS\notepad.exe "
-    str_shell = str_shell & filename
-    shell str_shell
+    shellPath = "C:\WINDOWS\notepad.exe "
+    shellPath = shellPath & fileName
+    shell shellPath
     
     On Error GoTo 0
     Exit Sub
@@ -66,35 +67,14 @@ codify_Error:
 
 End Function
 
-Public Sub MakeAllValues()
+Public Function DecodifyTime(hexTime As String) As String
     
-    Dim myCell                 As Range
-    Dim i               As Long
-    Dim str                     As String
+    Dim leftPart                  As Variant
+    Dim rightPart                  As Variant
     
-    For Each myCell In Selection
-        Increment i
-        str = vbTab & "my_arr(" & i & ")= "
-        
-        If Len(myCell) > 0 Then
-            If IsDate(myCell) Then
-                str = str & "CDate(""" & myCell & """)"
-            Else
-                If Not IsNumeric(myCell) Then
-                    str = str & """" & myCell & """"
-                Else
-                    str = str & ChangeCommas(myCell.value)
-                End If
-            End If
-        Else
-            If myCell.HasFormula Then
-                str = str & """"""
-            Else
-                str = str & 0
-            End If
-        End If
-        
-        Debug.Print str
-    Next myCell
+    leftPart = Split(hexTime, "_")(0)
+    rightPart = Split(hexTime, "_")(1)
     
-End Sub
+    DecodifyTime = CLng("&H" & leftPart) & "." & CLng("&H" & rightPart)
+    
+End Function

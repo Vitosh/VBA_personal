@@ -2,7 +2,7 @@ Attribute VB_Name = "ExcelAdditional"
 Option Explicit
 Option Private Module
 
-Public Sub FreezeRow(Optional wsName As String = "Input", Optional cellAddress As String = "b5")
+Public Sub FreezeRow(Optional wsName As String = "Input", Optional cellAddress As String = "B5")
 
     Dim ws As Worksheet
     Set ws = Worksheets(wsName)
@@ -22,9 +22,8 @@ Public Sub UnfreezeRows(Optional wsName As String = "Input")
 End Sub
 
 Public Function SumArray(myArray As Variant, Optional lastValuesNotToCalculate As Long = 0) As Double
-
+        
     Dim i As Long
-    
     For i = LBound(myArray) To UBound(myArray) - lastValuesNotToCalculate
         SumArray = SumArray + myArray(i)
     Next
@@ -82,17 +81,16 @@ Public Function RangeIsZeroOrEmpty(myRange As Range) As Boolean
     If myRange.Cells.Count > 1 Then
         
         For Each myCell In myRange
-            If (IsEmpty(myCell) Or myCell.value = 0) Then
+            If (isEmpty(myCell) Or myCell.value = 0) Then
                 RangeIsZeroOrEmpty = True
-                Exit Function
             Else
                 RangeIsZeroOrEmpty = False
+                Exit Function
             End If
         Next myCell
     Else
-        If (IsEmpty(myRange) Or myRange.value = 0) Then
+        If (isEmpty(myRange) Or myRange.value = 0) Then
             RangeIsZeroOrEmpty = True
-            Exit Function
         Else
             RangeIsZeroOrEmpty = False
         End If
@@ -101,13 +99,13 @@ Public Function RangeIsZeroOrEmpty(myRange As Range) As Boolean
 End Function
 
 Public Function MakeRandom(lowest As Long, highest As Long) As Long
-
+    'WorksheetFunction.randbetween for outside Excel
     MakeRandom = CLng((highest - lowest) * Rnd + lowest)
 
 End Function
 
 Public Function IsRangeHidden(myRange As Range) As Boolean
-
+    
     If myRange.EntireRow.Hidden Or myRange.EntireColumn.Hidden Then
         IsRangeHidden = True
     End If

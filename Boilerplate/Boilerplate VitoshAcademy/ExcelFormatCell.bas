@@ -59,9 +59,11 @@ Public Sub FormatAsEurProM2(myCell As Range)
 End Sub
 
 Public Sub FormatRedAndBold(myCell As Range, Optional isBold = True)
+
     myCell.Font.Color = -16777063
     myCell.Font.TintAndShade = 0
     If isBold Then myCell.Font.Bold = True
+    
 End Sub
 
 Public Sub WhiteRows(lines As Long, wks As Worksheet)
@@ -77,11 +79,15 @@ Public Sub WhiteRows(lines As Long, wks As Worksheet)
 End Sub
 
 Public Sub WhiteCell(myCell As Range)
+
     myCell.Font.ThemeColor = xlThemeColorDark1
     myCell.Font.TintAndShade = 0
+    
 End Sub
 
 Public Sub FormatFontColorToGrey(myCell As Range)
+
     myCell.Font.Color = RGB(128, 128, 128)
+    
 End Sub
 

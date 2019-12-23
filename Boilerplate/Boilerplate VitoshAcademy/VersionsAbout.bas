@@ -14,10 +14,21 @@ Option Private Module
 '                   https://github.com/Vitosh/VBA_personal
 'The offisial site and GitHub repo of the Boilerplate:
 '                   https://www.vitoshacademy.com/boilerplate
-'                   https://github.com/Vitosh/VBA_boilerplate
+'                   https://github.com/Vitosh/VBA_personal/tree/master/Boilerplate
 '==================================================================================================================
 '=======================================VERSIONS===================================================================
 '==================================================================================================================
+'Boiler Plate Version 8.0.3:
+'   Vitosh - 23.12.2019
+'
+'   Minor fixes:
+'       - Fix RangeIsZeroOrEmpty
+'       - Fix the credits with the correct url
+'       - Fix spaces, remove some lines, fix variables
+'       - Adding "DecodifyTime" to return "CodifyTime" back
+'-------------------------------------------------------------------------------------------------------------------
+'-------------------------------------------------------------------------------------------------------------------
+'-------------------------------------------------------------------------------------------------------------------
 'Boiler Plate Version 8.0.:
 '   Vitosh - 19.12.2019
 '

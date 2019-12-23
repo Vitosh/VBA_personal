@@ -34,7 +34,7 @@ Public Sub Show()
     With summaryForm
         .Top = CLng((Application.Height / 2 + Application.Top) - .Height / 2)
         .Left = CLng((Application.Width / 2 + Application.Left) - .Width / 2)
-        .Caption = CON_STR_APP_NAME
+        .caption = CON_STR_APP_NAME
     End With
 
 End Sub
@@ -45,10 +45,10 @@ Private Sub Hide()
 
 End Sub
 
-Public Sub ChangeLabelAndCaption(strLabelInfo As String, strCaption As String)
+Public Sub ChangeLabelAndCaption(labelInfo As String, caption As String)
 
-    summaryForm.InformationText = strLabelInfo
-    summaryForm.InformationCaption = strCaption
+    summaryForm.InformationText = labelInfo
+    summaryForm.InformationCaption = caption
     summaryForm.Repaint
 
 End Sub
@@ -70,7 +70,7 @@ Public Sub Refresh()
     
     With summaryForm
         .lblInfo = "Ready"
-        .Caption = "Task performed"
+        .caption = "Task performed"
     End With
 
 End Sub

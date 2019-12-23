@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} FrmExample 
    Caption         =   "UserForm1"
-   ClientHeight    =   2016
-   ClientLeft      =   0
-   ClientTop       =   204
-   ClientWidth     =   3000
+   ClientHeight    =   4404
+   ClientLeft      =   -12
+   ClientTop       =   120
+   ClientWidth     =   5388
    OleObjectBlob   =   "frmExample.frx":0000
    StartUpPosition =   1  'Fenstermitte
 End
@@ -20,25 +20,25 @@ Public Event OnExit()
 
 Public Property Get InformationText() As String
 
-    InformationText = lblInfo.Caption
+    InformationText = lblInfo.caption
 
 End Property
 
 Public Property Let InformationText(ByVal value As String)
 
-    lblInfo.Caption = value
+    lblInfo.caption = value
 
 End Property
 
 Public Property Get InformationCaption() As String
 
-    InformationCaption = Caption
+    InformationCaption = caption
 
 End Property
 
 Public Property Let InformationCaption(ByVal value As String)
 
-    Caption = value
+    caption = value
 
 End Property
 

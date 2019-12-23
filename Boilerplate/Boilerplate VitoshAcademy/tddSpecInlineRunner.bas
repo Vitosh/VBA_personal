@@ -3,13 +3,16 @@ Option Explicit
 Option Private Module
 
 Public Sub RunSuite(specs As tddSpecSuite, Optional ShowFailureDetails As Boolean = True, Optional ShowPassed As Boolean = False, Optional ShowSuiteDetails As Boolean = False)
+    
     Dim SuiteCol As New Collection
     
     SuiteCol.Add specs
     RunSuites SuiteCol, ShowFailureDetails, ShowPassed, ShowSuiteDetails
+
 End Sub
 
 Public Sub RunSuites(SuiteCol As Collection, Optional ShowFailureDetails As Boolean = True, Optional ShowPassed As Boolean = False, Optional ShowSuiteDetails As Boolean = True)
+    
     Dim Suite           As tddSpecSuite
     Dim Spec            As tddSpecDefinition
     Dim TotalCount      As Long
@@ -67,9 +70,11 @@ Public Sub RunSuites(SuiteCol As Collection, Optional ShowFailureDetails As Bool
         Debug.Print "==="
         PUB_STR_ERROR_REPORT = PUB_STR_ERROR_REPORT & "===" & vbCrLf
     End If
+    
 End Sub
 
 Private Function SummaryMessage(TotalCount As Long, FailedSpecs As Long, PendingSpecs As Long) As String
+    
     If FailedSpecs = 0 Then
         SummaryMessage = "PASS (" & TotalCount - PendingSpecs & " of " & TotalCount & " passed"
     Else
@@ -81,6 +86,7 @@ Private Function SummaryMessage(TotalCount As Long, FailedSpecs As Long, Pending
     Else
         SummaryMessage = SummaryMessage & ", " & PendingSpecs & " pending)"
     End If
+    
 End Function
 
 Private Function FailureMessage(Spec As tddSpecDefinition, ShowFailureDetails As Boolean, Indentation As String) As String
