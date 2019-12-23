@@ -8,7 +8,7 @@ Building a boilerplate, which is to be used by as a start point for every VBA pr
 Simply download it and use it! Or go through the files in [boilerplate folder](https://github.com/Vitosh/VBA_personal/tree/master/Boilerplate/Boilerplate%20VitoshAcademy) and check them 1 by 1. If you find something interesting, copy it to your project.
 
 ## Video tutorials:
-(YouTube VBA Boilerplate Tutorials)[https://www.youtube.com/playlist?list=PLHvb-qAb0DaE2WXKfOXXNNRkoW990S5lP]
+[YouTube VBA Boilerplate Tutorials](https://www.youtube.com/playlist?list=PLHvb-qAb0DaE2WXKfOXXNNRkoW990S5lP)
 
 ## What is inside the boilerplate:
 Plenty of stuff, which is useful for me. Take a look here for more info:
