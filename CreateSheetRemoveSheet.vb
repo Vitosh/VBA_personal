@@ -1,27 +1,46 @@
-'Create Sheet
-'Make Sheet
-'Remove Sheet
+'Create Make Sheet Worksheet
+'Remove Sheet Worksheet
+'Delete Sheet Worksheet
 
-Sub CreateSheet(str_name As String)
+Sub CreateWorksheet(sheetName As String)
 
-    Sheets.Add.Name = str_name
-    tbl_total_s = Worksheets(str_name).CodeName
-    Stop
+    ThisWorkbook.Worksheets.Add.Name = sheetName
+        
 End Sub
 
-Sub DeleteSheet(str_name As String)
+Sub DeleteWorksheet(sheetName As String)
 
-    Dim b_display_alerts    As Boolean
-    Dim my_sheet            As Worksheet
+    Dim displayAlert As Boolean
+    Dim mySheet As Worksheet
     
-    b_display_alerts = Application.DisplayAlerts
+    displayAlert = Application.DisplayAlerts
     
-    For Each my_sheet In ActiveWorkbook.Worksheets
-        If my_sheet.Name = str_name Then
+    For Each mySheet In ThisWorkbook.Worksheets
+        If mySheet.Name = sheetName Then
             Application.DisplayAlerts = False
-            Worksheets(str_name).Delete
-            Application.DisplayAlerts = b_display_alerts
+            ThisWorkbook.Worksheets(sheetName).Delete
+            Application.DisplayAlerts = displayAlert
         End If
-    Next my_sheet
+    Next
     
 End Sub
+
+Sub DeleteAllButLast()
+
+    Dim wksToStay As Worksheet
+    Dim wksToDelete As Worksheet
+    Dim i As Long
+
+    Set wksToStay = ThisWorkbook.Worksheets(Worksheets.Count)
+
+    For i = Worksheets.Count To 1 Step -1
+        Set wksToDelete = ThisWorkbook.Worksheets(i)
+        If wksToDelete.Name <> wksToStay.Name Then
+            Application.DisplayAlerts = False
+            wksToDelete.Delete
+            Application.DisplayAlerts = True
+        End If
+    Next
+
+End Sub
+
