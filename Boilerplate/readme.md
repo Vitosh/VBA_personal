@@ -1,1 +1,1 @@
-[The project migrated here](https://github.com/VBoilerplate/VBoilerpalte)
+[The project migrated here](https://github.com/vboilerplate)
