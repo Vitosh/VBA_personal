@@ -1,5 +1,3 @@
-Option Explicit
-
 Public Function Base64Sha1(inputText As String)
 
     Dim asc As Object
@@ -7,7 +5,6 @@ Public Function Base64Sha1(inputText As String)
     Dim textToHash() As Byte
     Dim SharedSecretKey() As Byte
     Dim bytes() As Byte
-    Dim hashlen As Long: hashlen = 20
 
     Set asc = CreateObject("System.Text.UTF8Encoding")
     Set enc = CreateObject("System.Security.Cryptography.HMACSHA1")
@@ -18,7 +15,6 @@ Public Function Base64Sha1(inputText As String)
 
     bytes = enc.ComputeHash_2((textToHash))
     Base64Sha1 = EncodeBase64(bytes)
-    Base64Sha1 = Left(Base64Sha1, hashlen)
 
 End Function
 
@@ -32,7 +28,6 @@ Private Function EncodeBase64(arrData() As Byte) As String
 
     objNode.DataType = "bin.base64"
     objNode.nodeTypedValue = arrData
-    EncodeBase64 = objNode.text
+    EncodeBase64 = objNode.Text
 
 End Function
-
