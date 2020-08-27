@@ -1,4 +1,3 @@
-Attribute VB_Name = "Module2"
 Option Explicit
 
 Public Function Base64Sha1(inputText As String)
