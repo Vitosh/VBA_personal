@@ -1,10 +1,28 @@
-Option Explicit
-
 Sub GitSave()
-
+    
+    DeleteAndMake
     ExportModules
     PrintAllCode
     PrintAllContainers
+    
+End Sub
+
+Sub DeleteAndMake()
+        
+    Dim fso As Object
+    Set fso = CreateObject("Scripting.FileSystemObject")
+
+    Dim parentFolder As String: parentFolder = ThisWorkbook.Path & "\VBA"
+    Dim childA As String: childA = parentFolder & "\VBA-Code_Together"
+    Dim childB As String: childB = parentFolder & "\VBA-Code_By_Modules"
+        
+    On Error Resume Next
+    fso.DeleteFolder parentFolder
+    On Error GoTo 0
+    
+    MkDir parentFolder
+    MkDir childA
+    MkDir childB
     
 End Sub
 
@@ -15,13 +33,13 @@ Sub PrintAllCode()
     Dim lineToPrint As String
     
     For Each item In ThisWorkbook.VBProject.VBComponents
-        lineToPrint = item.codeModule.lines(1, item.codeModule.CountOfLines)
+        lineToPrint = item.codeModule.Lines(1, item.codeModule.CountOfLines)
         Debug.Print lineToPrint
         textToPrint = textToPrint & vbCrLf & lineToPrint
     Next item
     
-    Dim pathToExport As String: pathToExport = ThisWorkbook.path & "\VBA\VBA-Code_Together\"
-    Kill pathToExport & "*.*"
+    Dim pathToExport As String: pathToExport = ThisWorkbook.Path & "\VBA\VBA-Code_Together\"
+    If Dir(pathToExport) <> "" Then Kill pathToExport & "*.*"
     SaveTextToFile textToPrint, pathToExport & "all_code.vb"
     
 End Sub
@@ -38,16 +56,18 @@ Sub PrintAllContainers()
         textToPrint = textToPrint & vbCrLf & lineToPrint
     Next item
     
-    Dim pathToExport As String: pathToExport = ThisWorkbook.path & "\VBA\VBA-Code_Together\"
+    Dim pathToExport As String: pathToExport = ThisWorkbook.Path & "\VBA\VBA-Code_Together\"
     SaveTextToFile textToPrint, pathToExport & "all_modules.vb"
     
 End Sub
 
 Sub ExportModules()
        
-    Dim pathToExport As String: pathToExport = ThisWorkbook.path & "\VBA\VBA-Code_By_Modules\"
-
-    Kill pathToExport & "*.*"
+    Dim pathToExport As String: pathToExport = ThisWorkbook.Path & "\VBA\VBA-Code_By_Modules\"
+    
+    If Dir(pathToExport) <> "" Then
+        Kill pathToExport & "*.*"
+    End If
      
     Dim wkb As Workbook: Set wkb = Excel.Workbooks(ThisWorkbook.Name)
     
@@ -72,9 +92,8 @@ Sub ExportModules()
         End Select
         
         If tryExport Then
-            Increment unitsCount
             Debug.Print unitsCount & " exporting " & filePath
-            component.export pathToExport & "\" & filePath
+            component.Export pathToExport & "\" & filePath
         End If
     Next
 
@@ -82,37 +101,27 @@ Sub ExportModules()
     
 End Sub
 
-Function GetFolderOnDesktopPath() As String
-
-    Dim shell As Object
-    Dim fso As Object
-    Dim specialFolderPath As String
-
-    Set shell = CreateObject("WScript.Shell")
-    Set fso = CreateObject("scripting.filesystemobject")
-
-    specialFolderPath = shell.SpecialFolders("Desktop")
-    If Right(specialFolderPath, 1) <> "\" Then specialFolderPath = specialFolderPath & "\"
+Sub SaveTextToFile(dataToPrint As String, pathToExport As String)
     
-    GetFolderOnDesktopPath = specialFolderPath & Split(ThisWorkbook.Name, "_")(0) & "\"
+    Dim fileSystem As Object
+    Dim textObject As Object
+    Dim fileName As String
+    Dim newFile  As String
+    Dim shellPath  As String
     
-End Function
-
-Sub CreateFolderOnDesktop(specialFolderPath As String)
+    If Dir(ThisWorkbook.Path & newFile, vbDirectory) = vbNullString Then MkDir ThisWorkbook.Path & newFile
     
-    On Error Resume Next
+    Set fileSystem = CreateObject("Scripting.FileSystemObject")
+    Set textObject = fileSystem.CreateTextFile(pathToExport, True)
     
-    MkDir specialFolderPath
-    If Err.Number <> 0 Then
-        If Err.Number = 75 Then
-            Debug.Print "Folder exists - " & specialFolderPath
-        Else
-            Err.Raise Err.Number, Err.Source, Err.Description
-        End If
-    Else
-        Debug.Print "Folder has been created - " & specialFolderPath
-    End If
-    
+    textObject.WriteLine dataToPrint
+    textObject.Close
+        
     On Error GoTo 0
-    
+    Exit Sub
+
+CreateLogFile_Error:
+
+    MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure CreateLogFile of Sub mod_TDD_Export"
+
 End Sub
