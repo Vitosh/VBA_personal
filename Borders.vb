@@ -42,3 +42,25 @@ Public Sub BorderMe(myRange As Range)
     Next
 
 End Sub
+
+Public Sub FixTableWithLines(tbl As Worksheet, Optional myStep As Long = 4, Optional myStart As Long = 2)
+    
+    OnStart
+    
+    Dim i As Long
+    Dim myLastRow As Long: myLastRow = LastRow(tbl.Name)
+    Dim myLastColumn As Long: myLastColumn = LastColumn(tbl.Name)
+    Dim myRange As Range
+    
+    For i = myStart + myStep To myLastRow + myStep Step myStep
+        With tbl
+            Set myRange = .Range(.Cells(i, 1), .Cells(i, myLastColumn))
+            With myRange.Borders(xlEdgeTop)
+                .LineStyle = xlContinuous
+                .Weight = xlThin
+            End With
+        End With
+    Next i
+    
+End Sub
+
