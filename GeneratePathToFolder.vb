@@ -95,3 +95,10 @@ str_BrowseFolder_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure str_BrowseFolder of Function mod_Browse"
 
 End Function
+
+            
+Public Function FolderIsEmpty(myPath As String) As Boolean
+    'Checks whether folder is empty    
+    FolderIsEmpty = CBool(Dir(myPath & "*.*") = "")
+    
+End Function
