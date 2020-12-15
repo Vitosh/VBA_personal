@@ -17,6 +17,6 @@ Public Function EshareFileExists(filePath)
     filePath = Replace(filePath, "https:", "")
     filePath = Replace(filePath, "%20", " ")
     filePath = Replace(filePath, "/", "\")
-    FileExists = CreateObject("Scripting.FileSystemObject").FileExists(filePath)
+    EshareFileExists = CreateObject("Scripting.FileSystemObject").FileExists(filePath)
     
 End Function
