@@ -1,4 +1,24 @@
-Option Explicit
+Sub ErrorInFormulas()
+
+    'Formatting condition, conditional formatting, external
+
+    Dim ws As Worksheet, r As Range
+    Dim cf As FormatCondition
+
+    For Each ws In Worksheets
+    
+        For Each r In ws.UsedRange
+            If IsError(r) Then
+                Debug.Print r.Parent.Name, r.Address, r.Formula
+            End If
+        Next
+        
+        For Each cf In ws.Cells.FormatConditions
+            Debug.Print cf.AppliesTo.Address, cf.Type, cf.Formula1, cf.Interior.COLOR, cf.Font.Name
+        Next
+    Next
+    
+End Sub
     
 Sub FixRangeError()
     
