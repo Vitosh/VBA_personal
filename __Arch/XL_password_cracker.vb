@@ -1,4 +1,4 @@
-'http://stackoverflow.com/questions/11649064/excel-spreadsheet-password-cracking-using-vba
+'https://stackoverflow.com/questions/11649064/excel-spreadsheet-password-cracking-using-vba
 
 Sub PasswordBreaker()
     'Breaks worksheet password protection.
@@ -11,10 +11,10 @@ Sub PasswordBreaker()
     For l = 65 To 66: For m = 65 To 66: For i1 = 65 To 66
     For i2 = 65 To 66: For i3 = 65 To 66: For i4 = 65 To 66
     For i5 = 65 To 66: For i6 = 65 To 66: For n = 32 To 126
-    ThisWorkbook.Unprotect Chr(i) & Chr(j) & Chr(k) & _
+    ActiveSheet.Unprotect Chr(i) & Chr(j) & Chr(k) & _
         Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & Chr(i3) & _
         Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
-    If ThisWorkbook.ProtectStructure = False Then
+    If ActiveSheet.ProtectContents = False Then
         MsgBox "One usable password is " & Chr(i) & Chr(j) & _
             Chr(k) & Chr(l) & Chr(m) & Chr(i1) & Chr(i2) & _
             Chr(i3) & Chr(i4) & Chr(i5) & Chr(i6) & Chr(n)
