@@ -5,24 +5,22 @@ Option Private Module
 'locate last row
 'last things
 
-Public Function LastCol(wsName As String, Optional rowToCheck As Long = 1) As Long
+Public Function LastColumn(ws As Worksheet, Optional rowToCheck As Long = 1) As Long
 
-    Dim ws  As Worksheet
-    Set ws = ThisWorkbook.Worksheets(wsName)
-    LastCol = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
+    LastColumn = ws.Cells(rowToCheck, ws.Columns.count).End(xlToLeft).Column
     
 End Function
 
-Public Function LastRow(wsName As String, Optional columnToCheck As Long = 1) As Long
-
-    Dim ws As Worksheet
-    Set ws = ThisWorkbook.Worksheets(wsName)
-    LastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
+Public Function LastRow(ws As Worksheet, Optional columnToCheck As Long = 1) As Long
+    
+    LastRow = ws.Cells(ws.Rows.count, columnToCheck).End(xlUp).Row
 
 End Function
             
-Public Function LastUsedColumn() As Long
+Public Function LastUsedColumn(wsName As String) As Long
     
+    Dim ws As Worksheet
+    Set ws = ThisWorkbook.Worksheets(wsName)
     Dim lastCell As Range
     
     Set lastCell = ActiveSheet.Cells.Find(What:="*", _
@@ -37,22 +35,6 @@ Public Function LastUsedColumn() As Long
 
 End Function
 
-Public Function LastUsedRow() As Long
-
-    Dim rLastCell As Range
-
-    Set rLastCell = ActiveSheet.Cells.Find(What:="*", _
-                                    After:=ActiveSheet.Cells(1, 1), _
-                                    LookIn:=xlFormulas, _
-                                    LookAt:=xlPart, _
-                                    SearchOrder:=xlByRows, _
-                                    SearchDirection:=xlPrevious, _
-                                    MatchCase:=False)
-
-    LastUsedRow = rLastCell.Row
-
-End Function
-
 Public Function LocateValueRow(ByVal textTarget As String, _
                 ByRef wksTarget As Worksheet, _
                 Optional col As Long = 1, _
@@ -60,17 +42,20 @@ Public Function LocateValueRow(ByVal textTarget As String, _
                 Optional lookForPart = False, _
                 Optional lookUpToBottom = True) As Long
 
-    Dim valuesFound      As Long
-    Dim localRange            As Range
-    Dim myCell           As Range
-
-    LocateValueRow = -999
+    Dim valuesFound         As Long
+    Dim localRange          As Range
+    Dim myCell              As Range
+    Dim lastRowOnColumn1    As Long
+    
+    LocateValueRow = GENERAL_NUMBERS.NF
+    
     valuesFound = moreValuesFound
-    Set localRange = wksTarget.Range(wksTarget.Cells(1, col), wksTarget.Cells(Rows.Count, col))
+    lastRowOnColumn1 = LastRow(wksTarget, col)
+    Set localRange = wksTarget.Range(wksTarget.Cells(1, col), wksTarget.Cells(lastRowOnColumn1, col))
 
     For Each myCell In localRange
         If lookForPart Then
-            If textTarget = Left(myCell, Len(textTarget)) Then
+            If UCase(textTarget) = UCase(Left(myCell, Len(textTarget))) Then
                 If valuesFound = 1 Then
                     LocateValueRow = myCell.Row
                     If lookUpToBottom Then Exit Function
@@ -79,7 +64,7 @@ Public Function LocateValueRow(ByVal textTarget As String, _
                 End If
             End If
         Else
-            If textTarget = Trim(myCell) Then
+            If UCase(textTarget) = UCase(Trim(myCell)) Then
                 If valuesFound = 1 Then
                     LocateValueRow = myCell.Row
                     If lookUpToBottom Then Exit Function
@@ -103,13 +88,13 @@ Public Function LocateValueCol(ByVal textTarget As String, _
     Dim localRange  As Range
     Dim myCell  As Range
     
-    LocateValueCol = -999
+    LocateValueCol = GENERAL_NUMBERS.NF
     valuesFound = moreValuesFound
-    Set localRange = wksTarget.Range(wksTarget.Cells(rowNeeded, 1), wksTarget.Cells(rowNeeded, Columns.Count))
+    Set localRange = wksTarget.Range(wksTarget.Cells(rowNeeded, 1), wksTarget.Cells(rowNeeded, Columns.count))
 
     For Each myCell In localRange
         If lookForPart Then
-            If textTarget = Left(myCell, Len(textTarget)) Then
+            If UCase(textTarget) = UCase(Left(myCell, Len(textTarget))) Then
                 If valuesFound = 1 Then
                     LocateValueCol = myCell.Column
                     If lookUpToBottom Then Exit Function
@@ -118,7 +103,7 @@ Public Function LocateValueCol(ByVal textTarget As String, _
                 End If
             End If
         Else
-            If textTarget = Trim(myCell) Then
+            If UCase(textTarget) = UCase(Trim(myCell)) Then
                 If valuesFound = 1 Then
                     LocateValueCol = myCell.Column
                     If lookUpToBottom Then Exit Function
@@ -130,7 +115,7 @@ Public Function LocateValueCol(ByVal textTarget As String, _
     Next myCell
 
 End Function
-                                    
+                            
 Private Sub Increment(ByRef valueToIncrement As Variant, Optional incrementWith As Double = 1)
     
     valueToIncrement = valueToIncrement + incrementWith
