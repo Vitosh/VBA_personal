@@ -28,3 +28,12 @@ Public Sub PrintMeUsefulFormat()
     Debug.Print strFormula
 
 End Sub
+
+'Column to letter lettertocolumn columntoletter letter to column
+
+Function ColumnToLetter(columnNumber As Long) As String
+   
+    If columnNumber < 1 Then Exit Function
+    ColumnToLetter = ColumnToLetter(Int((columnNumber - 1) / 26)) & Chr(((columnNumber - 1) Mod 26) + asc("A"))
+
+End Function
