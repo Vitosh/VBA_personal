@@ -14,11 +14,46 @@ Sub ErrorInFormulas()
         Next
         
         For Each cf In ws.Cells.FormatConditions
-            Debug.Print cf.AppliesTo.Address, cf.Type, cf.Formula1, cf.Interior.COLOR, cf.Font.Name
+            Debug.Print cf.AppliesTo.Address, cf.Type, cf.Formula1, cf.Interior.COLOR, cf.Font.Name, ws.Name
         Next
     Next
     
 End Sub
+
+Sub ListAllConditionalFormatting()
+
+    Dim cf As FormatCondition
+    Dim ws As Worksheet
+    Set ws = ActiveSheet
+    For Each cf In ws.Cells.FormatConditions
+        Debug.Print cf.AppliesTo.Address, cf.Type, cf.Formula1, cf.Interior.COLOR, cf.Font.Name
+    Next cf
+
+End Sub
+
+
+Sub ErrorList()
+
+    Dim ws As Worksheet
+    Dim rng1 As Range
+    Dim strOut As String
+    
+    For Each ws In ThisWorkbook.Worksheets
+        Set rng1 = Nothing
+        On Error Resume Next
+        Set rng1 = ws.Cells.SpecialCells(xlFormulas, xlErrors)
+        On Error GoTo 0
+        If Not rng1 Is Nothing Then strOut = strOut & (ws.Name & " has " & rng1.Cells.count & " errors" & vbNewLine)
+    Next ws
+    
+    If Len(strOut) > 0 Then
+        Debug.Print "Error List:" & vbNewLine & strOut
+    Else
+        Debug.Print "No Errors"
+    End If
+    
+End Sub
+
     
 Sub FixRangeError()
     
