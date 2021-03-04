@@ -53,13 +53,17 @@ Sub ChangeTheFont(lookFor As String, currentRange As Range, myColor As Long)
     End With
 End Sub
 
-Public Function PositionInArray(myValue As Variant, myArray As Variant) As Long
+Public Function PositionInArray(myValue As Variant, myArray As Variant, Optional timesSeenBefore = 0) As Long
     
     Dim i As Long
     For i = LBound(myArray) To UBound(myArray)
         If Trim(myValue) = Trim(myArray(i)) Then
-            PositionInArray = i
-            Exit Function
+            If timesSeenBefore = 0 Then
+                PositionInArray = i
+                Exit Function
+            Else
+                timesSeenBefore = timesSeenBefore - 1
+            End If
         End If
     Next
     
