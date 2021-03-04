@@ -17,23 +17,24 @@ Public Function LastRow(ws As Worksheet, Optional columnToCheck As Long = 1) As 
 
 End Function
             
-Public Function LastUsedColumn(wsName As String) As Long
+Public Function LastUsedColumn(wks As Worksheet) As Long
     
-    Dim ws As Worksheet
-    Set ws = ThisWorkbook.Worksheets(wsName)
     Dim lastCell As Range
     
-    Set lastCell = ActiveSheet.Cells.Find(What:="*", _
-                                    After:=ActiveSheet.Cells(1, 1), _
-                                    LookIn:=xlFormulas, _
-                                    LookAt:=xlPart, _
-                                    SearchOrder:=xlByColumns, _
-                                    SearchDirection:=xlPrevious, _
-                                    MatchCase:=False)
+    With wks
+        Set lastCell = wks.Cells.Find(What:="*", _
+                    After:=.Cells(1, 1), _
+                    LookIn:=xlFormulas, _
+                    LookAt:=xlPart, _
+                    SearchOrder:=xlByColumns, _
+                    SearchDirection:=xlPrevious, _
+                                MatchCase:=False)
+    End With
     
     LastUsedColumn = lastCell.Column
 
 End Function
+
 
 Public Function LocateValueRow(ByVal textTarget As String, _
                 ByRef wksTarget As Worksheet, _
