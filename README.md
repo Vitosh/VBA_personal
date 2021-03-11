@@ -11,7 +11,7 @@
     
 Good luck, have fun from [VitoshAcademy](http://www.vitoshacademy.com)
 
-:cat::dog::bird::icecream:
+:cat::dog::bird::icecream::sun:
 
 # VBA Boilerplate 
 
