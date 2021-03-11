@@ -116,7 +116,28 @@ Public Function LocateValueCol(ByVal textTarget As String, _
     Next myCell
 
 End Function
-                            
+                
+                
+Public Function GetColumnSequence(tbl As Worksheet, tableName As String, columnName As String) As Long
+        
+    Dim myCell As Range
+    Dim result As Long
+    result = 1
+    
+    For Each myCell In ThisWorkbook.Worksheets(tbl.Name).Range(tableName & "[#Headers]").Cells
+        If UCase(Trim(myCell)) = UCase(Trim(columnName)) Then
+            GetColumnSequence = result
+            Exit Function
+        Else
+            result = result + 1
+        End If
+    Next
+    
+    GetColumnSequence = -1
+    
+End Function
+            
+                
 Private Sub Increment(ByRef valueToIncrement As Variant, Optional incrementWith As Double = 1)
     
     valueToIncrement = valueToIncrement + incrementWith
