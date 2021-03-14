@@ -22,11 +22,11 @@ Public Sub DeleteCommentFromSelection()
     
 End Sub
 
-Public Sub BeautifyComments(myCell As Range)
+Public Sub BeautifyComments(myCell As Range, commentText As String)
     
     myCell.ClearComments
     myCell.AddComment.Visible = False
-    myCell.Comment.Text (GenerateInfoForComment(myCell))
+    myCell.Comment.Text commentText
     
     With myCell.Comment.Shape
         
