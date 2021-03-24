@@ -102,3 +102,8 @@ Public Function FolderIsEmpty(myPath As String) As Boolean
     FolderIsEmpty = CBool(Dir(myPath & "*.*") = "")
     
 End Function
+
+            
+Public Function GetDesktopPath() As String
+    GetDesktopPath = CreateObject("WScript.Shell").specialfolders("Desktop") & "\"
+End Function
