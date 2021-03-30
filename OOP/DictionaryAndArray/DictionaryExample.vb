@@ -93,3 +93,19 @@ Public Sub PrintDictionary(myDict As Object)
     Next key
     
 End Sub
+
+Public Function IntersectTwoDictionaries(dictA As Dictionary, dictB As Dictionary) As Dictionary
+
+    Dim newDictionary As New Dictionary
+    Dim myKey As Variant
+    
+    For Each myKey In dictA.Keys
+        If dictB.Exists(myKey) Then
+            newDictionary.Add myKey, Nothing
+        End If
+    Next
+    
+    Set IntersectTwoDictionaries = newDictionary
+
+End Function
+
