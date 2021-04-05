@@ -3,7 +3,7 @@ Option Private Module
     
 'locate last column 
 'locate last row
-'last things
+'last things count substrings, count strings, count stuff
 
 Public Function LastColumn(ws As Worksheet, Optional rowToCheck As Long = 1) As Long
 
