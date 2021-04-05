@@ -19,7 +19,7 @@ Building a boilerplate, which is to be used by as a start point for every VBA pr
 [https://github.com/VBoilerplate/Boiler](https://github.com/VBoilerplate/Boiler)
 
 But it will slowly be migrating it back to this one. 
-[https://github.com/VBA_personal/Boilerplate](https://github.com/VBA_personal/Boilerplate)
+[https://github.com/VBA_personal/Boilerplate](https://github.com/VBA_personal/)
 
 Keep on moving!
 
