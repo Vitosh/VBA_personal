@@ -149,6 +149,27 @@ Private Sub Decrement(ByRef valueToDecrement As Variant, Optional decrementWith 
     valueToDecrement = valueToDecrement - decrementWith
 
 End Sub
+                
+Public Function CountSubstringsInRow(wks As Worksheet, substring As String, Optional myRow As Long = 1)
+        
+    Dim myLastCol As Long
+    myLastCol = LastColumn(wks, myRow)
+    
+    Dim result As Long
+    Dim myCell As Range
+    
+    With wks
+        For Each myCell In .Range(.Cells(myRow, 1), .Cells(myRow, myLastCol))
+            If InStr(1, myCell.Text, substring, vbTextCompare) Then
+                result = result + 1
+            End If
+        Next
+    End With
+    
+    CountSubstringsInRow = result
+    
+End Function
+
                     
 'LastRow Last Row Formula
 =IFERROR(LOOKUP(2,1/(NOT(ISBLANK(A:A))),ROW(A:A)),0)
