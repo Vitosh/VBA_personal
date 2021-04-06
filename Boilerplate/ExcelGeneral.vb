@@ -74,16 +74,15 @@ End Function
 Public Sub WriteIfNotZero(myCell As Range, myValue As Variant)
     
     Dim info As String
-    info = "WriteIfNotZero()" & " " & myValue & " " & myCell.Address & " " & myCell.Parent.Name & " " & myCell.Parent.Parent.Name
+    info = "ExcelError()->" & myValue & "->" & myCell.Address & "->" & myCell.Parent.Name & "->" & myCell.Parent.Parent.Name
     
-    If IsError(myValue) Then
-        Debug.Print info
-    ElseIf IsNumeric(myValue) Then
+    If IsNumeric(myValue) Then
         If CDec(myValue) <> 0 Then
             myCell.Value2 = myValue
         End If
     Else
         Debug.Print info
+        LogDescription info
     End If
     
 End Sub
