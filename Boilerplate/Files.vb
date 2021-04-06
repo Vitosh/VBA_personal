@@ -20,26 +20,3 @@ Public Function EshareFileExists(filePath)
     EshareFileExists = CreateObject("Scripting.FileSystemObject").FileExists(filePath)
     
 End Function
-
-Public Sub SaveThis()
-    
-    'saves foo.4.5.6.xlsb to foo.4.5.7.xlsb
-    
-    Dim mySplitter As Variant
-    mySplitter = Split(ThisWorkbook.FullName, ".")
-    
-    Dim oldVersion As String
-    oldVersion = mySplitter(UBound(mySplitter) - 1)
-    
-    Dim newVersion As String
-    newVersion = oldVersion + 1
-    
-    mySplitter(UBound(mySplitter) - 1) = newVersion
-    
-    Dim newName As String
-    newName = Join(mySplitter, ".")
-    
-    ThisWorkbook.SaveAs newName
-    Debug.Print newName
-    
-End Sub
