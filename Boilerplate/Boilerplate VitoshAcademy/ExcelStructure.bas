@@ -210,15 +210,6 @@ Public Sub AddCommentToSelection(myComment As Range)
 
 End Sub
 
-Public Sub PrintArray(myArray As Variant)
-
-    Dim i As Long
-    For i = LBound(myArray) To UBound(myArray)
-        Debug.Print i & " --> " & myArray(i)
-    Next i
-    
-End Sub
-
 Sub PrintAllNames()
     
     Dim nm As Name
