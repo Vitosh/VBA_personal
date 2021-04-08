@@ -17,7 +17,7 @@ Public Sub SaveThis()
     newName = Join(mySplitter, ".")
     
     ThisWorkbook.SaveAs newName
-    Debug.Print newName
+    Debug.Print "Saved as:" & vbCrLf & newName
     
 End Sub
 
@@ -33,6 +33,7 @@ Public Sub SaveThisM()
     
     Dim fso As New FileSystemObject
     fso.MoveFile Source:=ThisWorkbook.path & "\" & oldName, Destination:=ThisWorkbook.path & "\Arch\Auto\" & oldName
-    Debug.Print ThisWorkbook.path & "\Arch\Auto\" & oldName
+
+    Debug.Print "Moved to:" & vbCrLf & ThisWorkbook.path & "\Arch\Auto\" & oldName
     
 End Sub
