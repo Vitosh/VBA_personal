@@ -62,3 +62,16 @@ Public Sub PrintArray(myArray As Variant)
     
 End Sub
 
+Public Function GetIndexInArrayFirstLast(myArray As Variant, myValue As String, Optional firstNeeded As Boolean = True) As Long
+    
+    GetIndexInArrayFirstLast = GENERAL_NUMBERS.MINUS_ONE
+    
+    Dim i As Long
+    For i = LBound(myArray) To UBound(myArray)
+        If Trim(UCase(myArray(i))) = Trim(UCase(myValue)) Then
+            GetIndexInArrayFirstLast = i
+            If firstNeeded Then Exit Function
+        End If
+    Next
+    
+End Function
