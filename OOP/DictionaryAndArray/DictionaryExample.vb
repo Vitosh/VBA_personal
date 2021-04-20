@@ -85,12 +85,22 @@ Public Sub NestedDictionaryExample()
     
 End Sub
 
-Public Sub PrintDictionary(myDict As Object)
+Public Sub PrintDictionary(myDict As Dictionary, Optional isCollection = False)
     
-    Dim key     As Variant
-    For Each key In myDict.Keys
-        Debug.Print key; "-->"; myDict(key)
-    Next key
+    Dim myKey As Variant
+    
+    For Each myKey In myDict.Keys
+        Debug.Print myKey
+        If isCollection Then
+            Dim myElement As Variant
+            For Each myElement In myDict(myKey)
+                Debug.Print myElement
+            Next
+            Debug.Print "----------------"
+        Else
+            Debug.Print myDict(myKey)
+        End If
+    Next
     
 End Sub
 
