@@ -104,6 +104,33 @@ Public Sub PrintDictionary(myDict As Dictionary, Optional isCollection = False)
     
 End Sub
 
+Public Sub PrintNestedDictionary(myDict As Dictionary, Optional isNested1 = False, Optional isNested2 = False)
+    
+    Dim myKey As Variant
+    
+    For Each myKey In myDict.Keys
+        Debug.Print myKey
+        If isNested1 Then
+            Dim myElement As Variant
+            For Each myElement In myDict(myKey).Keys
+                Debug.Print vbTab & myElement
+                If isNested2 Then
+                    Dim myElement2 As Variant
+                    For Each myElement2 In myDict(myKey)(myElement).Keys
+                        Debug.Print vbTab & vbTab & myElement2
+                        Debug.Print vbTab & vbTab & myDict(myKey)(myElement)(myElement2)
+                    Next
+                End If
+                Debug.Print "----------"
+            Next
+            Debug.Print "----------"
+        Else
+            Debug.Print myDict(myKey)
+        End If
+    Next
+    
+End Sub
+
 Public Function IntersectTwoDictionaries(dictA As Dictionary, dictB As Dictionary) As Dictionary
 
     Dim newDictionary As New Dictionary
