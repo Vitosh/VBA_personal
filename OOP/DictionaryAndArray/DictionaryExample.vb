@@ -94,11 +94,11 @@ Public Sub PrintDictionary(myDict As Dictionary, Optional isCollection = False)
         If isCollection Then
             Dim myElement As Variant
             For Each myElement In myDict(myKey)
-                Debug.Print myElement
+                Debug.Print vbTab & myElement
             Next
             Debug.Print "----------------"
         Else
-            Debug.Print myDict(myKey)
+            Debug.Print vbTab & myDict(myKey)
         End If
     Next
     
@@ -118,7 +118,7 @@ Public Sub PrintNestedDictionary(myDict As Dictionary, Optional isNested1 = Fals
                     Dim myElement2 As Variant
                     For Each myElement2 In myDict(myKey)(myElement).Keys
                         Debug.Print vbTab & vbTab & myElement2
-                        Debug.Print vbTab & vbTab & myDict(myKey)(myElement)(myElement2)
+                        Debug.Print vbTab & vbTab & vbTab & myDict(myKey)(myElement)(myElement2)
                     Next
                 End If
                 Debug.Print "----------"
