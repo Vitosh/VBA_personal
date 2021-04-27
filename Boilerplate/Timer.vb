@@ -1,40 +1,27 @@
-Public myTime As Double
+Sub StartingTimer(ByRef myTime As Double)
 
-Sub SetPublicConstants()
-    
+    Debug.Print "Strating at:"
+    Debug.Print Time
     myTime = Timer
     
 End Sub
 
-'Option 1
-Public Sub ShowMsgBoxReady1()
+Sub EndingTimer(ByRef myTime As Double)
 
-    Debug.Print "Ready" & vbCrLf & Round(Timer - myTime) & " Seconds!", vbInformation, "Information"
-
-End Sub
-
-'Option 2
-Public Sub ShowMsgBoxReady2()
-    
-    Dim timeAsText As String
-    
-    timeAsText = (Timer - myTime) \ 60 & ":" & (Timer - myTime) Mod 60
-    Debug.Print "Ready!" & vbCrLf & timeAsText, vbInformation, "Information"
+    Debug.Print "Ending at:"
+    Debug.Print Time
+    Debug.Print "Total time:"
+    Debug.Print Format((Timer - myTime) / 86400, "hh:mm:ss")
 
 End Sub
 
-'Option 3
-Public Sub ShowMsgBoxReady3()
+Sub TestAll()
     
-    Dim timeAsText As String
-    Dim result As Long
+    Dim myTime As Double
+    StartingTimer myTime
     
-    result = Timer - myTime
-
-    timeAsText = result \ 60 & ":" & IIf(Len(CStr(result Mod 60)) < 2, "0", "") & (result) Mod 60
-    Debug.Print "Ready!" & vbCrLf & timeAsText, vbInformation, "Information"
-
+    Stop    'PUT THE STUFF HERE!
+    
+    EndingTimer myTime
+    
 End Sub
-
-
-
