@@ -15,12 +15,10 @@ Good luck, have fun from [VitoshAcademy](http://www.vitoshacademy.com)
 
 # VBA Boilerplate 
 
-Building a boilerplate, which is to be used by as a start point for every VBA project was long in my mind. Somewhere in 2016 I have decided to put all the useful VBA code that I am using in a single repository. This repository currently resides here:
+Building a boilerplate, which is to be used by as a start point for every VBA project was long in my mind. Somewhere in 2016 I have decided to put all the useful VBA code that I am using in a single repository. That repository used to "live" here:
 [https://github.com/VBoilerplate/Boiler](https://github.com/VBoilerplate/Boiler)
 
-But it will slowly be migrating it back to this one. 
-[https://github.com/Vitosh/VBA_personal](https://github.com/Vitosh/VBA_personal)
-
+But now it is coming back.
 Keep on moving!
 
 :cactus::chicken::tropical_drink::lion::dragon:
