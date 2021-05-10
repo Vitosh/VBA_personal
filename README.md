@@ -18,7 +18,7 @@ Good luck, have fun from [VitoshAcademy](http://www.vitoshacademy.com)
 Building a boilerplate, which is to be used by as a start point for every VBA project was long in my mind. Somewhere in 2016 I have decided to put all the useful VBA code that I am using in a single repository. That repository used to "live" here - 
 [https://github.com/VBoilerplate/Boiler](https://github.com/VBoilerplate/Boiler).
 
-But now it is coming back to the site, which you are reading from.
+But then it come back to the repo you are currently reading from.
 Keep on moving!
 
 :cactus::chicken::tropical_drink::lion::dragon:
