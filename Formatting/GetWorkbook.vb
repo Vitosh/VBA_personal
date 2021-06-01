@@ -36,3 +36,19 @@ Public Function calculate_range(from_row As Long, to_row As Long, l_column As Lo
     calculate_range = Round(d_result, 2)
     
 End Function
+            
+Function IsWorkbookOpen(wbk As Workbook) As Boolean
+    'Opened Workbook, open workbook
+    Dim checkWbk As Workbook
+    
+    On Error Resume Next
+    Set checkWbk = Workbooks(wbk.Name)
+    On Error GoTo 0
+    
+    If checkWbk Is Nothing Then
+        IsWorkbookOpen = False
+    Else
+        IsWorkbookOpen = True
+    End If
+    
+End Function
