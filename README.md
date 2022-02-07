@@ -23,3 +23,5 @@ But then it come back to the repo you are currently reading from.
 Keep on moving!
 
 :cactus::chicken::tropical_drink::lion::dragon:
+
+# Thanks for all the stars! :star::star::star:
