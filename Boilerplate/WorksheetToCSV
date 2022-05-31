@@ -1,0 +1,133 @@
+Option Explicit
+
+Public Const CSV_NAME As String = "CSV_FILE"
+Public Const MY_STEP As Long = 5
+Public Const WKS_TO_KEEP As String = "Tabelle1"
+
+'split worksheet
+'worksheet to csv
+'worksheets to csv
+'convert to csv
+'https://www.vitoshacademy.com/vba-split-worksheet-to-worksheets-save-excel-worksheets-to-csv/
+
+Function WksToKeep() As Worksheet
+
+    Set WksToKeep = ThisWorkbook.Worksheets(WKS_TO_KEEP)
+
+End Function
+
+Sub SplitMe()
+       
+    OnStart
+   
+    Dim myLastRow As Long: myLastRow = LastRow(WksToKeep)
+    Dim myCell As Range, i As Long
+    
+    For i = 1 To myLastRow Step MY_STEP
+    
+        With WksToKeep
+        
+            Dim newWks As Worksheet
+            Set newWks = ThisWorkbook.Worksheets.Add(ThisWorkbook.Worksheets(ThisWorkbook.Worksheets.Count))
+            newWks.Name = i
+            newWks.Rows(1).Value = .Rows(1).Value
+            
+            Dim ii As Long
+            For ii = 2 To MY_STEP + 1
+               
+                With newWks
+                    newWks.Rows(ii).Value = WksToKeep.Rows(i + ii - 1).Value
+                End With
+
+            Next
+        End With
+    Next
+    
+    OnEnd
+   
+End Sub
+
+Public Sub DeleteAllButOne()
+       
+    Dim wks As Worksheet
+    OnStart
+    For Each wks In ThisWorkbook.Worksheets
+        If wks.Name <> WKS_TO_KEEP Then
+            wks.Delete
+        End If
+    Next wks
+    OnEnd
+
+End Sub
+
+Public Sub MakeMeACSV()
+   
+    Dim myNewWorkbook As Workbook
+    OnStart
+   
+    Dim myWorksheet As Worksheet
+    For Each myWorksheet In ThisWorkbook.Worksheets
+        If myWorksheet.Name <> WKS_TO_KEEP Then
+            
+            Set myNewWorkbook = Workbooks.Add
+            myWorksheet.Copy myNewWorkbook.Sheets(1)
+            
+            myNewWorkbook.Worksheets(WKS_TO_KEEP).Delete
+           
+            Dim myFileName As String
+            myFileName = ThisWorkbook.Path & "\"
+            myFileName = myFileName & CSV_NAME & Format(Date, "YYYYMMDD") & "_" & Format(Now(), "hhnnss") & ".csv"
+           
+            myNewWorkbook.Worksheets(1).Columns(1).Delete
+           
+            If myNewWorkbook.Worksheets(1).Cells(2, 1).Value = "" Then
+                myNewWorkbook.Worksheets(1).Rows(1).Delete
+            End If
+           
+            Debug.Print myNewWorkbook.Path
+            myNewWorkbook.SaveAs Filename:=myFileName, FileFormat:=xlCSV, local:=True
+            myNewWorkbook.Close False
+           
+        End If
+    Next
+   
+    OnEnd
+End Sub
+
+Sub Main()
+
+    SplitMe
+    MakeMeACSV
+   
+End Sub
+
+Public Sub OnStart()
+   
+    Application.DisplayAlerts = False
+    Application.ScreenUpdating = False
+    Application.Calculation = xlAutomatic
+    Application.EnableEvents = False
+
+End Sub
+
+Public Sub OnEnd()
+   
+    Application.DisplayAlerts = True
+    Application.ScreenUpdating = True
+    Application.EnableEvents = True
+    Application.StatusBar = False
+   
+End Sub
+
+Public Function LastColumn(ws As Worksheet, Optional rowToCheck As Long = 1) As Long
+
+    LastColumn = ws.Cells(rowToCheck, ws.Columns.Count).End(xlToLeft).Column
+    
+End Function
+
+Public Function LastRow(ws As Worksheet, Optional columnToCheck As Long = 1) As Long
+    
+    LastRow = ws.Cells(ws.Rows.Count, columnToCheck).End(xlUp).Row
+
+End Function
+
