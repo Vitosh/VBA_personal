@@ -5,4 +5,4 @@ Take a look at some of the code snippets here and motivate yourself to go out of
 
 ### Thanks.
 
-:cat::dog:bird::car::mouse:
+:cat::dog::bird::whale::mouse:
