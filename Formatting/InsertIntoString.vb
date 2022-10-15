@@ -11,12 +11,13 @@ End Function
 
 Public Sub TestInsertIntoString()
 
-    Debug.Print InsertIntoString("abcd", "ff", 0) = "ffabcd"
-    Debug.Print InsertIntoString("abcd", "ff", 1) = "ffabcd"
-    Debug.Print InsertIntoString("abcd", "ff", 2) = "affbcd"
+    Debug.Print InsertIntoString("vitosh", "academy", 1000) = "vitoshacademy"
+    Debug.Print InsertIntoString("academy", "vit", -6) = "vitacademy"
+    Debug.Print InsertIntoString("vitacademy", "osh", 4) = "vitoshacademy"
     Debug.Print InsertIntoString("abcd", "ff", 3) = "abffcd"
     Debug.Print InsertIntoString("abcd", "ff", 4) = "abcffd"
     Debug.Print InsertIntoString("abcd", "ff", 100) = "abcdff"
 
 End Sub
+
 
