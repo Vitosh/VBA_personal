@@ -24,6 +24,6 @@ Keep on moving!
 
 :cactus::chicken::tropical_drink::lion::dragon:
 
-### [If you decide to PayPal me, click here.](https://www.paypal.com/paypalme/vitoshacademy)
+## [If you decide to PayPal me, click here.](https://www.paypal.com/paypalme/vitoshacademy)
 
 # Thanks for all the stars! :star::star::star:
