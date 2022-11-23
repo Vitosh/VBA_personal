@@ -33,3 +33,27 @@ Clicked_Error:
     MsgBox "Error " & Err.Number & " (" & Err.Description & ") in procedure Clicked of Module mod_main"
     
 End Sub
+            
+
+Public Function CheckUrlExists(url) As Boolean
+        
+    On Error GoTo CheckUrlExists_Error
+    
+    Dim xmlhttp As Object
+    Set xmlhttp = CreateObject("MSXML2.XMLHTTP")
+ 
+    xmlhttp.Open "HEAD", url, False
+    xmlhttp.send
+    
+    If xmlhttp.Status = 200 Then
+        CheckUrlExists = True
+    Else
+        CheckUrlExists = False
+    End If
+    
+    Exit Function
+    
+CheckUrlExists_Error:
+    CheckUrlExists = False
+    
+End Function
