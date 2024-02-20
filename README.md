@@ -38,7 +38,23 @@ https://github.com/VBoilerplate/Boiler
 Simply download it and use it! Or go through the files in and check them. If you find something interesting, copy it to your project.
 
 ## Video tutorials:
-[YouTube VBA Boilerplate Tutorials](https://www.youtube.com/playlist?list=PLHvb-qAb0DaE2WXKfOXXNNRkoW990S5lP)
+## [YouTube VBA Boilerplate Tutorials](https://www.youtube.com/playlist?list=PLHvb-qAb0DaE2WXKfOXXNNRkoW990S5lP)
+
+<div align="left">
+      <a href="https://www.youtube.com/watch?v=bQu58nGbOGE">
+         <img src="https://img.youtube.com/vi/bQu58nGbOGE/0.jpg" style="width:35%;">
+      </a>
+          <a href="https://www.youtube.com/watch?v=gmwMy2-rsaY">
+         <img src="https://img.youtube.com/vi/gmwMy2-rsaY/0.jpg" style="width:35%;">
+      </a>
+      <a href="https://www.youtube.com/watch?v=p-XRB6C8Qec">
+         <img src="https://img.youtube.com/vi/p-XRB6C8Qec/0.jpg" style="width:35%;">
+      </a>
+      <a href="https://www.youtube.com/watch?v=H8FCVMe2Jmo">
+         <img src="https://img.youtube.com/vi/H8FCVMe2Jmo/0.jpg" style="width:35%;">
+      </a>
+</div>
+
 
 ## Where is the official documentation?
 On the current document and here - [vitoshacademy.com/boilerplate](https://www.vitoshacademy.com/boilerplate/)
