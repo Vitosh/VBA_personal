@@ -1,5 +1,7 @@
 # VBA Personal
 
+![https://github.com/Vitosh/VBA_personal/blob/master/__Arch/vitosh-academy.JPG](https://github.com/Vitosh/VBA_personal/blob/master/__Arch/vitosh-academy.JPG)
+
 - Inititally the idea was to have a repository, for the `personal.xlsb`.
 - Then it grew bigger. 
 - Then I read an article about [Hungarian Notation](https://en.wikipedia.org/wiki/Hungarian_notation) and I have decided to use it. 
