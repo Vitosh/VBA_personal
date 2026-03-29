@@ -33,8 +33,9 @@ Building a boilerplate, which is to be used by as a start point for every VBA pr
 The repository is  https://github.com/Vitosh/VBA_personal, and up to now it has more than 60+ :star: in GitHub and just 1 contributor except me. The reason for this is that it probably looks a bit unstructured and I am the only one who can somehow find his way among all these files. Anyway, this week I am having some free time, thus I have decided to restart the project again -  create an Excel binary file with VBA code in it, which can be used for every new VBA project as a boilerplate.
 
 ## The structure
-On February 2020 I have decided to change the repository to the current one:
-https://github.com/VBoilerplate/Boiler
+On February 2020 I have decided to change the repository to [that](https://github.com/VBoilerplate/Boiler) one, but after some time, I have migrated it back.
+So, "No need to go down there".
+
 
 ## How can I use the boilerplate:
 Simply download it and use it! Or go through the files in and check them. If you find something interesting, copy it to your project.
