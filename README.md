@@ -16,6 +16,8 @@ Good luck, have fun from [VitoshAcademy](http://www.vitoshacademy.com)
 
 :cat::dog::bird::icecream::sunny:
 
+# Thanks for all the stars! :star::star::star:
+
 # VBA Boilerplate 
 
 Building a boilerplate, which is to be used by as a start point for every VBA project was long in my mind. Somewhere in 2016 I have decided to put all the useful VBA code that I am using in a single repository. That repository used to "live" here - 
@@ -235,5 +237,3 @@ On the current document and here - [vitoshacademy.com/boilerplate](https://www.v
 
 :cactus::cat::dog::monkey:
 ## [If you decide to PayPal me, click here.](https://www.paypal.com/paypalme/vitoshacademy)
-
-# Thanks for all the stars! :star::star::star:
